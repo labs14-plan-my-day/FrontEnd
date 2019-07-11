@@ -5,7 +5,7 @@ import './App.css';
 
 class App extends Component() {
   constructor(){
-    super(props);
+    super();
     this.state={
       response: []
     }
@@ -15,6 +15,7 @@ class App extends Component() {
     console.log('mounted');
     axios.get('https://plan-my-dayapp.herokuapp.com/dummy')
     .then((res) => {
+      this.state.response.push(res.data);
       console.log(res.data);
     })
     .catch((err) => {
@@ -25,7 +26,7 @@ class App extends Component() {
   render() {
   return (
       <div className="App">
-       
+        <h1>Slack - Plan my day</h1>
       </div>
       );
     }
