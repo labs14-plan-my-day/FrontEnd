@@ -1,8 +1,26 @@
 import React from 'react';
 import logo from './logo.svg';
+import axios from axios;
 import './App.css';
 
 function App() {
+  constructor(){
+    super();
+    this.state={
+      response: []
+    }
+  }
+
+  componentDidMount() {
+    axios.get('')
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
+
   return (
     <div className="App">
       <header className="App-header">
