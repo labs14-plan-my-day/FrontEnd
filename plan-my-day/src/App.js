@@ -12,7 +12,7 @@ class App extends Component() {
   }
 
   componentDidMount() {
-    axios.get('')
+    axios.get('https://plan-my-dayapp.herokuapp.com/dummy')
     .then((res) => {
       console.log(res.data);
     })
