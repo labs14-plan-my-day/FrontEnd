@@ -8,8 +8,7 @@
 
 # 1️⃣ Title of project goes here
 
-1️⃣ You can find the deployed project at [🚫https://dazzling-bardeen-8fae5d.netlify.com/](🚫copy and paste URL here).
-
+1️⃣ You can find the deployed project at https://dazzling-bardeen-8fae5d.netlify.com/
 ## 4️⃣ Contributors
 
 🚫Add contributor info below, make sure add images and edit the social links for each member. Add to or delete these place-holders as needed
