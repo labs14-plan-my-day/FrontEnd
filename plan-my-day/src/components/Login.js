@@ -16,7 +16,8 @@ class Login extends Component {
     login = (event) => {
         event.preventDefault()
         this.props.login(this.state.credentials).then(() => {
-            this.props.history.push('/protected');
+            // this.props.history.push('/protected');
+            alert('works');
         })
     }
 
@@ -52,7 +53,7 @@ class Login extends Component {
                         required
                     >
                     </TextField>
-                    <Button variant="contained" color="primary" value="submit" >Submit</Button>
+                    <Button type="submit" variant="contained" color="primary" value="submit" >Submit</Button>
                 </form>
             </div>
         )
@@ -61,7 +62,8 @@ class Login extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        ...state
+        ...state,
+        loggedIn: true,//state.loggedIn,
     }
 }
 

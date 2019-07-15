@@ -8,10 +8,10 @@ export const LOGIN_FAILURE= 'LOGIN_FAILURE';
 export const login = creds => dispatch => {
     dispatch({ type: LOGIN_START });
     return axios 
-        .post('https://plan-my-dayapp.herokuapp.com/', creds)
+        .post('https://plan-my-dayapp.herokuapp.com/auth/register', creds)
         .then(res => {
-            localStorage.setItem('token', res.data.payload);
-            dispatch({ type: LOGIN_SUCCESS, payload: res.data.payload})
+            localStorage.setItem('token', res.data.token);
+            dispatch({ type: LOGIN_SUCCESS, payload: res.data.token})
         })
         .catch(err => {
             dispatch({ type: LOGIN_FAILURE, payload: err})

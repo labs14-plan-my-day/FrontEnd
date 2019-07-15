@@ -27,6 +27,7 @@ export const rootReducer = (state=initialState, action) => {
             fetchingData: false,
             loggedIn: false
         }
+        default: return state;
     }
 }
 
