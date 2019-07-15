@@ -1,9 +1,10 @@
-import React from 'react';
-import logo from './logo.svg';
-import axios from axios;
-import './App.css';
+import React, { Component } from 'react';
+import axios from 'axios';
 
-function App() {
+//import components 
+import Login  from './components/Login';
+
+class App extends Component {
   constructor(){
     super();
     this.state={
@@ -12,33 +13,25 @@ function App() {
   }
 
   componentDidMount() {
-    axios.get('')
+    console.log('mounted');
+    axios.get('https://plan-my-dayapp.herokuapp.com/dummy')
     .then((res) => {
-      console.log(res);
+      this.state.response.push(res.data);
+      console.log(res.data);
     })
     .catch((err) => {
       console.log(err);
     })
   }
 
+  render() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+      <div className="App">
+        <h1>Slack - Plan my day</h1>
+        <Login></Login>
+      </div>
+      );
+    }
+  }
 
 export default App;
