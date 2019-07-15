@@ -9,6 +9,7 @@
 # 1️⃣ Title of project goes here
 
 1️⃣ You can find the deployed project at https://romantic-boyd-8c4dd3.netlify.com/
+staging: https://staging-wilson-1807e1.netlify.com/
 ## 4️⃣ Contributors
 
 🚫Add contributor info below, make sure add images and edit the social links for each member. Add to or delete these place-holders as needed
