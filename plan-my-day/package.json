@@ -2,14 +2,17 @@
   "name": "plan-my-day",
   "version": "0.1.0",
   "private": true,
-  "devDependencies": {
-    "react-scripts": "0.9.5"
-  },
   "dependencies": {
+    "axios": "^0.17.1",
     "material-ui": "^0.17.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-tap-event-plugin": "^2.0.1",
+    "react-redux": "^7.0.3",
+    "react-scripts": "1.1.0",
+    "redux": "^4.0.1",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0",
     "uuid": "^3.0.1"
   },
   "scripts": {
