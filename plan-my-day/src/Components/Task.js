@@ -85,7 +85,8 @@ class Task extends Component {
   }
 
   render() {
-    const { task, checked } = this.props;
+    const { task } = this.props;
+    const checked = task.status === 3;
 
     const listStyles = !checked
       ? this.props.classes.listElementStyles

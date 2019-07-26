@@ -2,6 +2,7 @@ import React, { Component } from "react";
 // import injectTapEventPlugin from "react-tap-event-plugin";
 import { Route, Link, NavLink } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
+import axios from "axios";
 import Snackbar from "@material-ui/core/Snackbar";
 import Paper from "@material-ui/core/Paper";
 import uuid from "uuid";
@@ -27,18 +28,24 @@ const styles = theme => ({
   }
 });
 
+const TASK_STATUS_CODES = {
+  STATUS_INCOMPLETE: 1,
+  STATUS_IN_PROGRESS: 2,
+  STATUS_COMPLETE: 3
+};
+
 class Main extends Component {
   constructor() {
     super();
     this.state = {
       tasks: [
-        { id: 1, task: "test task", checked: false },
-        { id: 2, task: "test task2", checked: false },
-        { id: 3, task: "test task3", checked: false },
-        { id: 4, task: "test task4", checked: false },
-        { id: 5, task: "test task5", checked: false },
-        { id: 6, task: "test task6", checked: false },
-        { id: 7, task: "test task7", checked: false }
+        // { id: 1, task: "test task", checked: false },
+        // { id: 2, task: "test task2", checked: false },
+        // { id: 3, task: "test task3", checked: false },
+        // { id: 4, task: "test task4", checked: false },
+        // { id: 5, task: "test task5", checked: false },
+        // { id: 6, task: "test task6", checked: false },
+        // { id: 7, task: "test task7", checked: false }
       ],
       open: false,
       activeStep: 0
@@ -47,15 +54,29 @@ class Main extends Component {
     this.handleRemove = this.handleRemove.bind(this);
     this.handleCheck = this.handleCheck.bind(this);
   }
+
+  componentDidMount() {
+    const endpoint = "https://plan-my-dayapp.herokuapp.com/tasks";
+    axios
+      .get(endpoint)
+      .then(res => {
+        this.setState({
+          tasks: res.data.tasks
+        });
+      })
+      .catch(error => {
+        console.error("USERS ERROR", error);
+      });
+  }
+
   handleClick(task) {
-    console.log(this.state);
     this.setState({
       tasks: [
         ...this.state.tasks,
         {
-          id: uuid(),
+          id: task.id,
           task: task,
-          checked: false
+          status: TASK_STATUS_CODES.STATUS_INCOMPLETE
         }
       ]
     });
@@ -72,10 +93,27 @@ class Main extends Component {
   }
 
   handleCheck(id) {
+    console.log(this.state.tasks);
     const finalTasks = this.state.tasks.map(task => {
       if (task.id === id) {
-        task.checked = !task.checked;
-        const firstUnchecked = this.state.tasks.find(task => !task.checked);
+        const { status } = task;
+        switch (status) {
+          case TASK_STATUS_CODES.STATUS_INCOMPLETE:
+            task.status = TASK_STATUS_CODES.STATUS_COMPLETE;
+            break;
+          case TASK_STATUS_CODES.STATUS_COMPLETE:
+            task.status = TASK_STATUS_CODES.STATUS_INCOMPLETE;
+            break;
+          case TASK_STATUS_CODES.STATUS_IN_PROGRESS:
+            task.status = TASK_STATUS_CODES.STATUS_COMPLETE;
+            break;
+          default:
+            console.error("Invalid status code");
+        }
+
+        const firstUnchecked = this.state.tasks.find(
+          task => task.status === TASK_STATUS_CODES.STATUS_INCOMPLETE
+        );
         this.setState({
           activeStep: firstUnchecked
             ? firstUnchecked.id - 1
@@ -97,46 +135,50 @@ class Main extends Component {
 
   render() {
     return (
-      <Paper className={this.props.classes.mainContainer}>
-        <Typography variant="h1" className={this.props.classes.h1}>
-          Plan My Day
-        </Typography>
-        <TaskProgress
-          tasks={this.state.tasks}
-          handleRemove={this.handleRemove}
-          handleCheck={this.handleCheck}
-          activeStep={this.state.activeStep}
-        />
-        <Route
-          exact
-          path="/tasks"
-          render={props => (
-            <TaskList
-              {...props}
+      <div>
+        {this.state.tasks && (
+          <Paper className={this.props.classes.mainContainer}>
+            <Typography variant="h1" className={this.props.classes.h1}>
+              Plan My Day
+            </Typography>
+            <TaskProgress
               tasks={this.state.tasks}
-              activeStep={this.state.activeStep}
               handleRemove={this.handleRemove}
               handleCheck={this.handleCheck}
+              activeStep={this.state.activeStep}
             />
-          )}
-        />
-        <br />
-        <div>
-          <Route
-            exact
-            path="/"
-            render={props => (
-              <AddTask {...props} handleClick={this.handleClick} />
-            )}
-          />
-        </div>
-        <Snackbar
-          open={this.state.open}
-          message="Task deleted"
-          autoHideDuration={2000}
-          onRequestClose={this.handleRequestClose}
-        />
-      </Paper>
+            <Route
+              exact
+              path="/tasks"
+              render={props => (
+                <TaskList
+                  {...props}
+                  tasks={this.state.tasks}
+                  activeStep={this.state.activeStep}
+                  handleRemove={this.handleRemove}
+                  handleCheck={this.handleCheck}
+                />
+              )}
+            />
+            <br />
+            <div>
+              <Route
+                exact
+                path="/"
+                render={props => (
+                  <AddTask {...props} handleClick={this.handleClick} />
+                )}
+              />
+            </div>
+            <Snackbar
+              open={this.state.open}
+              message="Task deleted"
+              autoHideDuration={2000}
+              onRequestClose={this.handleRequestClose}
+            />
+          </Paper>
+        )}
+      </div>
     );
   }
 }

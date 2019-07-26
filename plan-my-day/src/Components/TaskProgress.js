@@ -34,7 +34,7 @@ export default function TaskProgress(props) {
 
   function getCompletedCount() {
     return tasks.filter(task => {
-      return task.checked === true;
+      return task.status === 3;
     }).length;
   }
 

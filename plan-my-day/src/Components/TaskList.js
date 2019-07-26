@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
+import axios from "axios";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
@@ -78,6 +79,8 @@ class TaskList extends Component {
   }
 
   render() {
+    // console.log("Props Tasks List", this.props.tasks);
+
     const {
       handleRemove,
       handleCheck,
@@ -105,57 +108,58 @@ class TaskList extends Component {
           activeStep={activeStep}
           connector={connector}
         >
-          {tasks.map((task, index) => {
-            const stepProps = {};
-            stepProps.completed = task.checked;
-            return (
-              <Step {...stepProps} key={task.id}>
-                <StepLabel
-                  icon={
-                    <Tooltip title="mark as complete" placement="top-left">
-                      <Icon
-                        onClick={e => {
-                          handleCheck(task.id);
-                        }}
-                        fontSize="large"
-                        className={
-                          stepProps.completed
-                            ? this.props.classes.completedTask
-                            : ""
-                        }
-                      >
-                        {stepProps.completed
-                          ? "check_circle"
-                          : "radio_button_unchecked"}
-                      </Icon>
-                    </Tooltip>
-                  }
-                >
-                  <List>
-                    <ListItem>
-                      <Paper
-                        className={
-                          stepProps.completed
-                            ? this.props.classes.taskItemCompleted
-                            : this.props.classes.taskItem
-                        }
-                      >
-                        <Task
-                          key={task.id}
-                          task={task.task}
-                          id={task.id}
-                          checked={task.checked}
-                          handleRemove={handleRemove}
-                          handleCheck={handleCheck}
-                        />
-                      </Paper>
-                    </ListItem>
-                    {/* <Divider /> */}
-                  </List>
-                </StepLabel>
-              </Step>
-            );
-          })}
+          {tasks &&
+            tasks.map((task, index) => {
+              const stepProps = {};
+              const taskCompleted = task.status === 3;
+              stepProps.completed = taskCompleted;
+              return (
+                <Step {...stepProps} key={task.id}>
+                  <StepLabel
+                    icon={
+                      <Tooltip title="mark as complete" placement="top-left">
+                        <Icon
+                          onClick={e => {
+                            handleCheck(task.id);
+                          }}
+                          fontSize="large"
+                          className={
+                            stepProps.completed
+                              ? this.props.classes.completedTask
+                              : ""
+                          }
+                        >
+                          {stepProps.completed
+                            ? "check_circle"
+                            : "radio_button_unchecked"}
+                        </Icon>
+                      </Tooltip>
+                    }
+                  >
+                    <List>
+                      <ListItem>
+                        <Paper
+                          className={
+                            stepProps.completed
+                              ? this.props.classes.taskItemCompleted
+                              : this.props.classes.taskItem
+                          }
+                        >
+                          <Task
+                            key={task.id}
+                            task={task.name}
+                            id={task.id}
+                            handleRemove={handleRemove}
+                            handleCheck={handleCheck}
+                          />
+                        </Paper>
+                      </ListItem>
+                      {/* <Divider /> */}
+                    </List>
+                  </StepLabel>
+                </Step>
+              );
+            })}
         </Stepper>
       </div>
     );
