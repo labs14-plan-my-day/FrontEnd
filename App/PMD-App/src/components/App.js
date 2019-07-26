@@ -1,15 +1,14 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { getTasks, addTask, deleteTask } from '../actions';
-import Tasks from './Tasks';
-import './App.css';
-
+import React, { Component } from "react";
+import { getTasks, addTask, deleteTask } from "../actions";
+import Tasks from "./Tasks";
+import "./App.css";
+import { BrowserRouter as Router, withRouter } from "react-router-dom";
 
 class App extends Component {
   state = {
-    title: '',
-    description: '',
-    time: ''
+    title: "",
+    description: "",
+    time: ""
   };
 
   componentDidMount() {
@@ -18,20 +17,20 @@ class App extends Component {
 
   handleInput = event => {
     this.setState({ [event.target.name]: event.target.value });
-  }
+  };
 
   addTask = event => {
     event.preventDefault();
 
     const { title, description, time } = this.state;
     this.props.addTask({ title, description, time });
-    this.setState({ title: '', description: '', time: '' });
-  }
+    this.setState({ title: "", description: "", time: "" });
+  };
 
   deleteTask = (event, id) => {
     event.preventDefault();
     this.props.deleteTask(id);
-  }
+  };
 
   render() {
     const { tasks, fetchingTasks, error } = this.props;
@@ -46,10 +45,8 @@ class App extends Component {
         <div className="App">
           <h1>Plan My Day</h1>
 
-          
-
           <form onSubmit={this.addTask}>
-          <h3>Add Task</h3>
+            <h3>Add Task</h3>
             <input
               placeholder="...Task?"
               type="text"
@@ -74,13 +71,14 @@ class App extends Component {
               onChange={this.handleInput}
             />
 
-            <button className="addBtn" type="submit"> Add </button>
-
+            <button className="addBtn" type="submit">
+              {" "}
+              Add{" "}
+            </button>
           </form>
 
-        <h1>Tasks</h1>
+          <h1>Tasks</h1>
           <Tasks tasks={tasks} deleteTask={this.deleteTask} />
-
         </div>
       );
     }
@@ -88,7 +86,7 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state)
+  console.log(state);
   return {
     tasks: state.tasks,
     fetchingTasks: state.fetchingTasks,
@@ -97,4 +95,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { getTasks, addTask, deleteTask })(App);
+export default withRouter(mapStateToProps, { getTasks, addTask, deleteTask })(
+  App
+);
