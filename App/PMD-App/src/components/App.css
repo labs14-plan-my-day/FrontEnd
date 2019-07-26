@@ -1,0 +1,93 @@
+* {
+  box-sizing: border-box;
+  background: rgb(114, 114, 114);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  
+}
+
+div, form {
+  margin: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  border-radius: 25px;
+}
+
+h3 {
+  background: black;
+  color: grey;
+}
+
+form {
+  border: 1px solid red;
+  background: black;
+  color: grey;
+}
+
+input, p {
+  margin: 5px;
+  border-radius: 25px;
+  text-align: center;
+}
+
+input {
+  outline: none;
+  background: white;
+}
+
+p {
+  background: black;
+  color: grey;
+}
+
+.taskDiv {
+  border: 1px solid red;
+  background: black;
+}
+
+.App {
+  text-align: center;
+}
+
+@keyframes Spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.deleteBtn {
+  width: 20px;
+  height: 20px;
+  padding: 0px;
+  border-radius: 50%;
+  border: 1px solid black;
+  background: red;
+  font-weight: bolder;
+  font-size: 12px;
+  margin-left: 820px;
+  animation: Spin infinite 2s linear;
+  cursor: pointer;
+  outline: none;
+}
+
+.addBtn {
+  border-radius: 20px;
+  border: 1px solid red;
+  background: black;
+  color: red;
+  font-weight: bolder;
+  cursor: pointer;
+  outline: none;
+}
+
+p {
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
