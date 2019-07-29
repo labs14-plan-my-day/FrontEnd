@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-// import injectTapEventPlugin from "react-tap-event-plugin";
 import { Route, Link, NavLink } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import Snackbar from "@material-ui/core/Snackbar";
 import Paper from "@material-ui/core/Paper";
-import uuid from "uuid";
 import Typography from "@material-ui/core/Typography";
 import AddTask from "./AddTask";
 import TaskList from "./TaskList";
@@ -38,15 +36,7 @@ class Main extends Component {
   constructor() {
     super();
     this.state = {
-      tasks: [
-        // { id: 1, task: "test task", checked: false },
-        // { id: 2, task: "test task2", checked: false },
-        // { id: 3, task: "test task3", checked: false },
-        // { id: 4, task: "test task4", checked: false },
-        // { id: 5, task: "test task5", checked: false },
-        // { id: 6, task: "test task6", checked: false },
-        // { id: 7, task: "test task7", checked: false }
-      ],
+      tasks: [{}],
       open: false,
       activeStep: 0
     };
@@ -148,7 +138,7 @@ class Main extends Component {
               activeStep={this.state.activeStep}
             />
             <Route
-              exact
+              
               path="/tasks"
               render={props => (
                 <TaskList
@@ -163,7 +153,7 @@ class Main extends Component {
             <br />
             <div>
               <Route
-                exact
+                
                 path="/"
                 render={props => (
                   <AddTask {...props} handleClick={this.handleClick} />

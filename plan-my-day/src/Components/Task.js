@@ -1,23 +1,10 @@
 import React, { Component, PropTypes } from "react";
-// import { red600 } from "@material-ui/core/colors/red";
-// import Checkbox from "@material-ui/core/Checkbox";
 import { withStyles } from "@material-ui/core/styles";
-import DeleteIcon from "@material-ui/icons/Delete";
-import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import Icon from "@material-ui/core/Icon";
 import "typeface-roboto";
 
-// const listElementStyles = {
-//   fontSize: 26,
-//   lineHeight: "26px"
-// };
-
-// const listElementCheckedStyles = {
-//   ...listElementStyles,
-//   textDecoration: "line-through"
-// };
 
 const styles = theme => ({
   listElementStyles: {
@@ -27,8 +14,6 @@ const styles = theme => ({
     color: "black",
     [theme.breakpoints.down("sm")]: {
       fontSize: "18px"
-      // flexDirection: "column",
-      // justifyContent: "center"
     }
   },
   listElementCheckedStyles: {
@@ -39,8 +24,6 @@ const styles = theme => ({
     [theme.breakpoints.down("sm")]: {
       fontSize: "18px",
       color: "green"
-      // flexDirection: "column",
-      // justifyContent: "center"
     }
   },
   taskPanel: {
@@ -52,8 +35,6 @@ const styles = theme => ({
     width: "100%",
     [theme.breakpoints.down("sm")]: {
       display: "flex"
-      // flexDirection: "column",
-      // justifyContent: "center"
     }
   },
   deleteButton: {
@@ -65,10 +46,6 @@ const styles = theme => ({
 });
 
 class Task extends Component {
-  // static propTypes = {
-  //   task: PropTypes.string
-  // };
-
   constructor(props) {
     super(props);
     this.onClick = this.onClick.bind(this);
@@ -85,8 +62,8 @@ class Task extends Component {
   }
 
   render() {
-    const { task } = this.props;
-    const checked = task.status === 3;
+    const { task, checked } = this.props;
+    // const checked = task.status === 3;
 
     const listStyles = !checked
       ? this.props.classes.listElementStyles
@@ -103,7 +80,6 @@ class Task extends Component {
           {task}
         </div>
         <div>
-          {/* <Checkbox onChange={this.onCheck} style={{ marginTop: 12 }} /> */}
           <Tooltip title="Delete task" placement="bottom-end">
             <IconButton onClick={this.onClick} fontSize="medium">
               <Icon className={this.props.classes.deleteButton}>
