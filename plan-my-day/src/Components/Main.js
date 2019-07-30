@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import injectTapEventPlugin from "react-tap-event-plugin";
 import { Route, Link, NavLink } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import axios from "axios";
@@ -18,12 +17,25 @@ const styles = theme => ({
     margin: "0 auto",
     marginTop: "2rem",
     width: "100%",
-    justifyContent: "space-evenly"
+    justifyContent: "space-around",
+    [theme.breakpoints.down("sm")]: {
+      display: "flex",
+      flexDirection: "column",
+      margin: "0 auto"
+    }
   },
   mainTaskContainer: {
     width: "100%",
-    marginLeft: "1rem",
+    // marginLeft: ".5rem",
     padding: "1rem",
+    [theme.breakpoints.down("sm")]: {
+      width: "100%"
+    }
+  },
+  bookmarkContainer: {
+    width: "30%",
+    marginLeft: "1rem",
+    marginTop: "1rem",
     [theme.breakpoints.down("sm")]: {
       width: "100%"
     }
@@ -175,7 +187,7 @@ class Main extends Component {
   render() {
     return (
       <div className={this.props.classes.mainPageContainer}>
-        <div>
+        <div className={this.props.classes.bookmarkContainer}>
           <Bookmark
             {...this.props}
             tasks={this.state.tasks}
@@ -184,9 +196,9 @@ class Main extends Component {
             handleBookmark={this.handleBookmark}
           />
         </div>
-        <div>
+        <div className={this.props.classes.mainTaskContainer}>
           {this.state.tasks && (
-            <Paper className={this.props.classes.mainTaskContainer}>
+            <Paper>
               <Typography variant="h1" className={this.props.classes.h1}>
                 Plan My Day
               </Typography>

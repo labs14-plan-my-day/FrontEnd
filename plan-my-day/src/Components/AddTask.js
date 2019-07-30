@@ -4,10 +4,6 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 
 class AddTask extends Component {
-  // static propTypes = {
-  //   handleClick: PropTypes.func
-  // };
-
   constructor() {
     super();
     this.onClick = this.onClick.bind(this);
@@ -30,7 +26,6 @@ class AddTask extends Component {
   }
 
   render() {
-    const { handleClick } = this.props;
     return (
       <div style={{ marginLeft: "30%", width: "60%" }}>
         <form id="addTask">

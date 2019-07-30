@@ -1,6 +1,4 @@
 import React, { Component, PropTypes } from "react";
-// import { red600 } from "@material-ui/core/colors/red";
-// import Checkbox from "@material-ui/core/Checkbox";
 import { withStyles } from "@material-ui/core/styles";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Typography from "@material-ui/core/Typography";
