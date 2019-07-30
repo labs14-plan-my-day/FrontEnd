@@ -101,6 +101,11 @@ class TaskList extends Component {
       />
     );
 
+    const sortedTasks = tasks.sort(function(a, b) {
+      return parseInt(a.start_time) - parseInt(b.start_time);
+    });
+
+    console.log("Sorted tasks", sortedTasks);
     return (
       <div className={this.props.classes.root}>
         {console.log(this.props.classes)}
@@ -109,8 +114,8 @@ class TaskList extends Component {
           activeStep={activeStep}
           connector={connector}
         >
-          {tasks &&
-            tasks.map((task, index) => {
+          {sortedTasks &&
+            sortedTasks.map((task, index) => {
               const stepProps = {};
               const taskCompleted = task.status === 3;
               stepProps.completed = taskCompleted;

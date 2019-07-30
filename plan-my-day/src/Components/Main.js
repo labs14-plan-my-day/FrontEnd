@@ -117,12 +117,13 @@ class Main extends Component {
   }
 
   getActiveStep() {
+    console.log("Teeeyasks", this.state.tasks);
     const firstUnchecked = this.state.tasks.find(
       task => task.status === TASK_STATUS_CODES.STATUS_INCOMPLETE
     );
     return firstUnchecked
-      ? firstUnchecked.id - 1
-      : this.state.tasks[this.state.tasks.length - 1].id;
+      ? this.state.tasks.indexOf(firstUnchecked)
+      : this.state.tasks.length - 1;
   }
 
   setBookmark(task) {

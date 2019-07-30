@@ -35,6 +35,9 @@ const styles = theme => ({
     fontWeight: 300,
     width: "100%",
     height: "2rem",
+    display: "flex",
+    alignItems: "center",
+    alignContent: "center",
     "& $bookmarkAddIcon": {
       opacity: 0
     },
@@ -50,6 +53,22 @@ const styles = theme => ({
   },
   bookmarkAddIcon: {
     opacity: 0
+  },
+  bookmarkedTime: {
+    color: "#757575",
+    marginRight: "2rem"
+  },
+  taskName: {
+    fontSize: "16px",
+    fontWeight: 500
+  },
+  taskNameAndAddIcon: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    alignContent: "center"
   }
 });
 
@@ -183,21 +202,36 @@ class Bookmark extends Component {
                 <List>
                   <ListItem
                     className={this.props.classes.listItem}
+                    key={bookmarkedTask.id}
                     onClick={e => {
                       this.onSubmitAddTask(bookmarkedTask);
                     }}
                   >
-                    <p
-                      key={bookmarkedTask.id}
-                      id="name"
-                      name="name"
-                      value={this.state.task.name}
+                    <Typography
+                      variant="body2"
+                      id="start_time"
+                      name="start_time"
+                      value={this.state.task.start_time}
+                      className={this.props.classes.bookmarkedTime}
                     >
-                      {bookmarkedTask.name}
-                    </p>
-                    <Icon className={this.props.classes.bookmarkAddIcon}>
-                      note_add
-                    </Icon>
+                      {bookmarkedTask.start_time}
+                    </Typography>
+                    <Tooltip title="add task to today's plan">
+                      <div className={this.props.classes.taskNameAndAddIcon}>
+                        <Typography
+                          variant="body2"
+                          id="name"
+                          name="name"
+                          className={this.props.classes.taskName}
+                          value={this.state.task.name}
+                        >
+                          {bookmarkedTask.name}
+                        </Typography>
+                        <Icon className={this.props.classes.bookmarkAddIcon}>
+                          note_add
+                        </Icon>
+                      </div>
+                    </Tooltip>
                   </ListItem>
                   <Divider />
                 </List>
