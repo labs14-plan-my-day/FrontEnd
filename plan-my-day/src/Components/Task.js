@@ -1,6 +1,4 @@
 import React, { Component, PropTypes } from "react";
-// import { red600 } from "@material-ui/core/colors/red";
-// import Checkbox from "@material-ui/core/Checkbox";
 import { withStyles } from "@material-ui/core/styles";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Typography from "@material-ui/core/Typography";
@@ -70,7 +68,7 @@ const styles = theme => ({
   taskPanel: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-between",
+    // justifyContent: "space-between",
     alignItems: "center",
     alignContent: "center",
     width: "100%",
@@ -80,6 +78,30 @@ const styles = theme => ({
       // justifyContent: "center"
     }
   },
+  startTime: {
+    marginRight: "2rem",
+    color: "darkGrey"
+  },
+  startTimeText: {
+    fontWeight: 500,
+    fontSize: "16px",
+    color: "darkGrey"
+  },
+  taskContent: {
+    // border: "1px solid black",
+    displa: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
+    alignContent: "flex-start"
+  },
+  taskButtonsAndContent: {
+    // border: "1px solid black",
+    display: "flex",
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between"
+  },
   deleteButton: {
     color: "#c62828",
     "&:hover": {
@@ -87,6 +109,14 @@ const styles = theme => ({
     }
   },
   bookmarkIcon: {
+    "&:hover": {
+      color: "#512da8"
+    }
+  },
+  bookmarkIconSelected: {
+    color: "#512da8"
+  },
+  bookmarkButton: {
     "&:hover": {
       color: "#512da8"
     }
@@ -122,41 +152,63 @@ class Task extends Component {
       : this.props.classes.listElementCheckedStyles;
     return (
       <div className={this.props.classes.taskPanel}>
-        <div>
+        <div className={this.props.classes.startTime}>
           <Typography
+            className={this.props.classes.startTimeText}
             variant="body1"
-            className={
-              !checked
-                ? this.props.classes.listElementStyles
-                : this.props.classes.listElementCheckedStyles
-            }
           >
-            {task.name}
-          </Typography>
-          <Typography
-            className={
-              !checked
-                ? this.props.classes.listElementStylesDesc
-                : this.props.classes.listElementCheckedStylesDesc
-            }
-          >
-            {task.description}
+            {task.start_time}
           </Typography>
         </div>
-        <div>
-          {/* <Checkbox onChange={this.onCheck} style={{ marginTop: 12 }} /> */}
-          <Tooltip title="Delete task" placement="bottom-end">
-            <IconButton onClick={this.onRemove} fontSize="medium">
-              <Icon className={this.props.classes.deleteButton}>
-                remove_circle
-              </Icon>
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="Bookmark task" placement="bottom-end">
-            <IconButton onClick={this.onBookmark} fontSize="medium">
-              <Icon className={this.props.classes.bookmarkIcon}>bookmark</Icon>
-            </IconButton>
-          </Tooltip>
+        <div className={this.props.classes.taskButtonsAndContent}>
+          <div className={this.props.classes.taskContent}>
+            <Typography
+              variant="body1"
+              className={
+                !checked
+                  ? this.props.classes.listElementStyles
+                  : this.props.classes.listElementCheckedStyles
+              }
+            >
+              {task.name}
+            </Typography>
+            <Typography
+              className={
+                !checked
+                  ? this.props.classes.listElementStylesDesc
+                  : this.props.classes.listElementCheckedStylesDesc
+              }
+            >
+              {task.description}
+            </Typography>
+          </div>
+          <div>
+            {/* <Checkbox onChange={this.onCheck} style={{ marginTop: 12 }} /> */}
+            <Tooltip title="Delete task" placement="bottom-end">
+              <IconButton onClick={this.onRemove} fontSize="medium">
+                <Icon className={this.props.classes.deleteButton}>
+                  remove_circle
+                </Icon>
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Bookmark task" placement="bottom-end">
+              <IconButton
+                onClick={this.onBookmark}
+                className={this.props.classes.bookmarkButton}
+                fontSize="medium"
+              >
+                <Icon
+                  className={
+                    !task.bookmark
+                      ? this.props.classes.bookmarkIcon
+                      : this.props.classes.bookmarkIconSelected
+                  }
+                >
+                  bookmark
+                </Icon>
+              </IconButton>
+            </Tooltip>
+          </div>
         </div>
       </div>
     );
