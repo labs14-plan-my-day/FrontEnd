@@ -23,11 +23,18 @@ import Task from "./Task";
 const styles = theme => ({
   bookmarkListToggle: {
     width: "100%",
+    minWidth: "250px",
     margin: "0 auto",
     backgroundColor: "white",
     [theme.breakpoints.down("sm")]: {
       // display: "flex",
-      // justifyContent: "center",
+      fontSize: "14px",
+      width: "100%"
+    }
+  },
+  bookmarkToggleText: {
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "12px",
       width: "100%"
     }
   },
@@ -192,7 +199,12 @@ class Bookmark extends Component {
           onClick={this.handleExpandClick}
         >
           <Icon>bookmarks</Icon>
-          <Typography variant="subtitle 1">Bookmarked Tasks</Typography>
+          <Typography
+            variant="subtitle 1"
+            className={this.props.classes.bookmarkToggleText}
+          >
+            Bookmarked Tasks
+          </Typography>
           {this.state.open ? <ExpandMore /> : <ExpandLess />}
         </Button>
         <Paper>
