@@ -21,7 +21,7 @@ import "typeface-roboto";
 
 const styles = theme => ({
   listElementStyles: {
-    fontSize: "26px",
+    fontSize: "24px",
     lineHeight: "26px",
     fontWeight: 300,
     color: "black",
@@ -32,12 +32,36 @@ const styles = theme => ({
     }
   },
   listElementCheckedStyles: {
-    fontSize: "26px",
+    fontSize: "24px",
     lineHeight: "26px",
     color: "green",
     fontWeight: 500,
     [theme.breakpoints.down("sm")]: {
       fontSize: "18px",
+      color: "green"
+      // flexDirection: "column",
+      // justifyContent: "center"
+    }
+  },
+  listElementStylesDesc: {
+    fontSize: "16px",
+    fontWeight: 300,
+    color: "black",
+    fontStyle: "italic",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "14px"
+      // flexDirection: "column",
+      // justifyContent: "center"
+    }
+  },
+  listElementCheckedStylesDesc: {
+    fontSize: "16px",
+    lineHeight: "26px",
+    color: "green",
+    fontWeight: 500,
+    fontStyle: "italic",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "14px",
       color: "green"
       // flexDirection: "column",
       // justifyContent: "center"
@@ -61,6 +85,11 @@ const styles = theme => ({
     "&:hover": {
       color: "#7f0000"
     }
+  },
+  bookmarkIcon: {
+    "&:hover": {
+      color: "#512da8"
+    }
   }
 });
 
@@ -71,44 +100,61 @@ class Task extends Component {
 
   constructor(props) {
     super(props);
-    this.onClick = this.onClick.bind(this);
-    this.onCheck = this.onCheck.bind(this);
+    this.onRemove = this.onRemove.bind(this);
+    this.onBookmark = this.onBookmark.bind(this);
   }
 
-  onClick(event) {
+  onRemove(event) {
     this.props.handleRemove(this.props.id);
   }
 
-  onCheck(event) {
-    console.log(this.props.id);
-    this.props.handleCheck(this.props.id);
+  onBookmark(event) {
+    this.props.handleBookmark(this.props.task);
+    console.log("Handle Bookmark", this.props.task.bookmark);
   }
 
   render() {
-    const { task } = this.props;
-    const checked = task.status === 3;
+    const { task, status, handleRemove, handleBookmark } = this.props;
+    const checked = status === 3;
 
     const listStyles = !checked
       ? this.props.classes.listElementStyles
       : this.props.classes.listElementCheckedStyles;
     return (
       <div className={this.props.classes.taskPanel}>
-        <div
-          className={
-            !checked
-              ? this.props.classes.listElementStyles
-              : this.props.classes.listElementCheckedStyles
-          }
-        >
-          {task}
+        <div>
+          <Typography
+            variant="body1"
+            className={
+              !checked
+                ? this.props.classes.listElementStyles
+                : this.props.classes.listElementCheckedStyles
+            }
+          >
+            {task.name}
+          </Typography>
+          <Typography
+            className={
+              !checked
+                ? this.props.classes.listElementStylesDesc
+                : this.props.classes.listElementCheckedStylesDesc
+            }
+          >
+            {task.description}
+          </Typography>
         </div>
         <div>
           {/* <Checkbox onChange={this.onCheck} style={{ marginTop: 12 }} /> */}
           <Tooltip title="Delete task" placement="bottom-end">
-            <IconButton onClick={this.onClick} fontSize="medium">
+            <IconButton onClick={this.onRemove} fontSize="medium">
               <Icon className={this.props.classes.deleteButton}>
                 remove_circle
               </Icon>
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Bookmark task" placement="bottom-end">
+            <IconButton onClick={this.onBookmark} fontSize="medium">
+              <Icon className={this.props.classes.bookmarkIcon}>bookmark</Icon>
             </IconButton>
           </Tooltip>
         </div>

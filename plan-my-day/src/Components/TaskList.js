@@ -19,11 +19,10 @@ import Task from "./Task";
 
 const styles = theme => ({
   root: {
-    width: "90%",
-    margin: "0 auto",
+    width: "100%",
     [theme.breakpoints.down("sm")]: {
-      // display: "flex",
-      // justifyContent: "center",
+      display: "flex",
+      justifyContent: "center",
       width: "100%"
     }
   },
@@ -86,9 +85,11 @@ class TaskList extends Component {
       handleCheck,
       tasks,
       classes,
-      activeStep
+      activeStep,
+      handleBookmark
     } = this.props;
 
+    // console.log("Handle Bookmark", handleBookmark);
     const connector = (
       <StepConnector
         classes={{
@@ -120,7 +121,7 @@ class TaskList extends Component {
                       <Tooltip title="mark as complete" placement="top-left">
                         <Icon
                           onClick={e => {
-                            handleCheck(task.id);
+                            handleCheck(task);
                           }}
                           fontSize="large"
                           className={
@@ -146,11 +147,12 @@ class TaskList extends Component {
                           }
                         >
                           <Task
-                            key={task.id}
-                            task={task.name}
+                            task={task}
                             id={task.id}
+                            status={task.status}
                             handleRemove={handleRemove}
                             handleCheck={handleCheck}
+                            handleBookmark={handleBookmark}
                           />
                         </Paper>
                       </ListItem>

@@ -39,7 +39,7 @@ export default function TaskProgress(props) {
   }
 
   useEffect(() => {
-    console.log(completed);
+    // console.log(completed);
     setCompleted(Math.floor((getCompletedCount() / tasks.length) * 100));
   }, [tasks]);
 
@@ -56,7 +56,6 @@ export default function TaskProgress(props) {
       </div>
       <Typography variant="body1">
         You have {getCompletedCount()} / {tasks.length} of your tasks completed.
-        Let's finish the day strong!
       </Typography>
     </Paper>
   );
