@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
+
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
+
+import Snackbar from "@material-ui/core/Snackbar";
+import Button from "@material-ui/core/Button";
+import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
+import Icon from "@material-ui/core/Icon";
+
 import "typeface-roboto";
 
 const useStyles = makeStyles(theme => ({
@@ -36,7 +44,11 @@ export default function TaskProgress(props) {
   }
 
   useEffect(() => {
+
     console.log(completed);
+
+    // console.log(completed);
+
     setCompleted(Math.floor((getCompletedCount() / tasks.length) * 100));
   }, [tasks]);
 
@@ -53,7 +65,9 @@ export default function TaskProgress(props) {
       </div>
       <Typography variant="body1">
         You have {getCompletedCount()} / {tasks.length} of your tasks completed.
+
         Let's finish the day strong!
+
       </Typography>
     </Paper>
   );
