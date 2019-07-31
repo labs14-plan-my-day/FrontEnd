@@ -4,11 +4,19 @@ import { withStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import Snackbar from "@material-ui/core/Snackbar";
 import Paper from "@material-ui/core/Paper";
+
 import uuid from "uuid";
 import Typography from "@material-ui/core/Typography";
 import AddTask from "./AddTask";
 import TaskList from "./TaskList";
 import TaskProgress from "./TaskProgress";
+
+
+const styles = theme => ({
+  mainContainer: {
+    width: "80%",
+    margin: "0 auto",
+
 import Bookmark from "./Bookmark";
 
 const styles = theme => ({
@@ -36,6 +44,7 @@ const styles = theme => ({
     width: "30%",
     marginLeft: "1rem",
     marginTop: "1rem",
+
     [theme.breakpoints.down("sm")]: {
       width: "100%"
     }
@@ -59,15 +68,21 @@ class Main extends Component {
   constructor() {
     super();
     this.state = {
+
+      tasks: [{}],
+
       tasks: [],
+
       open: false,
       activeStep: 0
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
     this.handleCheck = this.handleCheck.bind(this);
+
     this.handleBookmark = this.handleBookmark.bind(this);
     this.getActiveStep = this.getActiveStep.bind(this);
+
   }
 
   componentDidMount() {
@@ -78,9 +93,11 @@ class Main extends Component {
         this.setState({
           tasks: res.data.tasks
         });
+
         this.setState({
           activeStep: this.getActiveStep()
         });
+
       })
       .catch(error => {
         console.error("USERS ERROR", error);
@@ -109,6 +126,41 @@ class Main extends Component {
       open: true
     });
   }
+
+
+  handleCheck(id) {
+    console.log(this.state.tasks);
+    const finalTasks = this.state.tasks.map(task => {
+      if (task.id === id) {
+        const { status } = task;
+        switch (status) {
+          case TASK_STATUS_CODES.STATUS_INCOMPLETE:
+            task.status = TASK_STATUS_CODES.STATUS_COMPLETE;
+            break;
+          case TASK_STATUS_CODES.STATUS_COMPLETE:
+            task.status = TASK_STATUS_CODES.STATUS_INCOMPLETE;
+            break;
+          case TASK_STATUS_CODES.STATUS_IN_PROGRESS:
+            task.status = TASK_STATUS_CODES.STATUS_COMPLETE;
+            break;
+          default:
+            console.error("Invalid status code");
+        }
+
+        const firstUnchecked = this.state.tasks.find(
+          task => task.status === TASK_STATUS_CODES.STATUS_INCOMPLETE
+        );
+        this.setState({
+          activeStep: firstUnchecked
+            ? firstUnchecked.id - 1
+            : this.state.tasks[this.state.tasks.length - 1].id
+        });
+      }
+      return task;
+    });
+    this.setState({
+      tasks: finalTasks
+    });
 
   setStatus(task) {
     const { status } = task;
@@ -176,6 +228,7 @@ class Main extends Component {
           activeStep: this.getActiveStep()
         });
       });
+
   }
 
   handleRequestClose = () => {
@@ -186,6 +239,51 @@ class Main extends Component {
 
   render() {
     return (
+
+      <div>
+        {this.state.tasks && (
+          <Paper className={this.props.classes.mainContainer}>
+            <Typography variant="h1" className={this.props.classes.h1}>
+              Plan My Day
+            </Typography>
+            <TaskProgress
+              tasks={this.state.tasks}
+              handleRemove={this.handleRemove}
+              handleCheck={this.handleCheck}
+              activeStep={this.state.activeStep}
+            />
+            <Route
+              
+              path="/tasks"
+              render={props => (
+                <TaskList
+                  {...props}
+                  tasks={this.state.tasks}
+                  activeStep={this.state.activeStep}
+                  handleRemove={this.handleRemove}
+                  handleCheck={this.handleCheck}
+                />
+              )}
+            />
+            <br />
+            <div>
+              <Route
+                
+                path="/"
+                render={props => (
+                  <AddTask {...props} handleClick={this.handleClick} />
+                )}
+              />
+            </div>
+            <Snackbar
+              open={this.state.open}
+              message="Task deleted"
+              autoHideDuration={2000}
+              onRequestClose={this.handleRequestClose}
+            />
+          </Paper>
+        )}
+
       <div className={this.props.classes.mainPageContainer}>
         <div className={this.props.classes.bookmarkContainer}>
           <Bookmark
@@ -241,6 +339,7 @@ class Main extends Component {
             </Paper>
           )}
         </div>
+
       </div>
     );
   }
