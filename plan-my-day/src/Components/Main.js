@@ -14,58 +14,6 @@ import Bookmark from "./Bookmark";
 import Home from "./Home";
 
 const styles = theme => ({
-  mainPageContainer: {
-    display: "flex",
-    margin: "0 auto",
-    marginTop: "1rem",
-    width: "100%",
-    // justifyContent: "space-around",
-    [theme.breakpoints.down("xs")]: {
-      display: "flex",
-      flexDirection: "column",
-      margin: "0 auto",
-      justifyContent: "center",
-      alignItems: "center",
-      alignContent: "center"
-    }
-  },
-  mainTaskContainer: {
-    width: "65%",
-    margin: "0 auto",
-    marginTop: "4rem",
-    padding: "1rem",
-    [theme.breakpoints.down("xs")]: {
-      margin: "0 auto",
-      marginTop: "2rem"
-    }
-  },
-  bookmarkContainer: {
-    margin: "0 auto",
-    [theme.breakpoints.down("xs")]: {
-      margin: "0 auto",
-      marginTop: "1rem"
-    }
-  },
-  h1: {
-    fontSize: "30px",
-    fontWeight: 400,
-    display: "flex",
-    justifyContent: "center",
-    paddingTop: "2rem",
-    [theme.breakpoints.down("xs")]: {
-      textAlign: "center"
-    }
-  },
-  h2: {
-    fontSize: "18px",
-    fontWeight: 300,
-    display: "flex",
-    justifyContent: "center",
-    paddingTop: "2rem",
-    [theme.breakpoints.down("xs")]: {
-      textAlign: "center"
-    }
-  },
   mainFooterContainer: {
     [theme.breakpoints.down("xs")]: {
       margin: "0 auto"
@@ -211,92 +159,49 @@ class Main extends Component {
   render() {
     return (
       <>
-        <div className={this.props.classes.mainPageContainer}>
-          <div className={this.props.classes.bookmarkContainer}>
-            <Bookmark
-              {...this.props}
-              tasks={this.state.tasks}
-              handleCheck={this.handleCheck}
-              activeStep={this.state.activeStep}
-              handleBookmark={this.handleBookmark}
-            />
-          </div>
-          <div className={this.props.classes.mainTaskContainer}>
-            {this.state.tasks && (
-              <Paper>
-                <Typography variant="h1" className={this.props.classes.h1}>
-                  Plan My Day
-                </Typography>
-                <Typography variant="h2" className={this.props.classes.h2}>
-                  What do you need to get done today?
-                </Typography>
-                <TaskProgress
+        <div>
+          <Route
+            exact
+            path="/"
+            render={props => <Home {...props} handleClick={this.handleClick} />}
+          />
+        </div>
+
+        {this.state.tasks && (
+          <div>
+            <Route
+              exact
+              path="/tasks"
+              render={props => (
+                <TaskList
+                  {...props}
                   tasks={this.state.tasks}
+                  activeStep={this.state.activeStep}
                   handleRemove={this.handleRemove}
                   handleCheck={this.handleCheck}
-                  activeStep={this.state.activeStep}
+                  handleBookmark={this.handleBookmark}
                 />
-                <Route
-                  exact
-<<<<<<< HEAD
-                  path="/tasks"
-=======
-                  path="/addtask"
->>>>>>> c4a1a1212aa86610cb58d36e93ce6b622186ce8e
-                  render={props => (
-                    <TaskList
-                      {...props}
-                      tasks={this.state.tasks}
-                      activeStep={this.state.activeStep}
-                      handleRemove={this.handleRemove}
-                      handleCheck={this.handleCheck}
-                      handleBookmark={this.handleBookmark}
-                    />
-                  )}
-                />
-<<<<<<< HEAD
-                <br />
-                <div>
-                  <Route
-                    exact
-                    path="/"
-                    render={props => (
-                      <AddTask {...props} handleClick={this.handleClick} />
-                    )}
-                  />
-                </div>
-                <Snackbar
-                  open={this.state.open}
-                  message="Task deleted"
-                  autoHideDuration={2000}
-                  onRequestClose={this.handleRequestClose}
-                />
-              </Paper>
-            )}
+              )}
+            />
+            <div>
+              <Route
+                exact
+                path="/addtask"
+                render={props => (
+                  <AddTask {...props} handleClick={this.handleClick} />
+                )}
+              />
+            </div>
+            <Snackbar
+              open={this.state.open}
+              message="Task deleted"
+              autoHideDuration={2000}
+              onRequestClose={this.handleRequestClose}
+            />
           </div>
-        </div>
+        )}
         <div className={this.props.classes.mainFooterContainer}>
           <Footer />
-=======
-              </div>
-              <div>
-                <Route
-                  exact
-                  path="/"
-                  render={props => (
-                    <Home {...props} handleClick={this.handleClick} />
-                  )}
-                />
-              </div>
-              <Snackbar
-                open={this.state.open}
-                message="Task deleted"
-                autoHideDuration={2000}
-                onRequestClose={this.handleRequestClose}
-              />
-            </Paper>
-          )}
->>>>>>> c4a1a1212aa86610cb58d36e93ce6b622186ce8e
         </div>
       </>
     );

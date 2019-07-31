@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Container } from "reactstrap";
 
 // import PrivateRoute from "./components/PrivateRoute";
 // import Loading from "./components/Loading";

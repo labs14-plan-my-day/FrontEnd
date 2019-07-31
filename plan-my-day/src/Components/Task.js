@@ -4,6 +4,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
+import Chip from "@material-ui/core/Chip";
 import Icon from "@material-ui/core/Icon";
 import "typeface-roboto";
 
@@ -133,6 +134,33 @@ const styles = theme => ({
       alignItems: "center",
       alignContent: "center"
     }
+  },
+  lowPriority: {
+    marginTop: ".5rem",
+    color: "rgba(0,0,0,.7)",
+    fontweight: 500,
+    backgroundColor: "#eeeeee",
+    borderWidth: ".3px",
+    height: "25px",
+    fontSize: "12px",
+  },
+  medPriority: {
+    marginTop: ".5rem",
+    color: "rgba(0,0,0,.7)",
+    fontweight: 500,
+    backgroundColor: "#fff9c4",
+    borderWidth: ".3px",
+    height: "25px",
+    fontSize: "12px",
+  },
+highPriority: {
+  marginTop: ".5rem",
+    color: "rgba(0,0,0,.7)",
+    fontweight: 500,
+    backgroundColor: "rgba(255, 158, 128, .5)",
+    borderWidth: ".3px",
+    height: "25px",
+    fontSize: "12px",
   }
 });
 
@@ -156,13 +184,31 @@ class Task extends Component {
     console.log("Handle Bookmark", this.props.task.bookmark);
   }
 
+
   render() {
     const { task, status, handleRemove, handleBookmark } = this.props;
     const checked = status === 3;
-
     const listStyles = !checked
       ? this.props.classes.listElementStyles
       : this.props.classes.listElementCheckedStyles;
+
+  
+const convertImportanceToLabel = (taskImportance) => {
+    switch (taskImportance) {
+      case 1:
+        return "Low";
+        break;
+      case 2:
+       return "Medium";
+        break;
+     case 3:
+        return "High";
+        break;
+      default:
+        console.error("Invalid code");
+    }
+  }
+
     return (
       <div className={this.props.classes.taskPanel}>
         <div className={this.props.classes.startTime}>
@@ -194,9 +240,9 @@ class Task extends Component {
             >
               {task.description}
             </Typography>
+            <Chip label={convertImportanceToLabel(task.importance)} className={task.importance === 1 ? this.props.classes.lowPriority : task.importance === 2 ? this.props.classes.medPriority : task.importance === 3 ? this.props.classes.highPriority : ""} variant="outlined" />
           </div>
           <div className={this.props.classes.buttons}>
-            {/* <Checkbox onChange={this.onCheck} style={{ marginTop: 12 }} /> */}
             <Tooltip title="Delete task" placement="bottom-end">
               <IconButton onClick={this.onRemove} fontSize="medium">
                 <Icon className={this.props.classes.deleteButton}>
