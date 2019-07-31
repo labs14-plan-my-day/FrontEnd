@@ -21,7 +21,8 @@ const styles = theme => ({
   root: {
     width: "95%",
     margin: "0 auto",
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("xs")]: {
+      width: "74%",
       margin: "0 auto",
       display: "flex",
       justifyContent: "center"
@@ -38,9 +39,9 @@ const styles = theme => ({
     padding: theme.spacing(3)
   },
   completedTask: {
-    color: "green",
+    color: "#0E8B5B",
     fontWeight: 700,
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("xs")]: {
       fontSize: "26px"
     }
   },
@@ -49,16 +50,18 @@ const styles = theme => ({
       borderColor: "grey",
       borderWidth: "3px"
     },
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("xs")]: {
+      borderColor: "grey",
       borderWidth: "3px"
     }
   },
   connectorCompleted: {
     "& $connectorLine": {
-      borderColor: "green",
+      borderColor: "#0E8B5B",
       borderWidth: "3px"
     },
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("xs")]: {
+      borderColor: "#0E8B5B",
       borderWidth: "3px"
     }
   },
@@ -81,17 +84,17 @@ const styles = theme => ({
     borderRadius: 3
   },
   taskListContainer: {
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("xs")]: {
       width: "70%"
     }
   },
   stepMainContainer: {
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("xs")]: {
       width: "100%"
     }
   },
   stepLabelContainer: {
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("xs")]: {
       fontSize: "26px"
     }
   }
@@ -170,7 +173,7 @@ class TaskList extends Component {
                   >
                     <List className={this.props.classes.taskListContainer}>
                       <ListItem>
-                        <Paper
+                        <div
                           className={
                             stepProps.completed
                               ? this.props.classes.taskItemCompleted
@@ -185,8 +188,9 @@ class TaskList extends Component {
                             handleCheck={handleCheck}
                             handleBookmark={handleBookmark}
                           />
-                        </Paper>
+                        </div>
                       </ListItem>
+                      <Divider />
                     </List>
                   </StepLabel>
                 </Step>

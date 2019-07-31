@@ -12,17 +12,17 @@ const styles = theme => ({
     fontSize: "22px",
     fontWeight: 300,
     color: "black",
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("xs")]: {
       fontSize: "14px"
     }
   },
   listElementCheckedStyles: {
     fontSize: "22px",
-    color: "green",
+    color: "#0E8B5B",
     fontWeight: 500,
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("xs")]: {
       fontSize: "14px",
-      color: "green"
+      color: "#0E8B5B"
     }
   },
   listElementStylesDesc: {
@@ -30,7 +30,7 @@ const styles = theme => ({
     fontWeight: 300,
     color: "black",
     fontStyle: "italic",
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("xs")]: {
       fontSize: "12px",
       margin: "0 auto",
       textAlign: "center"
@@ -38,12 +38,12 @@ const styles = theme => ({
   },
   listElementCheckedStylesDesc: {
     fontSize: "16px",
-    color: "green",
+    color: "#0E8B5B",
     fontWeight: 500,
     fontStyle: "italic",
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("xs")]: {
       fontSize: "12px",
-      color: "green",
+      color: "#0E8B5B",
       margin: "0 auto",
       textAlign: "center"
     }
@@ -54,7 +54,7 @@ const styles = theme => ({
     alignItems: "center",
     alignContent: "center",
     width: "100%",
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("xs")]: {
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",
@@ -65,7 +65,7 @@ const styles = theme => ({
   startTime: {
     marginRight: "2rem",
     color: "darkGrey",
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("xs")]: {
       fontSize: "12px",
       margin: "0 auto"
     }
@@ -74,7 +74,7 @@ const styles = theme => ({
     fontWeight: 500,
     fontSize: "16px",
     color: "darkGrey",
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("xs")]: {
       fontSize: "12px",
       margin: "0 auto"
     }
@@ -86,7 +86,7 @@ const styles = theme => ({
     justifyContent: "flex-start",
     alignItems: "flex-start",
     alignContent: "flex-start",
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("xs")]: {
       margin: "0 auto",
       justifyContent: "center",
       alignItems: "center",
@@ -94,12 +94,11 @@ const styles = theme => ({
     }
   },
   taskButtonsAndContent: {
-    // border: "1px solid black",
     display: "flex",
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-between",
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("xs")]: {
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",
@@ -124,6 +123,15 @@ const styles = theme => ({
   bookmarkButton: {
     "&:hover": {
       color: "#512da8"
+    }
+  },
+  buttons: {
+    [theme.breakpoints.down("xs")]: {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+      alignContent: "center"
     }
   }
 });
@@ -187,7 +195,7 @@ class Task extends Component {
               {task.description}
             </Typography>
           </div>
-          <div>
+          <div className={this.props.classes.buttons}>
             {/* <Checkbox onChange={this.onCheck} style={{ marginTop: 12 }} /> */}
             <Tooltip title="Delete task" placement="bottom-end">
               <IconButton onClick={this.onRemove} fontSize="medium">

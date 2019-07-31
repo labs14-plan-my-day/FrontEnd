@@ -31,13 +31,13 @@ const styles = theme => ({
     minWidth: "150px",
     margin: "0 auto",
     backgroundColor: "white",
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("xs")]: {
       // display: "flex",
       width: "100%"
     }
   },
   bookmarkToggleText: {
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("xs")]: {
       fontSize: "12px",
       width: "100%"
     }

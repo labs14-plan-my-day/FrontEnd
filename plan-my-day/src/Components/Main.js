@@ -6,6 +6,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import Paper from "@material-ui/core/Paper";
 import uuid from "uuid";
 import Typography from "@material-ui/core/Typography";
+import Footer from "./Footer";
 import AddTask from "./AddTask";
 import TaskList from "./TaskList";
 import TaskProgress from "./TaskProgress";
@@ -18,7 +19,7 @@ const styles = theme => ({
     marginTop: "1rem",
     width: "100%",
     // justifyContent: "space-around",
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("xs")]: {
       display: "flex",
       flexDirection: "column",
       margin: "0 auto",
@@ -32,14 +33,14 @@ const styles = theme => ({
     margin: "0 auto",
     marginTop: "4rem",
     padding: "1rem",
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("xs")]: {
       margin: "0 auto",
       marginTop: "2rem"
     }
   },
   bookmarkContainer: {
     margin: "0 auto",
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("xs")]: {
       margin: "0 auto",
       marginTop: "1rem"
     }
@@ -50,6 +51,18 @@ const styles = theme => ({
     display: "flex",
     justifyContent: "center",
     paddingTop: "2rem"
+  },
+  h2: {
+    fontSize: "18px",
+    fontWeight: 300,
+    display: "flex",
+    justifyContent: "center",
+    paddingTop: "2rem"
+  },
+  mainFooterContainer: {
+    [theme.breakpoints.down("xs")]: {
+      margin: "0 auto"
+    }
   }
 });
 
@@ -139,7 +152,7 @@ class Main extends Component {
     );
     return firstUnchecked
       ? this.state.tasks.indexOf(firstUnchecked)
-      : this.state.tasks.length - 1;
+      : this.state.tasks.length;
   }
 
   setBookmark(task) {
@@ -207,6 +220,9 @@ class Main extends Component {
                 <Typography variant="h1" className={this.props.classes.h1}>
                   Plan My Day
                 </Typography>
+                <Typography variant="h2" className={this.props.classes.h2}>
+                  What do you need to get done today?
+                </Typography>
                 <TaskProgress
                   tasks={this.state.tasks}
                   handleRemove={this.handleRemove}
@@ -246,6 +262,9 @@ class Main extends Component {
               </Paper>
             )}
           </div>
+        </div>
+        <div className={this.props.classes.mainFooterContainer}>
+          <Footer />
         </div>
       </>
     );
