@@ -7,38 +7,22 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Icon from "@material-ui/core/Icon";
 import "typeface-roboto";
 
-// const listElementStyles = {
-//   fontSize: 26,
-//   lineHeight: "26px"
-// };
-
-// const listElementCheckedStyles = {
-//   ...listElementStyles,
-//   textDecoration: "line-through"
-// };
-
 const styles = theme => ({
   listElementStyles: {
-    fontSize: "24px",
-    lineHeight: "26px",
+    fontSize: "22px",
     fontWeight: 300,
     color: "black",
     [theme.breakpoints.down("sm")]: {
-      fontSize: "18px"
-      // flexDirection: "column",
-      // justifyContent: "center"
+      fontSize: "14px"
     }
   },
   listElementCheckedStyles: {
-    fontSize: "24px",
-    lineHeight: "26px",
+    fontSize: "22px",
     color: "green",
     fontWeight: 500,
     [theme.breakpoints.down("sm")]: {
-      fontSize: "18px",
+      fontSize: "14px",
       color: "green"
-      // flexDirection: "column",
-      // justifyContent: "center"
     }
   },
   listElementStylesDesc: {
@@ -47,60 +31,81 @@ const styles = theme => ({
     color: "black",
     fontStyle: "italic",
     [theme.breakpoints.down("sm")]: {
-      fontSize: "14px"
-      // flexDirection: "column",
-      // justifyContent: "center"
+      fontSize: "12px",
+      margin: "0 auto",
+      textAlign: "center"
     }
   },
   listElementCheckedStylesDesc: {
     fontSize: "16px",
-    lineHeight: "26px",
     color: "green",
     fontWeight: 500,
     fontStyle: "italic",
     [theme.breakpoints.down("sm")]: {
-      fontSize: "14px",
-      color: "green"
-      // flexDirection: "column",
-      // justifyContent: "center"
+      fontSize: "12px",
+      color: "green",
+      margin: "0 auto",
+      textAlign: "center"
     }
   },
   taskPanel: {
     display: "flex",
     flexDirection: "row",
-    // justifyContent: "space-between",
     alignItems: "center",
     alignContent: "center",
     width: "100%",
     [theme.breakpoints.down("sm")]: {
-      display: "flex"
-      // flexDirection: "column",
-      // justifyContent: "center"
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignContent: "center",
+      alignItems: "center"
     }
   },
   startTime: {
     marginRight: "2rem",
-    color: "darkGrey"
+    color: "darkGrey",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "12px",
+      margin: "0 auto"
+    }
   },
   startTimeText: {
     fontWeight: 500,
     fontSize: "16px",
-    color: "darkGrey"
+    color: "darkGrey",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "12px",
+      margin: "0 auto"
+    }
   },
   taskContent: {
     // border: "1px solid black",
-    displa: "flex",
+    display: "flex",
     flexDirection: "column",
     justifyContent: "flex-start",
     alignItems: "flex-start",
-    alignContent: "flex-start"
+    alignContent: "flex-start",
+    [theme.breakpoints.down("sm")]: {
+      margin: "0 auto",
+      justifyContent: "center",
+      alignItems: "center",
+      alignContent: "center"
+    }
   },
   taskButtonsAndContent: {
     // border: "1px solid black",
     display: "flex",
     width: "100%",
     flexDirection: "row",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    [theme.breakpoints.down("sm")]: {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+      alignContent: "center"
+    }
   },
   deleteButton: {
     color: "#c62828",

@@ -15,29 +15,33 @@ const styles = theme => ({
   mainPageContainer: {
     display: "flex",
     margin: "0 auto",
-    marginTop: "2rem",
+    marginTop: "1rem",
     width: "100%",
-    justifyContent: "space-around",
+    // justifyContent: "space-around",
     [theme.breakpoints.down("sm")]: {
       display: "flex",
       flexDirection: "column",
-      margin: "0 auto"
+      margin: "0 auto",
+      justifyContent: "center",
+      alignItems: "center",
+      alignContent: "center"
     }
   },
   mainTaskContainer: {
-    width: "100%",
-    // marginLeft: ".5rem",
+    width: "65%",
+    margin: "0 auto",
+    marginTop: "4rem",
     padding: "1rem",
     [theme.breakpoints.down("sm")]: {
-      width: "100%"
+      margin: "0 auto",
+      marginTop: "2rem"
     }
   },
   bookmarkContainer: {
-    width: "30%",
-    marginLeft: "1rem",
-    marginTop: "1rem",
+    margin: "0 auto",
     [theme.breakpoints.down("sm")]: {
-      width: "100%"
+      margin: "0 auto",
+      marginTop: "1rem"
     }
   },
   h1: {
@@ -186,62 +190,64 @@ class Main extends Component {
 
   render() {
     return (
-      <div className={this.props.classes.mainPageContainer}>
-        <div className={this.props.classes.bookmarkContainer}>
-          <Bookmark
-            {...this.props}
-            tasks={this.state.tasks}
-            handleCheck={this.handleCheck}
-            activeStep={this.state.activeStep}
-            handleBookmark={this.handleBookmark}
-          />
-        </div>
-        <div className={this.props.classes.mainTaskContainer}>
-          {this.state.tasks && (
-            <Paper>
-              <Typography variant="h1" className={this.props.classes.h1}>
-                Plan My Day
-              </Typography>
-              <TaskProgress
-                tasks={this.state.tasks}
-                handleRemove={this.handleRemove}
-                handleCheck={this.handleCheck}
-                activeStep={this.state.activeStep}
-              />
-              <Route
-                exact
-                path="/tasks"
-                render={props => (
-                  <TaskList
-                    {...props}
-                    tasks={this.state.tasks}
-                    activeStep={this.state.activeStep}
-                    handleRemove={this.handleRemove}
-                    handleCheck={this.handleCheck}
-                    handleBookmark={this.handleBookmark}
-                  />
-                )}
-              />
-              <br />
-              <div>
+      <>
+        <div className={this.props.classes.mainPageContainer}>
+          <div className={this.props.classes.bookmarkContainer}>
+            <Bookmark
+              {...this.props}
+              tasks={this.state.tasks}
+              handleCheck={this.handleCheck}
+              activeStep={this.state.activeStep}
+              handleBookmark={this.handleBookmark}
+            />
+          </div>
+          <div className={this.props.classes.mainTaskContainer}>
+            {this.state.tasks && (
+              <Paper>
+                <Typography variant="h1" className={this.props.classes.h1}>
+                  Plan My Day
+                </Typography>
+                <TaskProgress
+                  tasks={this.state.tasks}
+                  handleRemove={this.handleRemove}
+                  handleCheck={this.handleCheck}
+                  activeStep={this.state.activeStep}
+                />
                 <Route
                   exact
-                  path="/"
+                  path="/tasks"
                   render={props => (
-                    <AddTask {...props} handleClick={this.handleClick} />
+                    <TaskList
+                      {...props}
+                      tasks={this.state.tasks}
+                      activeStep={this.state.activeStep}
+                      handleRemove={this.handleRemove}
+                      handleCheck={this.handleCheck}
+                      handleBookmark={this.handleBookmark}
+                    />
                   )}
                 />
-              </div>
-              <Snackbar
-                open={this.state.open}
-                message="Task deleted"
-                autoHideDuration={2000}
-                onRequestClose={this.handleRequestClose}
-              />
-            </Paper>
-          )}
+                <br />
+                <div>
+                  <Route
+                    exact
+                    path="/"
+                    render={props => (
+                      <AddTask {...props} handleClick={this.handleClick} />
+                    )}
+                  />
+                </div>
+                <Snackbar
+                  open={this.state.open}
+                  message="Task deleted"
+                  autoHideDuration={2000}
+                  onRequestClose={this.handleRequestClose}
+                />
+              </Paper>
+            )}
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 }

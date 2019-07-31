@@ -19,11 +19,12 @@ import Task from "./Task";
 
 const styles = theme => ({
   root: {
-    width: "100%",
+    width: "95%",
+    margin: "0 auto",
     [theme.breakpoints.down("sm")]: {
+      margin: "0 auto",
       display: "flex",
-      justifyContent: "center",
-      width: "100%"
+      justifyContent: "center"
     }
   },
   button: {
@@ -38,18 +39,27 @@ const styles = theme => ({
   },
   completedTask: {
     color: "green",
-    fontWeight: 700
+    fontWeight: 700,
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "26px"
+    }
   },
   connectorActive: {
     "& $connectorLine": {
       borderColor: "grey",
-      borderWidth: "4px"
+      borderWidth: "3px"
+    },
+    [theme.breakpoints.down("sm")]: {
+      borderWidth: "3px"
     }
   },
   connectorCompleted: {
     "& $connectorLine": {
       borderColor: "green",
-      borderWidth: "4px"
+      borderWidth: "3px"
+    },
+    [theme.breakpoints.down("sm")]: {
+      borderWidth: "3px"
     }
   },
   connectorDisabled: {
@@ -69,6 +79,21 @@ const styles = theme => ({
     width: "100%",
     padding: ".8rem",
     borderRadius: 3
+  },
+  taskListContainer: {
+    [theme.breakpoints.down("sm")]: {
+      width: "70%"
+    }
+  },
+  stepMainContainer: {
+    [theme.breakpoints.down("sm")]: {
+      width: "100%"
+    }
+  },
+  stepLabelContainer: {
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "26px"
+    }
   }
 });
 
@@ -113,6 +138,7 @@ class TaskList extends Component {
           orientation="vertical"
           activeStep={activeStep}
           connector={connector}
+          className={this.props.classes.stepMainContainer}
         >
           {sortedTasks &&
             sortedTasks.map((task, index) => {
@@ -132,7 +158,7 @@ class TaskList extends Component {
                           className={
                             stepProps.completed
                               ? this.props.classes.completedTask
-                              : ""
+                              : this.props.classes.stepLabelContainer
                           }
                         >
                           {stepProps.completed
@@ -142,7 +168,7 @@ class TaskList extends Component {
                       </Tooltip>
                     }
                   >
-                    <List>
+                    <List className={this.props.classes.taskListContainer}>
                       <ListItem>
                         <Paper
                           className={
@@ -161,7 +187,6 @@ class TaskList extends Component {
                           />
                         </Paper>
                       </ListItem>
-                      {/* <Divider /> */}
                     </List>
                   </StepLabel>
                 </Step>

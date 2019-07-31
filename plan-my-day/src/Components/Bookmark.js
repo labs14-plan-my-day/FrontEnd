@@ -21,14 +21,18 @@ import "typeface-roboto";
 import Task from "./Task";
 
 const styles = theme => ({
+  bookmarkMainContainer: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center"
+  },
   bookmarkListToggle: {
     width: "100%",
-    minWidth: "250px",
+    minWidth: "150px",
     margin: "0 auto",
     backgroundColor: "white",
     [theme.breakpoints.down("sm")]: {
       // display: "flex",
-      fontSize: "14px",
       width: "100%"
     }
   },
@@ -194,21 +198,23 @@ class Bookmark extends Component {
       return task.bookmark;
     });
     return (
-      <div>
-        <Button
-          variant="contained"
-          className={this.props.classes.bookmarkListToggle}
-          onClick={this.handleExpandClick}
-        >
-          <Icon>bookmarks</Icon>
-          <Typography
+      <div className={this.props.classes.bookmarkMainContainer}>
+        <Tooltip title="Bookmarked tasks" placement="right-start">
+          <Button
+            variant="contained"
+            className={this.props.classes.bookmarkListToggle}
+            onClick={this.handleExpandClick}
+          >
+            <Icon>bookmarks</Icon>
+            {/* <Typography
             variant="subtitle 1"
             className={this.props.classes.bookmarkToggleText}
           >
             Bookmarked Tasks
-          </Typography>
-          {this.state.open ? <ExpandMore /> : <ExpandLess />}
-        </Button>
+          </Typography> */}
+            {this.state.open ? <ExpandMore /> : <ExpandLess />}
+          </Button>
+        </Tooltip>
         <Paper>
           {bookmarkedTasksList &&
             bookmarkedTasksList.map(bookmarkedTask => (

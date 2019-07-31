@@ -13,7 +13,12 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(1),
     color: "#512da8"
   },
-  progressCircle: {
+  progressText: {
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "12px"
+    }
+  },
+  progressMainContainer: {
     display: "flex",
     justifyContent: "space-evenly",
     alignItems: "center",
@@ -23,7 +28,13 @@ const useStyles = makeStyles(theme => ({
     marginBottom: "2rem",
     marginTop: "2rem",
     height: "3.5rem",
-    padding: ".5rem"
+    padding: ".5rem",
+    [theme.breakpoints.down("sm")]: {
+      width: "80%",
+      margin: "0 auto",
+      marginTop: "1.5rem",
+      marginBottom: "1.5rem"
+    }
   }
 }));
 
@@ -44,8 +55,8 @@ export default function TaskProgress(props) {
   }, [tasks]);
 
   return (
-    <Paper className={classes.progressCircle}>
-      <div className={classes.progressContainer}>
+    <Paper className={classes.progressMainContainer}>
+      <div className={classes.progressCircleContainer}>
         <CircularProgress
           className={classes.progress}
           variant="static"
@@ -54,7 +65,7 @@ export default function TaskProgress(props) {
           size={45}
         />
       </div>
-      <Typography variant="body1">
+      <Typography variant="body1" className={classes.progressText}>
         You have {getCompletedCount()} / {tasks.length} of your tasks completed.
       </Typography>
     </Paper>

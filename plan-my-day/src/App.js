@@ -10,19 +10,6 @@ class App extends Component {
     };
   }
 
-  componentDidMount() {
-    console.log("mounted");
-    axios
-      .get("https://plan-my-dayapp.herokuapp.com/dummy")
-      .then(res => {
-        this.state.response.push(res.data);
-        console.log(res.data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
-
   render() {
     return (
       <div className="App">
