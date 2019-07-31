@@ -165,9 +165,6 @@ highPriority: {
 });
 
 class Task extends Component {
-  // static propTypes = {
-  //   task: PropTypes.string
-  // };
 
   constructor(props) {
     super(props);
