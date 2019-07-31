@@ -1,19 +1,11 @@
 import React, { Component, PropTypes } from "react";
 import { withStyles } from "@material-ui/core/styles";
-
 import DeleteIcon from "@material-ui/icons/Delete";
 import Typography from "@material-ui/core/Typography";
-
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import Icon from "@material-ui/core/Icon";
 import "typeface-roboto";
-
-
-
-const styles = theme => ({
-  listElementStyles: {
-    fontSize: "26px",
 
 // const listElementStyles = {
 //   fontSize: 26,
@@ -28,32 +20,23 @@ const styles = theme => ({
 const styles = theme => ({
   listElementStyles: {
     fontSize: "24px",
-
     lineHeight: "26px",
     fontWeight: 300,
     color: "black",
     [theme.breakpoints.down("sm")]: {
       fontSize: "18px"
-
-    }
-  },
-  listElementCheckedStyles: {
-    fontSize: "26px",
-
       // flexDirection: "column",
       // justifyContent: "center"
     }
   },
   listElementCheckedStyles: {
     fontSize: "24px",
-
     lineHeight: "26px",
     color: "green",
     fontWeight: 500,
     [theme.breakpoints.down("sm")]: {
       fontSize: "18px",
       color: "green"
-
       // flexDirection: "column",
       // justifyContent: "center"
     }
@@ -80,26 +63,17 @@ const styles = theme => ({
       color: "green"
       // flexDirection: "column",
       // justifyContent: "center"
-
     }
   },
   taskPanel: {
     display: "flex",
     flexDirection: "row",
-
-    justifyContent: "space-between",
-
     // justifyContent: "space-between",
-
     alignItems: "center",
     alignContent: "center",
     width: "100%",
     [theme.breakpoints.down("sm")]: {
       display: "flex"
-
-    }
-  },
-
       // flexDirection: "column",
       // justifyContent: "center"
     }
@@ -128,13 +102,11 @@ const styles = theme => ({
     flexDirection: "row",
     justifyContent: "space-between"
   },
-
   deleteButton: {
     color: "#c62828",
     "&:hover": {
       color: "#7f0000"
     }
-
   },
   bookmarkIcon: {
     "&:hover": {
@@ -148,31 +120,10 @@ const styles = theme => ({
     "&:hover": {
       color: "#512da8"
     }
-
   }
 });
 
 class Task extends Component {
-
-  constructor(props) {
-    super(props);
-    this.onClick = this.onClick.bind(this);
-    this.onCheck = this.onCheck.bind(this);
-  }
-
-  onClick(event) {
-    this.props.handleRemove(this.props.id);
-  }
-
-  onCheck(event) {
-    console.log(this.props.id);
-    this.props.handleCheck(this.props.id);
-  }
-
-  render() {
-    const { task, checked } = this.props;
-    // const checked = task.status === 3;
-
   // static propTypes = {
   //   task: PropTypes.string
   // };
@@ -196,31 +147,11 @@ class Task extends Component {
     const { task, status, handleRemove, handleBookmark } = this.props;
     const checked = status === 3;
 
-
     const listStyles = !checked
       ? this.props.classes.listElementStyles
       : this.props.classes.listElementCheckedStyles;
     return (
       <div className={this.props.classes.taskPanel}>
-
-        <div
-          className={
-            !checked
-              ? this.props.classes.listElementStyles
-              : this.props.classes.listElementCheckedStyles
-          }
-        >
-          {task}
-        </div>
-        <div>
-          <Tooltip title="Delete task" placement="bottom-end">
-            <IconButton onClick={this.onClick} fontSize="medium">
-              <Icon className={this.props.classes.deleteButton}>
-                remove_circle
-              </Icon>
-            </IconButton>
-          </Tooltip>
-
         <div className={this.props.classes.startTime}>
           <Typography
             className={this.props.classes.startTimeText}
@@ -278,7 +209,6 @@ class Task extends Component {
               </IconButton>
             </Tooltip>
           </div>
-
         </div>
       </div>
     );
