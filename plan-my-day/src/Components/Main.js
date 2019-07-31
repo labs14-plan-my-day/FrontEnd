@@ -11,6 +11,7 @@ import AddTask from "./AddTask";
 import TaskList from "./TaskList";
 import TaskProgress from "./TaskProgress";
 import Bookmark from "./Bookmark";
+import Home from "./Home";
 
 const styles = theme => ({
   mainPageContainer: {
@@ -237,7 +238,11 @@ class Main extends Component {
                 />
                 <Route
                   exact
+<<<<<<< HEAD
                   path="/tasks"
+=======
+                  path="/addtask"
+>>>>>>> c4a1a1212aa86610cb58d36e93ce6b622186ce8e
                   render={props => (
                     <TaskList
                       {...props}
@@ -249,6 +254,7 @@ class Main extends Component {
                     />
                   )}
                 />
+<<<<<<< HEAD
                 <br />
                 <div>
                   <Route
@@ -271,6 +277,26 @@ class Main extends Component {
         </div>
         <div className={this.props.classes.mainFooterContainer}>
           <Footer />
+=======
+              </div>
+              <div>
+                <Route
+                  exact
+                  path="/"
+                  render={props => (
+                    <Home {...props} handleClick={this.handleClick} />
+                  )}
+                />
+              </div>
+              <Snackbar
+                open={this.state.open}
+                message="Task deleted"
+                autoHideDuration={2000}
+                onRequestClose={this.handleRequestClose}
+              />
+            </Paper>
+          )}
+>>>>>>> c4a1a1212aa86610cb58d36e93ce6b622186ce8e
         </div>
       </>
     );
