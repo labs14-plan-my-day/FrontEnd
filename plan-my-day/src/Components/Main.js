@@ -50,14 +50,20 @@ const styles = theme => ({
     fontWeight: 400,
     display: "flex",
     justifyContent: "center",
-    paddingTop: "2rem"
+    paddingTop: "2rem",
+    [theme.breakpoints.down("xs")]: {
+      textAlign: "center"
+    }
   },
   h2: {
     fontSize: "18px",
     fontWeight: 300,
     display: "flex",
     justifyContent: "center",
-    paddingTop: "2rem"
+    paddingTop: "2rem",
+    [theme.breakpoints.down("xs")]: {
+      textAlign: "center"
+    }
   },
   mainFooterContainer: {
     [theme.breakpoints.down("xs")]: {

@@ -29,7 +29,9 @@ const useStyles = makeStyles(theme => ({
     marginRight: "4rem",
     [theme.breakpoints.down("xs")]: {
       fontSize: "12px",
-      width: "100%"
+      width: "100%",
+      margin: "0 auto",
+      textAlign: "center"
     }
   },
   progressMainContainer: {
@@ -57,7 +59,7 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "space-between",
     width: "56%",
     [theme.breakpoints.down("xs")]: {
-      width: "80%"
+      width: "100%"
     }
   }
 }));
