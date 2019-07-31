@@ -10,6 +10,7 @@ import AddTask from "./AddTask";
 import TaskList from "./TaskList";
 import TaskProgress from "./TaskProgress";
 import Bookmark from "./Bookmark";
+import Home from "./Home";
 
 const styles = theme => ({
   mainPageContainer: {
@@ -226,9 +227,18 @@ class Main extends Component {
               <div>
                 <Route
                   exact
-                  path="/"
+                  path="/addtask"
                   render={props => (
                     <AddTask {...props} handleClick={this.handleClick} />
+                  )}
+                />
+              </div>
+              <div>
+                <Route
+                  exact
+                  path="/"
+                  render={props => (
+                    <Home {...props} handleClick={this.handleClick} />
                   )}
                 />
               </div>

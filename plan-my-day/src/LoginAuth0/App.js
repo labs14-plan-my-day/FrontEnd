@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Container } from "reactstrap";
+// import { Container } from "reactstrap";
 
 import PrivateRoute from "./components/PrivateRoute";
 import Loading from "./components/Loading";

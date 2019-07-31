@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import Main from "./Components/Main";
 import { BrowserRouter as Router, withRouter } from "react-router-dom";
 import "./index.css";
+import App from "./App";
 
 const AppWithRouter = withRouter(Main);
 
