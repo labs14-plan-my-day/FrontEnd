@@ -43,12 +43,12 @@ class Main extends Component {
   }
 
   componentDidMount() {
-    const endpoint = "https://plan-my-dayapp.herokuapp.com/user/1";
+    const endpoint = "http://localhost:8080/tasks/user/1";
     axios
       .get(endpoint)
       .then(res => {
         this.setState({
-          tasks: res.data.tasks
+          tasks: res.data
         });
         this.setState({
           activeStep: this.getActiveStep()

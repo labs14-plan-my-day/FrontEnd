@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import createAuth0Client from "@auth0/auth0-spa-js";
+import Axios from "axios";
 
 const DEFAULT_REDIRECT_CALLBACK = () =>
   window.history.replaceState({}, document.title, window.location.pathname);
@@ -34,6 +35,40 @@ export const Auth0Provider = ({
       if (isAuthenticated) {
         const user = await auth0FromHook.getUser();
         setUser(user);
+        //console.log(user)
+        const newUser = {
+          email: user.email,
+          username: user.nickname,
+        }
+        //console.log(newUser)
+        // After we have set the user, make a POST request to your backend and save the USER if it doesnt exist. if exist just return the user
+        // get user if !user 
+
+        // Axios.get(`http://localhost:8080/auth/${user.email}`)
+        //   .then(res => {
+        //     console.log(`this is res${res.data}`)
+        //     return res.data
+
+        //   }).catch(err => {
+        //     if (!user) {
+        //       Axios
+        //         .post('http://localhost:8080/auth/register', newUser)
+        //         .then(res => {
+        //           console.log({res, newUser})
+        //         }).catch(err => {
+        //           console.log(err)
+        //         })
+        //     }else{console.log('error')}
+        //   })
+
+        Axios
+          .post('http://localhost:8080/auth/register', newUser)
+          .then(res => {
+            console.log(res)
+          }).catch(err => {
+            console.log(err)
+          })
+
       }
 
       setLoading(false);
