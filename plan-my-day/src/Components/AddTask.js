@@ -26,6 +26,7 @@ class AddTask extends Component {
   }
 
   render() {
+
     return (
       <div style={{ marginLeft: "30%", width: "60%" }}>
         <form id="addTask">
