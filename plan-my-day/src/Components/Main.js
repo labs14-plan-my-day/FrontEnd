@@ -178,7 +178,7 @@ class Main extends Component {
 
           {this.state.tasks && (
             <div>
-              <PrivateRoute
+              <Route
                 exact
                 path="/tasks"
                 render={props => (
@@ -193,7 +193,7 @@ class Main extends Component {
                 )}
               />
               <div>
-                <PrivateRoute
+                <Route
                   exact
                   path="/addtask"
                   render={props => (

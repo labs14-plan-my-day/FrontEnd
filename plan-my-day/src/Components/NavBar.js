@@ -91,7 +91,7 @@ const NavBar = () => {
                 </UncontrolledDropdown>
               )}
             </Nav>
-            {!isAuthenticated && (
+            {/* {!isAuthenticated && (
               <Nav className="d-md-none" navbar>
                 <NavItem>
                   <Button
@@ -104,7 +104,7 @@ const NavBar = () => {
                   </Button>
                 </NavItem>
               </Nav>
-            )}
+            )} */}
             {isAuthenticated && (
               <Nav
                 className="d-md-none justify-content-between"
