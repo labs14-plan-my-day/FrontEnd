@@ -47,6 +47,11 @@ const NavBar = () => {
                 >
                   Home
                 </NavLink>
+                <NavLink
+                  tag = {RouterNavLink}
+                  to = "/tasks">
+                  Tasks
+                </NavLink>
               </NavItem>
             </Nav>
             <Nav className="d-none d-md-block" navbar>

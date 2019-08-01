@@ -1,13 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Main from "./Components/Main";
-import { BrowserRouter as Router, withRouter } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import { Auth0Provider } from "./react-auth0-spa";
 import config from "./auth_config.json";
-
-const AppWithRouter = withRouter(Main);
 
 const onRedirectCallback = appState => {
   window.history.replaceState(
@@ -26,11 +22,8 @@ ReactDOM.render(
     redirect_uri={window.location.origin}
     onRedirectCallback={onRedirectCallback}
   >
-    <Router>
-      <AppWithRouter />
-    </Router>
-    ,
     <App />
   </Auth0Provider>,
   document.getElementById("root")
 );
+
