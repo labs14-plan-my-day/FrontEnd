@@ -4,41 +4,26 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
+import Chip from "@material-ui/core/Chip";
 import Icon from "@material-ui/core/Icon";
 import "typeface-roboto";
 
-// const listElementStyles = {
-//   fontSize: 26,
-//   lineHeight: "26px"
-// };
-
-// const listElementCheckedStyles = {
-//   ...listElementStyles,
-//   textDecoration: "line-through"
-// };
-
 const styles = theme => ({
   listElementStyles: {
-    fontSize: "24px",
-    lineHeight: "26px",
+    fontSize: "22px",
     fontWeight: 300,
     color: "black",
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "18px"
-      // flexDirection: "column",
-      // justifyContent: "center"
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "14px"
     }
   },
   listElementCheckedStyles: {
-    fontSize: "24px",
-    lineHeight: "26px",
-    color: "green",
+    fontSize: "22px",
+    color: "#0E8B5B",
     fontWeight: 500,
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "18px",
-      color: "green"
-      // flexDirection: "column",
-      // justifyContent: "center"
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "14px",
+      color: "#0E8B5B"
     }
   },
   listElementStylesDesc: {
@@ -46,61 +31,81 @@ const styles = theme => ({
     fontWeight: 300,
     color: "black",
     fontStyle: "italic",
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "14px"
-      // flexDirection: "column",
-      // justifyContent: "center"
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "12px",
+      margin: "0 auto",
+      textAlign: "center"
     }
   },
   listElementCheckedStylesDesc: {
     fontSize: "16px",
-    lineHeight: "26px",
-    color: "green",
+    color: "#0E8B5B",
     fontWeight: 500,
     fontStyle: "italic",
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "14px",
-      color: "green"
-      // flexDirection: "column",
-      // justifyContent: "center"
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "12px",
+      color: "#0E8B5B",
+      margin: "0 auto",
+      textAlign: "center"
     }
   },
   taskPanel: {
     display: "flex",
     flexDirection: "row",
-    // justifyContent: "space-between",
     alignItems: "center",
     alignContent: "center",
     width: "100%",
-    [theme.breakpoints.down("sm")]: {
-      display: "flex"
-      // flexDirection: "column",
-      // justifyContent: "center"
+    [theme.breakpoints.down("xs")]: {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignContent: "center",
+      alignItems: "center"
     }
   },
   startTime: {
     marginRight: "2rem",
-    color: "darkGrey"
+    color: "darkGrey",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "12px",
+      margin: "0 auto"
+    }
   },
   startTimeText: {
     fontWeight: 500,
     fontSize: "16px",
-    color: "darkGrey"
+    color: "darkGrey",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "12px",
+      margin: "0 auto"
+    }
   },
   taskContent: {
     // border: "1px solid black",
-    displa: "flex",
+    display: "flex",
     flexDirection: "column",
     justifyContent: "flex-start",
     alignItems: "flex-start",
-    alignContent: "flex-start"
+    alignContent: "flex-start",
+    [theme.breakpoints.down("xs")]: {
+      margin: "0 auto",
+      justifyContent: "center",
+      alignItems: "center",
+      alignContent: "center"
+    }
   },
   taskButtonsAndContent: {
-    // border: "1px solid black",
     display: "flex",
     width: "100%",
     flexDirection: "row",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    [theme.breakpoints.down("xs")]: {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+      alignContent: "center"
+    }
   },
   deleteButton: {
     color: "#c62828",
@@ -120,13 +125,46 @@ const styles = theme => ({
     "&:hover": {
       color: "#512da8"
     }
+  },
+  buttons: {
+    [theme.breakpoints.down("xs")]: {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+      alignContent: "center"
+    }
+  },
+  lowPriority: {
+    marginTop: ".5rem",
+    color: "rgba(0,0,0,.7)",
+    fontweight: 500,
+    backgroundColor: "#eeeeee",
+    borderWidth: ".3px",
+    height: "25px",
+    fontSize: "12px",
+  },
+  medPriority: {
+    marginTop: ".5rem",
+    color: "rgba(0,0,0,.7)",
+    fontweight: 500,
+    backgroundColor: "#fff9c4",
+    borderWidth: ".3px",
+    height: "25px",
+    fontSize: "12px",
+  },
+highPriority: {
+  marginTop: ".5rem",
+    color: "rgba(0,0,0,.7)",
+    fontweight: 500,
+    backgroundColor: "rgba(255, 158, 128, .5)",
+    borderWidth: ".3px",
+    height: "25px",
+    fontSize: "12px",
   }
 });
 
 class Task extends Component {
-  // static propTypes = {
-  //   task: PropTypes.string
-  // };
 
   constructor(props) {
     super(props);
@@ -143,13 +181,31 @@ class Task extends Component {
     console.log("Handle Bookmark", this.props.task.bookmark);
   }
 
+
   render() {
     const { task, status, handleRemove, handleBookmark } = this.props;
     const checked = status === 3;
-
     const listStyles = !checked
       ? this.props.classes.listElementStyles
       : this.props.classes.listElementCheckedStyles;
+
+  
+const convertImportanceToLabel = (taskImportance) => {
+    switch (taskImportance) {
+      case 1:
+        return "Low";
+        break;
+      case 2:
+       return "Medium";
+        break;
+     case 3:
+        return "High";
+        break;
+      default:
+        console.error("Invalid code");
+    }
+  }
+
     return (
       <div className={this.props.classes.taskPanel}>
         <div className={this.props.classes.startTime}>
@@ -181,9 +237,9 @@ class Task extends Component {
             >
               {task.description}
             </Typography>
+            <Chip label={convertImportanceToLabel(task.importance)} className={task.importance === 1 ? this.props.classes.lowPriority : task.importance === 2 ? this.props.classes.medPriority : task.importance === 3 ? this.props.classes.highPriority : ""} variant="outlined" />
           </div>
-          <div>
-            {/* <Checkbox onChange={this.onCheck} style={{ marginTop: 12 }} /> */}
+          <div className={this.props.classes.buttons}>
             <Tooltip title="Delete task" placement="bottom-end">
               <IconButton onClick={this.onRemove} fontSize="medium">
                 <Icon className={this.props.classes.deleteButton}>
