@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Link, NavLink } from "react-router-dom";
+import { Route, Link, BrowserRouter as Router } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import Snackbar from "@material-ui/core/Snackbar";
@@ -11,7 +11,12 @@ import AddTask from "./AddTask";
 import TaskList from "./TaskList";
 import TaskProgress from "./TaskProgress";
 import Bookmark from "./Bookmark";
+import PrivateRoute from "./PrivateRoute";
 import Home from "./Home";
+import { Container } from "reactstrap";
+import NavBar from "./NavBar";
+import Profile from "./Profile";
+import { useAuth0 } from "./react-auth0-spa";
 
 const styles = theme => ({
   mainFooterContainer: {
@@ -159,50 +164,55 @@ class Main extends Component {
   render() {
     return (
       <>
-        <div>
-          <Route
-            exact
-            path="/"
-            render={props => <Home {...props} handleClick={this.handleClick} />}
-          />
-        </div>
-
-        {this.state.tasks && (
+        <Router>
+          <NavBar />
           <div>
             <Route
               exact
-              path="/tasks"
+              path="/"
               render={props => (
-                <TaskList
-                  {...props}
-                  tasks={this.state.tasks}
-                  activeStep={this.state.activeStep}
-                  handleRemove={this.handleRemove}
-                  handleCheck={this.handleCheck}
-                  handleBookmark={this.handleBookmark}
-                />
+                <Home {...props} handleClick={this.handleClick} />
               )}
             />
+          </div>
+
+          {this.state.tasks && (
             <div>
-              <Route
+              <PrivateRoute
                 exact
-                path="/addtask"
+                path="/tasks"
                 render={props => (
-                  <AddTask {...props} handleClick={this.handleClick} />
+                  <TaskList
+                    {...props}
+                    tasks={this.state.tasks}
+                    activeStep={this.state.activeStep}
+                    handleRemove={this.handleRemove}
+                    handleCheck={this.handleCheck}
+                    handleBookmark={this.handleBookmark}
+                  />
                 )}
               />
+              <div>
+                <PrivateRoute
+                  exact
+                  path="/addtask"
+                  render={props => (
+                    <AddTask {...props} handleClick={this.handleClick} />
+                  )}
+                />
+              </div>
+              <Snackbar
+                open={this.state.open}
+                message="Task deleted"
+                autoHideDuration={2000}
+                onRequestClose={this.handleRequestClose}
+              />
             </div>
-            <Snackbar
-              open={this.state.open}
-              message="Task deleted"
-              autoHideDuration={2000}
-              onRequestClose={this.handleRequestClose}
-            />
+          )}
+          <div className={this.props.classes.mainFooterContainer}>
+            <Footer />
           </div>
-        )}
-        <div className={this.props.classes.mainFooterContainer}>
-          <Footer />
-        </div>
+        </Router>
       </>
     );
   }
