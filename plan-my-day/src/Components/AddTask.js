@@ -6,26 +6,12 @@ import axios from "axios";
 class AddTask extends Component {
   constructor(props) {
     super(props);
-    // this.onClick = this.onClick.bind(this);
     this.state = {
       inputValue: "",
-      tasks: [ {} ],
-			task: { name: ''},
+      tasks: [ { name:"" } ],
+			// task: { name: ''},
     };
-  }fftyjstjsjt
-
-  // onClick(event) {
-  //   event.preventDefault();
-  //   // var task = this.state.inputValue;
-  //   if (task == "") return;
-  //   else {
-  //     var form = document.getElementById("addTask");
-  //     // form.reset();
-  //     this.props.handleClick(task);
-  //     this.state.inputValue = "";
-  //   }
-  //   this.props.history.push("/tasks");
-  // }
+  }
 
   formHandler = (event) => {
     event.preventDefault();
@@ -45,7 +31,7 @@ class AddTask extends Component {
 
 		 else {
 			axios
-				.post('https://plan-my-dayapp.herokuapp.com/tasks', this.state.task)
+				.post('https://plan-my-dayapp.herokuapp.com/tasks')
 				.then((res) => {
 					this.setState({
 						tasks: res.data.tasks,

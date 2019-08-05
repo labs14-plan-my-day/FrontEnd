@@ -3,8 +3,6 @@ import { Route } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import Snackbar from "@material-ui/core/Snackbar";
-
-
 import Footer from "../Components/Footer";
 import AddTask from "../Components/AddTask";
 import TaskList from "../Components/TaskList";
@@ -40,12 +38,12 @@ class Main extends Component {
   }
 
   componentDidMount() {
-    const endpoint = "http://localhost:8080/tasks/user/1";
+    const endpoint = "https://plan-my-dayapp.herokuapp.com/tasks";
     axios
       .get(endpoint)
       .then(res => {
         this.setState({
-          tasks: res.data
+          tasks: res.data.tasks
         });
         this.setState({
           activeStep: this.getActiveStep()
@@ -78,6 +76,8 @@ class Main extends Component {
       open: true
     });
   }
+
+  
 
   setStatus(task) {
     const { status } = task;
