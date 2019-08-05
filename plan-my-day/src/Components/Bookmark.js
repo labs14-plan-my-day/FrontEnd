@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import axios from "axios";
-import Stepper from "@material-ui/core/Stepper";
-import Step from "@material-ui/core/Step";
-import StepLabel from "@material-ui/core/StepLabel";
-import StepConnector from "@material-ui/core/StepConnector";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
@@ -14,11 +10,10 @@ import ExpandMore from "@material-ui/icons/ExpandMore";
 import Collapse from "@material-ui/core/Collapse";
 import ListItem from "@material-ui/core/ListItem";
 import Divider from "@material-ui/core/Divider";
-import StepIcon from "@material-ui/core/StepIcon";
 import Tooltip from "@material-ui/core/Tooltip";
 import Icon from "@material-ui/core/Icon";
 import "typeface-roboto";
-import Task from "./Task";
+
 
 const styles = theme => ({
   bookmarkMainContainer: {
@@ -48,7 +43,6 @@ const styles = theme => ({
     width: "100%",
     padding: ".5rem",
     maxHeight: "2.5rem",
-    display: "flex",
     alignItems: "center",
     alignContent: "center",
     "& $bookmarkAddIcon": {
@@ -56,7 +50,6 @@ const styles = theme => ({
     },
     "&:hover": {
       fontWeight: 500,
-      fontWeight: "bold",
       backgroundColor: "white",
       cursor: "pointer",
       "& $bookmarkAddIcon": {
@@ -186,12 +179,8 @@ class Bookmark extends Component {
   render() {
     // console.log("Props Tasks List", this.props.tasks);
 
-    const {
-      handleRemove,
-      handleCheck,
-      tasks,
-      classes,
-      activeStep
+    const { 
+      tasks
     } = this.props;
 
     const bookmarkedTasksList = tasks.filter(task => {

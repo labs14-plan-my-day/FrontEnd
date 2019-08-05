@@ -1,6 +1,5 @@
-import React, { Component, PropTypes } from "react";
+import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
-import DeleteIcon from "@material-ui/icons/Delete";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
@@ -183,9 +182,8 @@ class Task extends Component {
 
 
   render() {
-    const { task, status, handleRemove, handleBookmark } = this.props;
-    const checked = status === 3;
-    const listStyles = !checked
+    const { task, status } = this.props;
+    const checked = status === 3
       ? this.props.classes.listElementStyles
       : this.props.classes.listElementCheckedStyles;
 
@@ -194,13 +192,13 @@ const convertImportanceToLabel = (taskImportance) => {
     switch (taskImportance) {
       case 1:
         return "Low";
-        break;
+        // break;
       case 2:
        return "Medium";
-        break;
+        // break;
      case 3:
         return "High";
-        break;
+        // break;
       default:
         console.error("Invalid code");
     }

@@ -1,17 +1,14 @@
 import React, { Component } from "react";
-import { Route, Link, NavLink } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import Snackbar from "@material-ui/core/Snackbar";
-import Paper from "@material-ui/core/Paper";
-import uuid from "uuid";
-import Typography from "@material-ui/core/Typography";
+
 
 import Footer from "../Components/Footer";
 import AddTask from "../Components/AddTask";
 import TaskList from "../Components/TaskList";
-import TaskProgress from "../Components/TaskProgress";
-import Bookmark from "../Components/Bookmark";
+
 
 const styles = theme => ({
   mainFooterContainer: {
@@ -74,7 +71,7 @@ class Main extends Component {
 
   handleRemove(id) {
     const finalTasks = this.state.tasks.filter(task => {
-      if (task.id != id) return task;
+      if (task.id !== id) return task;
     });
     this.setState({
       tasks: finalTasks,

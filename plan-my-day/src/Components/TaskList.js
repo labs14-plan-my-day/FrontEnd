@@ -1,17 +1,14 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
-import axios from "axios";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import StepConnector from "@material-ui/core/StepConnector";
-import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Divider from "@material-ui/core/Divider";
-import StepIcon from "@material-ui/core/StepIcon";
 import Tooltip from "@material-ui/core/Tooltip";
 import Icon from "@material-ui/core/Icon";
 import "typeface-roboto";
@@ -155,9 +152,9 @@ const styles = theme => ({
 });
 
 class TaskList extends Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   render() {
     // console.log("Props Tasks List", this.props.tasks);
@@ -197,7 +194,7 @@ class TaskList extends Component {
               tasks={tasks}
               handleRemove={handleRemove}
               handleCheck={handleCheck}
-              handleBookmark={handleBookmark}
+              // handleBookmark={handleBookmark}
               activeStep={activeStep}
               handleBookmark={this.handleBookmark}
             />
