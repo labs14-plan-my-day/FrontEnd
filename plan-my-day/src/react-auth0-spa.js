@@ -49,7 +49,7 @@ export const Auth0Provider = ({
           console.log('authenticate', res.data)
         }).catch(e =>{
           console.log(e)
-        })
+        }) 
 
       }
 
