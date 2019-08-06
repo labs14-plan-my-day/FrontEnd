@@ -167,8 +167,15 @@ highPriority: {
 class Task extends Component {
 
   state = {
-    editingID:null
+    editingID:null,
+    open: false
   }
+
+  handleToggle = () => {
+    this.setState({
+      open: !this.state.open
+    });
+  };
 
   constructor(props) {
     super(props);
@@ -277,12 +284,14 @@ const convertImportanceToLabel = (taskImportance) => {
             </Tooltip>
 
             <Tooltip title="Edit task" placement="bottom-end">
-              <IconButton onClick={()=> this.props.getID(task)} fontSize="medium">
+              <IconButton onClick={this.handleToggle} fontSize="medium">
                 <Icon >
                   create
                 </Icon>
               </IconButton>
             </Tooltip>
+
+            <EditingForm open = {this.state.open} handleToggle = {this.handleToggle}/>
 
                   {/* {this.props.taskBeingEdited ? <EditingForm taskBeingEdited ={this.props.taskBeingEdited.name}/> : <h1>WE ARE NOT EDITING ANYTHING</h1>} */}
           </div>
