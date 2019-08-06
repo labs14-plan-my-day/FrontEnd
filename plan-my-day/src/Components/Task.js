@@ -6,6 +6,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Chip from "@material-ui/core/Chip";
 import Icon from "@material-ui/core/Icon";
 import "typeface-roboto";
+import EditingForm from "./EditingForm";
 
 const styles = theme => ({
   listElementStyles: {
@@ -165,6 +166,10 @@ highPriority: {
 
 class Task extends Component {
 
+  state = {
+    editingID:null
+  }
+
   constructor(props) {
     super(props);
     this.onRemove = this.onRemove.bind(this);
@@ -203,17 +208,25 @@ const convertImportanceToLabel = (taskImportance) => {
         console.error("Invalid code");
     }
   }
+  // console.log(this.state)
+  
+  return (
+    
+      
+      <div className={this.props.classes.taskPanel}>  
+         {/* if({this.state.editingID === task.id}) {
 
-    return (
-      <div className={this.props.classes.taskPanel}>
-        <div className={this.props.classes.startTime}>
+            return (<div><h2>TEST</h2></div>)
+        } */}
+
+        {/* <div className={this.props.classes.startTime}>
           <Typography
             className={this.props.classes.startTimeText}
             variant="body1"
           >
             {task.start_time}
-          </Typography>
-        </div>
+          </Typography> 
+        </div> */}
         <div className={this.props.classes.taskButtonsAndContent}>
           <div className={this.props.classes.taskContent}>
             <Typography
@@ -262,6 +275,16 @@ const convertImportanceToLabel = (taskImportance) => {
                 </Icon>
               </IconButton>
             </Tooltip>
+
+            <Tooltip title="Edit task" placement="bottom-end">
+              <IconButton onClick={()=> this.props.getID(task)} fontSize="medium">
+                <Icon >
+                  create
+                </Icon>
+              </IconButton>
+            </Tooltip>
+
+                  {/* {this.props.taskBeingEdited ? <EditingForm taskBeingEdited ={this.props.taskBeingEdited.name}/> : <h1>WE ARE NOT EDITING ANYTHING</h1>} */}
           </div>
         </div>
       </div>

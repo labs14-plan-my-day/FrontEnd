@@ -8,12 +8,11 @@ class AddTask extends Component {
     super(props);
     this.state = {
 
-      task: { test:"test", name:"" }
+      task: { name:"" }
     };
   }
 
   formHandler = (event) => {
-    // event.preventDefault();
 		this.setState({
 			task: {
 				...this.state.task,
@@ -24,10 +23,8 @@ class AddTask extends Component {
 
 
   addNewTask = (event) => {
-    console.log(this.state.task)
     // event.preventDefault();
     const newTask = { user_id: 1, name: this.state.task.name, date: Date.now(), start_time: "12:00", end_time: "1:00" }
-    console.log(newTask, "newTask")
 
 		const  name  = this.state.task.name;
 		if (name.length <= 0) {}
@@ -37,9 +34,7 @@ class AddTask extends Component {
 				.post('https://plan-my-dayapp.herokuapp.com/tasks', newTask)
 				.then((res) => {
 					this.setState({
-						// tasks: res.data.tasks,
-            task: { name: ''}
-            
+            task: { name: ''} 
 					});
         })
  
@@ -60,7 +55,6 @@ class AddTask extends Component {
                 hintText="Add a Task"
                 className="AddText"
                 fullWidth={true}
-                // onChange={event => this.setState({ inputValue: event.target.value })}
               />
             </div>
           </Paper>

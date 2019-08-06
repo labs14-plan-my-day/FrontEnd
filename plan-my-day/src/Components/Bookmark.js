@@ -216,7 +216,7 @@ class Bookmark extends Component {
                       this.onSubmitAddTask(bookmarkedTask);
                     }}
                   >
-                    <Typography
+                    {/* <Typography
                       variant="body2"
                       id="start_time"
                       name="start_time"
@@ -224,7 +224,7 @@ class Bookmark extends Component {
                       className={this.props.classes.bookmarkedTime}
                     >
                       {bookmarkedTask.start_time}
-                    </Typography>
+                    </Typography> */}
                     <Tooltip title="add task to today's plan">
                       <div className={this.props.classes.taskNameAndAddIcon}>
                         <Typography
