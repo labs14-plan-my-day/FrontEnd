@@ -178,7 +178,7 @@ class Main extends Component {
                 exact
                 path="/tasks"
                 render={props => (
-                  <AddTask {...props}  formHandler={this.formHandler} addNewTask={this.addNewTask} />
+                  <AddTask {...props} />
                 )}
               />
             </div>

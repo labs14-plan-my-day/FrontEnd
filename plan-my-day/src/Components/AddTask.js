@@ -7,14 +7,13 @@ class AddTask extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputValue: "",
-      tasks: [ { name:"" } ],
-			// task: { name: ''},
+
+      task: { test:"test", name:"" }
     };
   }
 
   formHandler = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
 		this.setState({
 			task: {
 				...this.state.task,
@@ -25,19 +24,25 @@ class AddTask extends Component {
 
 
   addNewTask = (event) => {
-		event.preventDefault();
-		const { name } = this.state.task;
+    console.log(this.state.task)
+    // event.preventDefault();
+    const newTask = { user_id: 1, name: this.state.task.name, date: Date.now(), start_time: "12:00", end_time: "1:00" }
+    console.log(newTask, "newTask")
+
+		const  name  = this.state.task.name;
 		if (name.length <= 0) {}
 
 		 else {
 			axios
-				.post('https://plan-my-dayapp.herokuapp.com/tasks')
+				.post('https://plan-my-dayapp.herokuapp.com/tasks', newTask)
 				.then((res) => {
 					this.setState({
-						tasks: res.data.tasks,
-						task: { name: ''}
+						// tasks: res.data.tasks,
+            task: { name: ''}
+            
 					});
-				})
+        })
+ 
 				.catch((err) => console.log(err));
 		}
 	};
@@ -50,10 +55,12 @@ class AddTask extends Component {
           <Paper style={{ width: "60%", leftMargin: "0px" }} zDepth={1}>
             <div style={{ marginLeft: "20px", width: "92%" }}>
               <TextField
+                onChange={this.formHandler}
+                name="name"
                 hintText="Add a Task"
                 className="AddText"
                 fullWidth={true}
-                onChange={event => this.setState({ inputValue: event.target.value })}
+                // onChange={event => this.setState({ inputValue: event.target.value })}
               />
             </div>
           </Paper>
@@ -63,7 +70,7 @@ class AddTask extends Component {
             type="Submit"
             label="Add Task"
             primary={true}
-            onClick={this.onClick}
+            onClick={this.addNewTask}
           >
             Add Task
           </Button>
