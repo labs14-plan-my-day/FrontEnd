@@ -23,7 +23,7 @@ class AddTask extends Component {
 
 
   addNewTask = (event) => {
-    // event.preventDefault();
+    event.preventDefault();
     const newTask = { user_id: 1, name: this.state.task.name, date: Date.now(), start_time: "12:00", end_time: "1:00" }
 
 		const  name  = this.state.task.name;
@@ -33,6 +33,7 @@ class AddTask extends Component {
 			axios
 				.post('https://plan-my-dayapp.herokuapp.com/tasks', newTask)
 				.then((res) => {
+          this.props.refetchAllTasks();
 					this.setState({
             task: { name: ''} 
 					});

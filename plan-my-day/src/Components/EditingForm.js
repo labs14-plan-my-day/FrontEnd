@@ -11,7 +11,7 @@ import axios from 'axios';
 const whatTask = {
 	name: ''
 };
-export default class extends Component {
+class EditingForm extends Component {
 
     constructor(props) {
             super(props);
@@ -33,11 +33,24 @@ export default class extends Component {
 		});
 	};
 
-    updateInfo = (event, taskID) => {
+  setUpUpdateForm = (event, task) => {
 		event.preventDefault();
-		axios
-			.put(`https://plan-my-dayapp.herokuapp.com/tasks/${taskID}`, this.state.task.name)
+		this.setState({
+			task: this.state.task,
+			isEditing: true
+		});
+	};
+
+    updateInfo = (event) => {
+    event.preventDefault();
+    const editTask = { user_id: 1, id:this.props.id, name: this.state.task.name, date: Date.now(), start_time: "12:00", end_time: "1:00" }
+    const  name  = this.state.task.name;
+    axios
+			.put(`https://plan-my-dayapp.herokuapp.com/tasks/${this.props.id}`, editTask)
 			.then((res) => {
+        console.log(this.state.name)
+        this.props.handleToggle();
+        this.props.refetchAllTasks();
 				this.setState({
 					tasks: res.data.tasks,
 					task: { name: '', task: whatTask, isEditing: false }
@@ -48,6 +61,7 @@ export default class extends Component {
 
   render() {
     const open  = this.props.open;
+    console.log(this.state.task);
     return(
       <Fragment>
           
@@ -74,7 +88,7 @@ export default class extends Component {
               Cancel
             </Button>
             <Button  
-            type="Submit"
+            type="submit"
             label="Add Task"
             primary={true} 
             onClick={this.updateInfo} 
@@ -87,3 +101,5 @@ export default class extends Component {
     )
   }
 }
+
+export default EditingForm;

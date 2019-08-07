@@ -284,6 +284,7 @@ class TaskList extends Component {
                                     handleCheck={handleCheck}
                                     handleBookmark={handleBookmark}
                                     getID={this.getID}
+                                    refetchAllTasks={this.props.refetchAllTasks}
                                     taskBeingEdited={this.state.task}
                                   />
                                 </div>

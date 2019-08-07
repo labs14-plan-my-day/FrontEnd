@@ -291,7 +291,7 @@ const convertImportanceToLabel = (taskImportance) => {
               </IconButton>
             </Tooltip>
 
-            <EditingForm open = {this.state.open} handleToggle = {this.handleToggle}/>
+            <EditingForm open = {this.state.open} handleToggle = {this.handleToggle} id={task.id} refetchAllTasks={this.props.refetchAllTasks}/>
 
                   {/* {this.props.taskBeingEdited ? <EditingForm taskBeingEdited ={this.props.taskBeingEdited.name}/> : <h1>WE ARE NOT EDITING ANYTHING</h1>} */}
           </div>

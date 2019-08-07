@@ -53,6 +53,23 @@ class Main extends Component {
         console.error("USERS ERROR", error);
       });
   }
+  refetchAllTasks = () => {
+    console.log("refetching all tasks")
+    const endpoint = "https://plan-my-dayapp.herokuapp.com/tasks";
+    axios
+      .get(endpoint)
+      .then(res => {
+        this.setState({
+          tasks: res.data.tasks
+        });
+        this.setState({
+          activeStep: this.getActiveStep()
+        });
+      })
+      .catch(error => {
+        console.error("USERS ERROR", error);
+      });
+  }
 
   handleClick(task) {
     this.setState({
@@ -67,15 +84,18 @@ class Main extends Component {
     });
   }
 
-  handleRemove(id) {
-    const finalTasks = this.state.tasks.filter(task => {
-      if (task.id !== id) return task;
-    });
-    this.setState({
-      tasks: finalTasks,
-      open: true
-    });
-  }
+  handleRemove = (event, taskID) => {
+		event.preventDefault();
+		axios
+			.delete(`https://plan-my-dayapp.herokuapp.com/tasks/${taskID}`)
+			.then((res) => {
+				this.setState({
+					tasks: res.data.tasks,
+					task: { name: '', description: '' }
+				});
+			})
+			.catch((err) => console.log(err));
+	};
 
   
 
@@ -170,6 +190,7 @@ class Main extends Component {
                   handleRemove={this.handleRemove}
                   handleCheck={this.handleCheck}
                   handleBookmark={this.handleBookmark}
+                  refetchAllTasks={this.refetchAllTasks}
                 />
               )}
             />
@@ -178,7 +199,9 @@ class Main extends Component {
                 exact
                 path="/tasks"
                 render={props => (
-                  <AddTask {...props} />
+                  <AddTask {...props}
+                  refetchAllTasks={this.refetchAllTasks}
+                   />
                 )}
               />
             </div>
