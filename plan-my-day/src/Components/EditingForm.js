@@ -19,17 +19,16 @@ export default class extends Component {
           onClose={this.props.handleToggle}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+          <DialogTitle id="form-dialog-title">Edit Task</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              To subscribe to this website, please enter your email address
-              here. We will send updates occasionally.
+              
             </DialogContentText>
             <TextField
               autoFocus
               margin="dense"
               id="name"
-              label="Email Address"
+              label="Task"
               type="email"
               fullWidth
             />
@@ -39,7 +38,7 @@ export default class extends Component {
               Cancel
             </Button>
             <Button onClick={this.props.handleToggle} color="primary">
-              Subscribe
+              Update
             </Button>
           </DialogActions>
         </Dialog>
