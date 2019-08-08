@@ -7,7 +7,6 @@ import Footer from "../Components/Footer";
 import AddTask from "../Components/AddTask";
 import TaskList from "../Components/TaskList";
 
-
 const styles = theme => ({
   mainFooterContainer: {
     [theme.breakpoints.down("xs")]: {
@@ -54,7 +53,7 @@ class Main extends Component {
       });
   }
   refetchAllTasks = () => {
-    console.log("refetching all tasks")
+    console.log("refetching all tasks");
     const endpoint = "https://plan-my-dayapp.herokuapp.com/tasks";
     axios
       .get(endpoint)
@@ -69,7 +68,7 @@ class Main extends Component {
       .catch(error => {
         console.error("USERS ERROR", error);
       });
-  }
+  };
 
   handleClick(task) {
     this.setState({
@@ -85,16 +84,14 @@ class Main extends Component {
   }
 
   handleRemove(id) {
-    const finalTasks = this.state.tasks.filter((task) => {
-      if(task.id != id) return task
+    const finalTasks = this.state.tasks.filter(task => {
+      if (task.id != id) return task;
     });
     this.setState({
       tasks: finalTasks,
-      open: true,
+      open: true
     });
-}
-
-  
+  }
 
   setStatus(task) {
     const { status } = task;
@@ -164,6 +161,16 @@ class Main extends Component {
       });
   }
 
+  deleteTask = (e, id) => {
+    e.preventDefault();
+    axios
+      .delete(`https://plan-my-dayapp.herokuapp.com/tasks/${id}`, deleteTask)
+      .then(res => {
+        this.setState({ tasks: this.deleteTask });
+      })
+      .catch(err => console.log(err));
+  };
+
   handleRequestClose = () => {
     this.setState({
       open: false
@@ -173,7 +180,6 @@ class Main extends Component {
   render() {
     return (
       <>
-
         {this.state.tasks && (
           <div>
             <Route
@@ -196,9 +202,7 @@ class Main extends Component {
                 exact
                 path="/tasks"
                 render={props => (
-                  <AddTask {...props}
-                  refetchAllTasks={this.refetchAllTasks}
-                   />
+                  <AddTask {...props} refetchAllTasks={this.refetchAllTasks} />
                 )}
               />
             </div>

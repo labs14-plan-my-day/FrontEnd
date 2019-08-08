@@ -142,7 +142,7 @@ const styles = theme => ({
     backgroundColor: "#eeeeee",
     borderWidth: ".3px",
     height: "25px",
-    fontSize: "12px",
+    fontSize: "12px"
   },
   medPriority: {
     marginTop: ".5rem",
@@ -151,25 +151,24 @@ const styles = theme => ({
     backgroundColor: "#fff9c4",
     borderWidth: ".3px",
     height: "25px",
-    fontSize: "12px",
+    fontSize: "12px"
   },
-highPriority: {
-  marginTop: ".5rem",
+  highPriority: {
+    marginTop: ".5rem",
     color: "rgba(0,0,0,.7)",
     fontweight: 500,
     backgroundColor: "rgba(255, 158, 128, .5)",
     borderWidth: ".3px",
     height: "25px",
-    fontSize: "12px",
+    fontSize: "12px"
   }
 });
 
 class Task extends Component {
-
   state = {
-    editingID:null,
+    editingID: null,
     open: false
-  }
+  };
 
   handleToggle = () => {
     this.setState({
@@ -192,36 +191,33 @@ class Task extends Component {
     console.log("Handle Bookmark", this.props.task.bookmark);
   }
 
-
   render() {
     const { task, status } = this.props;
-    const checked = status === 3
-      ? this.props.classes.listElementStyles
-      : this.props.classes.listElementCheckedStyles;
+    const checked =
+      status === 3
+        ? this.props.classes.listElementStyles
+        : this.props.classes.listElementCheckedStyles;
 
-  
-const convertImportanceToLabel = (taskImportance) => {
-    switch (taskImportance) {
-      case 1:
-        return "Low";
+    const convertImportanceToLabel = taskImportance => {
+      switch (taskImportance) {
+        case 1:
+          return "Low";
         // break;
-      case 2:
-       return "Medium";
+        case 2:
+          return "Medium";
         // break;
-     case 3:
-        return "High";
+        case 3:
+          return "High";
         // break;
-      default:
-        console.error("Invalid code");
-    }
-  }
-  // console.log(this.state)
-  
-  return (
-    
-      
-      <div className={this.props.classes.taskPanel}>  
-         {/* if({this.state.editingID === task.id}) {
+        default:
+          console.error("Invalid code");
+      }
+    };
+    // console.log(this.state)
+
+    return (
+      <div className={this.props.classes.taskPanel}>
+        {/* if({this.state.editingID === task.id}) {
 
             return (<div><h2>TEST</h2></div>)
         } */}
@@ -255,7 +251,19 @@ const convertImportanceToLabel = (taskImportance) => {
             >
               {task.description}
             </Typography>
-            <Chip label={convertImportanceToLabel(task.importance)} className={task.importance === 1 ? this.props.classes.lowPriority : task.importance === 2 ? this.props.classes.medPriority : task.importance === 3 ? this.props.classes.highPriority : ""} variant="outlined" />
+            <Chip
+              label={convertImportanceToLabel(task.importance)}
+              className={
+                task.importance === 1
+                  ? this.props.classes.lowPriority
+                  : task.importance === 2
+                  ? this.props.classes.medPriority
+                  : task.importance === 3
+                  ? this.props.classes.highPriority
+                  : ""
+              }
+              variant="outlined"
+            />
           </div>
           <div className={this.props.classes.buttons}>
             <Tooltip title="Delete task" placement="bottom-end">
@@ -285,15 +293,18 @@ const convertImportanceToLabel = (taskImportance) => {
 
             <Tooltip title="Edit task" placement="bottom-end">
               <IconButton onClick={this.handleToggle} fontSize="medium">
-                <Icon >
-                  create
-                </Icon>
+                <Icon>create</Icon>
               </IconButton>
             </Tooltip>
 
-            <EditingForm open = {this.state.open} handleToggle = {this.handleToggle} id={task.id} refetchAllTasks={this.props.refetchAllTasks}/>
+            <EditingForm
+              open={this.state.open}
+              handleToggle={this.handleToggle}
+              id={task.id}
+              refetchAllTasks={this.props.refetchAllTasks}
+            />
 
-                  {/* {this.props.taskBeingEdited ? <EditingForm taskBeingEdited ={this.props.taskBeingEdited.name}/> : <h1>WE ARE NOT EDITING ANYTHING</h1>} */}
+            {/* {this.props.taskBeingEdited ? <EditingForm taskBeingEdited ={this.props.taskBeingEdited.name}/> : <h1>WE ARE NOT EDITING ANYTHING</h1>} */}
           </div>
         </div>
       </div>
