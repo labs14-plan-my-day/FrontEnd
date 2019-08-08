@@ -8,6 +8,7 @@ import AddTask from "../Components/AddTask";
 import TaskList from "../Components/TaskList";
 
 
+
 const styles = theme => ({
   mainFooterContainer: {
     [theme.breakpoints.down("xs")]: {
@@ -38,6 +39,7 @@ class Main extends Component {
   }
 
   componentDidMount() {
+
     const endpoint = "https://plan-my-dayapp.herokuapp.com/tasks";
     axios
       .get(endpoint)
@@ -56,6 +58,7 @@ class Main extends Component {
   refetchAllTasks = () => {
     console.log("refetching all tasks")
     const endpoint = "https://plan-my-dayapp.herokuapp.com/tasks";
+
     axios
       .get(endpoint)
       .then(res => {
@@ -84,6 +87,7 @@ class Main extends Component {
     });
   }
 
+
   handleRemove = id => {
     console.log("delete");
     axios
@@ -97,6 +101,7 @@ class Main extends Component {
   };
 
   
+
 
   setStatus(task) {
     const { status } = task;
@@ -189,18 +194,22 @@ class Main extends Component {
                   handleRemove={this.handleRemove}
                   handleCheck={this.handleCheck}
                   handleBookmark={this.handleBookmark}
+
                   refetchAllTasks={this.refetchAllTasks}
+
                 />
               )}
             />
             <div>
               <Route
                 exact
+
                 path="/tasks"
                 render={props => (
                   <AddTask {...props}
                   refetchAllTasks={this.refetchAllTasks}
                    />
+
                 )}
               />
             </div>

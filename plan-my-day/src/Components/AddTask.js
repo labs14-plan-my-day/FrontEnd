@@ -18,6 +18,7 @@ class AddTask extends Component {
   formHandler = (event) => {
     event.preventDefault();
 
+
 		this.setState({
 			task: {
 				...this.state.task,
@@ -49,6 +50,7 @@ class AddTask extends Component {
 				.catch((err) => console.log(err));
 		}
 	};
+
 
   render() {
 
