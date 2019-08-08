@@ -172,7 +172,7 @@ class Main extends Component {
           tasks: this.state.tasks.filter(task => task.id != id)
         });
       })
-      .catch(err => console.log(err.message, "DELETE"));
+      .catch(err => console.log(err.message, "delete"));
   };
 
   handleRequestClose = () => {
