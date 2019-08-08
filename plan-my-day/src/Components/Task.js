@@ -184,6 +184,8 @@ class Task extends Component {
   }
 
   onRemove(event) {
+    event.preventDefault();
+    console.log("on remove");
     this.props.handleRemove(this.props.id);
   }
 
@@ -194,8 +196,9 @@ class Task extends Component {
 
 
   render() {
-    const { task, status } = this.props;
-    const checked = status === 3
+    const { task, status, handleRemove, handleBookmark } = this.props;
+    const checked = status === 3;
+    const listStyles = !checked
       ? this.props.classes.listElementStyles
       : this.props.classes.listElementCheckedStyles;
 
