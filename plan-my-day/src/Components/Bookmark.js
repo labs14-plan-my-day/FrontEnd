@@ -88,12 +88,12 @@ class Bookmark extends Component {
   }
 
   componentDidMount() {
-    const endpoint = "http://localhost:8080/tasks/user/1";
+    const endpoint = "https://plan-my-dayapp.herokuapp.com/tasks";
     axios
       .get(endpoint)
       .then(res => {
         this.setState({
-          tasks: res.data
+          tasks: res.data.tasks
         });
         this.setState({
           activeStep: this.getActiveStep()
