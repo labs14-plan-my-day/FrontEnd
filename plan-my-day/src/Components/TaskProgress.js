@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
+import React, { useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Snackbar from "@material-ui/core/Snackbar";
 import Button from "@material-ui/core/Button";
@@ -66,7 +66,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function TaskProgress(props) {
   const classes = useStyles();
-  const { tasks, handleCheck, activeStep, handleRemove } = props;
+  const { tasks } = props;
   const [completed, setCompleted] = React.useState(0);
 
   function getCompletedCount() {
@@ -76,7 +76,7 @@ export default function TaskProgress(props) {
   }
 
   useEffect(() => {
-    // console.log("Completed", completed);
+
     setCompleted(Math.floor((getCompletedCount() / tasks.length) * 100));
   }, [tasks]);
 

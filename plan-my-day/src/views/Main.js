@@ -1,17 +1,13 @@
 import React, { Component } from "react";
-import { Route, Link, NavLink } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import Snackbar from "@material-ui/core/Snackbar";
-import Paper from "@material-ui/core/Paper";
-import uuid from "uuid";
-import Typography from "@material-ui/core/Typography";
+import Footer from "../Components/Footer";
+import AddTask from "../Components/AddTask";
+import TaskList from "../Components/TaskList";
 
-import Footer from "../components/Footer";
-import AddTask from "../components/AddTask";
-import TaskList from "../components/TaskList";
-import TaskProgress from "../components/TaskProgress";
-import Bookmark from "../components/Bookmark";
+
 
 const styles = theme => ({
   mainFooterContainer: {
@@ -43,7 +39,26 @@ class Main extends Component {
   }
 
   componentDidMount() {
-    const endpoint = "https://plan-my-dayapp.herokuapp.com/user/1";
+
+    const endpoint = "https://plan-my-dayapp.herokuapp.com/tasks";
+    axios
+      .get(endpoint)
+      .then(res => {
+        this.setState({
+          tasks: res.data.tasks
+        });
+        this.setState({
+          activeStep: this.getActiveStep()
+        });
+      })
+      .catch(error => {
+        console.error("USERS ERROR", error);
+      });
+  }
+  refetchAllTasks = () => {
+    console.log("refetching all tasks")
+    const endpoint = "https://plan-my-dayapp.herokuapp.com/tasks";
+
     axios
       .get(endpoint)
       .then(res => {
@@ -72,15 +87,21 @@ class Main extends Component {
     });
   }
 
-  handleRemove(id) {
-    const finalTasks = this.state.tasks.filter(task => {
-      if (task.id != id) return task;
-    });
-    this.setState({
-      tasks: finalTasks,
-      open: true
-    });
-  }
+
+  handleRemove = id => {
+    console.log("delete");
+    axios
+      .delete(`https://plan-my-dayapp.herokuapp.com/tasks/${id}`)
+      .then(res => {
+        this.setState({
+          tasks: this.state.tasks.filter(task => task.id != id)
+        });
+      })
+      .catch(err => console.log(err.message, "delete"));
+  };
+
+  
+
 
   setStatus(task) {
     const { status } = task;
@@ -173,15 +194,22 @@ class Main extends Component {
                   handleRemove={this.handleRemove}
                   handleCheck={this.handleCheck}
                   handleBookmark={this.handleBookmark}
+
+                  refetchAllTasks={this.refetchAllTasks}
+
                 />
               )}
             />
             <div>
               <Route
                 exact
-                path="/tasks/addtask"
+
+                path="/tasks"
                 render={props => (
-                  <AddTask {...props} handleClick={this.handleClick} />
+                  <AddTask {...props}
+                  refetchAllTasks={this.refetchAllTasks}
+                   />
+
                 )}
               />
             </div>

@@ -11,13 +11,16 @@ import Typography from "@material-ui/core/Typography";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Divider from "@material-ui/core/Divider";
-import StepIcon from "@material-ui/core/StepIcon";
+
 import Tooltip from "@material-ui/core/Tooltip";
 import Icon from "@material-ui/core/Icon";
 import "typeface-roboto";
 import Task from "./Task";
 import Bookmark from "./Bookmark";
 import TaskProgress from "./TaskProgress";
+
+import EditingForm from "./EditingForm";
+
 
 const styles = theme => ({
   mainPageContainer: {
@@ -155,12 +158,22 @@ const styles = theme => ({
 });
 
 class TaskList extends Component {
-  constructor(props) {
-    super(props);
+  // constructor(props) {
+  //   super(props);
+  // }
+
+  state = {
+    task: ''
+  }
+
+  getID = (task) =>{
+    this.setState({task})
   }
 
   render() {
-    // console.log("Props Tasks List", this.props.tasks);
+
+    console.log(this.state);
+
 
     const {
       handleRemove,
@@ -188,6 +201,9 @@ class TaskList extends Component {
     });
 
     console.log("Sorted tasks", sortedTasks);
+
+    console.log(this.state.task.id)
+
     return (
       <>
         <div className={this.props.classes.mainPageContainer}>
@@ -197,7 +213,9 @@ class TaskList extends Component {
               tasks={tasks}
               handleRemove={handleRemove}
               handleCheck={handleCheck}
+
               handleBookmark={handleBookmark}
+
               activeStep={activeStep}
               handleBookmark={this.handleBookmark}
             />
@@ -229,6 +247,7 @@ class TaskList extends Component {
                       const stepProps = {};
                       const taskCompleted = task.status === 3;
                       stepProps.completed = taskCompleted;
+
                       return (
                         <Step {...stepProps} key={task.id}>
                           <StepLabel
@@ -266,6 +285,7 @@ class TaskList extends Component {
                                       : this.props.classes.taskItem
                                   }
                                 >
+
                                   <Task
                                     task={task}
                                     id={task.id}
@@ -273,6 +293,11 @@ class TaskList extends Component {
                                     handleRemove={handleRemove}
                                     handleCheck={handleCheck}
                                     handleBookmark={handleBookmark}
+
+                                    getID={this.getID}
+                                    refetchAllTasks={this.props.refetchAllTasks}
+                                    taskBeingEdited={this.state.task}
+
                                   />
                                 </div>
                               </ListItem>

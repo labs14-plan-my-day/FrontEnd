@@ -1,12 +1,15 @@
-import React, { Component, PropTypes } from "react";
+import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
-import DeleteIcon from "@material-ui/icons/Delete";
+
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import Chip from "@material-ui/core/Chip";
 import Icon from "@material-ui/core/Icon";
 import "typeface-roboto";
+
+import EditingForm from "./EditingForm";
+
 
 const styles = theme => ({
   listElementStyles: {
@@ -166,6 +169,19 @@ highPriority: {
 
 class Task extends Component {
 
+
+  state = {
+    editingID:null,
+    open: false
+  }
+
+  handleToggle = () => {
+    this.setState({
+      open: !this.state.open
+    });
+  };
+
+
   constructor(props) {
     super(props);
     this.onRemove = this.onRemove.bind(this);
@@ -183,9 +199,11 @@ class Task extends Component {
 
 
   render() {
+
     const { task, status, handleRemove, handleBookmark } = this.props;
     const checked = status === 3;
     const listStyles = !checked
+
       ? this.props.classes.listElementStyles
       : this.props.classes.listElementCheckedStyles;
 
@@ -194,28 +212,42 @@ const convertImportanceToLabel = (taskImportance) => {
     switch (taskImportance) {
       case 1:
         return "Low";
-        break;
+
+        // break;
       case 2:
        return "Medium";
-        break;
+        // break;
      case 3:
         return "High";
-        break;
+        // break;
+
       default:
         console.error("Invalid code");
     }
   }
 
-    return (
-      <div className={this.props.classes.taskPanel}>
-        <div className={this.props.classes.startTime}>
+  // console.log(this.state)
+  
+  return (
+    
+      
+      <div className={this.props.classes.taskPanel}>  
+         {/* if({this.state.editingID === task.id}) {
+
+            return (<div><h2>TEST</h2></div>)
+        } */}
+
+        {/* <div className={this.props.classes.startTime}>
+
           <Typography
             className={this.props.classes.startTimeText}
             variant="body1"
           >
             {task.start_time}
-          </Typography>
-        </div>
+
+          </Typography> 
+        </div> */}
+
         <div className={this.props.classes.taskButtonsAndContent}>
           <div className={this.props.classes.taskContent}>
             <Typography
@@ -237,7 +269,9 @@ const convertImportanceToLabel = (taskImportance) => {
             >
               {task.description}
             </Typography>
+
             <Chip label={convertImportanceToLabel(task.importance)} className={task.importance === 1 ? this.props.classes.lowPriority : task.importance === 2 ? this.props.classes.medPriority : task.importance === 3 ? this.props.classes.highPriority : ""} variant="outlined" />
+
           </div>
           <div className={this.props.classes.buttons}>
             <Tooltip title="Delete task" placement="bottom-end">
@@ -264,6 +298,20 @@ const convertImportanceToLabel = (taskImportance) => {
                 </Icon>
               </IconButton>
             </Tooltip>
+
+
+            <Tooltip title="Edit task" placement="bottom-end">
+              <IconButton onClick={this.handleToggle} fontSize="medium">
+                <Icon >
+                  create
+                </Icon>
+              </IconButton>
+            </Tooltip>
+
+            <EditingForm open = {this.state.open} handleToggle = {this.handleToggle} id={task.id} refetchAllTasks={this.props.refetchAllTasks}/>
+
+                  {/* {this.props.taskBeingEdited ? <EditingForm taskBeingEdited ={this.props.taskBeingEdited.name}/> : <h1>WE ARE NOT EDITING ANYTHING</h1>} */}
+
           </div>
         </div>
       </div>
