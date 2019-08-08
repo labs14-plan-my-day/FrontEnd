@@ -84,18 +84,15 @@ class Main extends Component {
     });
   }
 
-  handleRemove = (event, taskID) => {
-		event.preventDefault();
-		axios
-			.delete(`https://plan-my-dayapp.herokuapp.com/tasks/${taskID}`)
-			.then((res) => {
-				this.setState({
-					tasks: res.data.tasks,
-					task: { name: '', description: '' }
-				});
-			})
-			.catch((err) => console.log(err));
-	};
+  handleRemove(id) {
+    const finalTasks = this.state.tasks.filter((task) => {
+      if(task.id != id) return task
+    });
+    this.setState({
+      tasks: finalTasks,
+      open: true,
+    });
+}
 
   
 

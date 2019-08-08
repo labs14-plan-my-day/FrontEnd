@@ -13,20 +13,22 @@ class AddTask extends Component {
   }
 
   formHandler = (event) => {
+    event.preventDefault();
+
 		this.setState({
 			task: {
 				...this.state.task,
-				[event.target.name]: event.target.value
+        [event.target.name]: event.target.value
+    
 			}
 		});
-	};
-
+  };
+  
 
   addNewTask = (event) => {
     event.preventDefault();
     const newTask = { user_id: 1, name: this.state.task.name, date: Date.now(), start_time: "12:00", end_time: "1:00" }
-
-		const  name  = this.state.task.name;
+    const  name  = this.state.task.name;
 		if (name.length <= 0) {}
 
 		 else {
@@ -35,7 +37,7 @@ class AddTask extends Component {
 				.then((res) => {
           this.props.refetchAllTasks();
 					this.setState({
-            task: { name: ''} 
+            name: "" 
 					});
         })
  
@@ -56,6 +58,7 @@ class AddTask extends Component {
                 hintText="Add a Task"
                 className="AddText"
                 fullWidth={true}
+              
               />
             </div>
           </Paper>
@@ -66,9 +69,10 @@ class AddTask extends Component {
             label="Add Task"
             primary={true}
             onClick={this.addNewTask}
+            
           >
             Add Task
-          </Button>
+          </Button >
         </form>
       </div>
     );
