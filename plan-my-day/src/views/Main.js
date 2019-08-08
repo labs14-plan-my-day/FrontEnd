@@ -21,6 +21,8 @@ const TASK_STATUS_CODES = {
   STATUS_COMPLETE: 3
 };
 
+const deleteTask = {};
+
 class Main extends Component {
   constructor() {
     super();
@@ -161,14 +163,16 @@ class Main extends Component {
       });
   }
 
-  deleteTask = (e, id) => {
-    e.preventDefault();
+  handleRemove = id => {
+    console.log("delete");
     axios
-      .delete(`https://plan-my-dayapp.herokuapp.com/tasks/${id}`, deleteTask)
+      .delete(`https://plan-my-dayapp.herokuapp.com/tasks/${id}`)
       .then(res => {
-        this.setState({ tasks: this.deleteTask });
+        this.setState({
+          tasks: this.state.tasks.filter(task => task.id != id)
+        });
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err.message, "DELETE"));
   };
 
   handleRequestClose = () => {
