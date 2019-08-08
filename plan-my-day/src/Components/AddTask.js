@@ -8,7 +8,10 @@ class AddTask extends Component {
     super(props);
     this.state = {
 
-      task: { name:"" }
+      task: {
+         name:"",
+         description:"",
+     }
     };
   }
 
@@ -18,7 +21,8 @@ class AddTask extends Component {
 		this.setState({
 			task: {
 				...this.state.task,
-        [event.target.name]: event.target.value
+        [event.target.name]: event.target.value,
+        [event.target.description]: event.target.value        
     
 			}
 		});
@@ -27,7 +31,7 @@ class AddTask extends Component {
 
   addNewTask = (event) => {
     event.preventDefault();
-    const newTask = { user_id: 1, name: this.state.task.name, date: Date.now(), start_time: "12:00", end_time: "1:00" }
+    const newTask = { user_id: 1, name: this.state.task.name, description: this.state.task.description, date: Date.now(), start_time: "12:00", end_time: "1:00" }
     const  name  = this.state.task.name;
 		if (name.length <= 0) {}
 
@@ -37,7 +41,8 @@ class AddTask extends Component {
 				.then((res) => {
           this.props.refetchAllTasks();
 					this.setState({
-            name: "" 
+            name: "",
+            description: "" 
 					});
         })
  
@@ -52,10 +57,20 @@ class AddTask extends Component {
         <form action="">
           <Paper style={{ width: "60%", leftMargin: "0px" }} zDepth={1}>
             <div style={{ marginLeft: "20px", width: "92%" }}>
+              Task
               <TextField
                 onChange={this.formHandler}
                 name="name"
                 hintText="Add a Task"
+                className="AddText"
+                fullWidth={true}
+              
+              />
+              Description
+              <TextField
+                onChange={this.formHandler}
+                hintText="Add a Description"
+                name="description"
                 className="AddText"
                 fullWidth={true}
               

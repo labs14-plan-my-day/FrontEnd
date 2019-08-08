@@ -9,7 +9,8 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import axios from 'axios';
 
 const whatTask = {
-	name: ''
+  name: "",
+  description: ""
 };
 class EditingForm extends Component {
 
@@ -17,7 +18,7 @@ class EditingForm extends Component {
             super(props);
             this.state = {
                 tasks: [ {} ],
-                task: { name: '' },
+                task: { name: "" },
                 editingId: null,
                 activeTask: null,
                 isEditing: false
@@ -43,7 +44,7 @@ class EditingForm extends Component {
 
     updateInfo = (event) => {
     event.preventDefault();
-    const editTask = { user_id: 1, id:this.props.id, name: this.state.task.name, date: Date.now(), start_time: "12:00", end_time: "1:00" }
+    const editTask = { user_id: 1, id:this.props.id, name: this.state.task.name, description: this.state.task.description, date: Date.now(), start_time: "12:00", end_time: "1:00" }
     const  name  = this.state.task.name;
     axios
 			.put(`https://plan-my-dayapp.herokuapp.com/tasks/${this.props.id}`, editTask)
@@ -53,7 +54,7 @@ class EditingForm extends Component {
         this.props.refetchAllTasks();
 				this.setState({
 					tasks: res.data.tasks,
-					task: { name: '', task: whatTask, isEditing: false }
+					task: { name: "", description:"", task: whatTask, isEditing: false }
 				});
 			})
 			.catch((err) => console.log(err));
@@ -75,9 +76,18 @@ class EditingForm extends Component {
             <DialogContentText>
               
             </DialogContentText>
+            Task
             <TextField
               onChange={this.formHandler}
                 name="name"
+                hintText="Add a Task"
+                className="AddText"
+                fullWidth={true}
+            />
+            Description
+            <TextField
+              onChange={this.formHandler}
+                name="description"
                 hintText="Add a Task"
                 className="AddText"
                 fullWidth={true}
