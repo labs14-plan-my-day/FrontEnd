@@ -13,23 +13,6 @@ const whatTask = {
   description: ""
 };
 
-const priorities = [
-  {
-    value: 1,
-    label: 'Low',
-  },
-  {
-    value: 2,
-    label: 'Medium',
-  },
-  {
-    value: 3,
-    label: 'High',
-  },
-
-];
-
-
 class EditingForm extends Component {
 
     constructor(props) {
@@ -114,7 +97,7 @@ class EditingForm extends Component {
                 fullWidth={true}
             />
             <TextField
-        id="standard-select-currency-native"
+        id="Priority-Select"
         select
         label=""
         name="importance"

@@ -255,7 +255,7 @@ const convertImportanceToLabel = (taskImportance) => {
             >
               {task.description}
             </Typography>
-            <Chip label={convertImportanceToLabel(task.importance)} className={task.importance === 1 ? this.props.classes.lowPriority : task.importance === 2 ? this.props.classes.medPriority : task.importance === 3 ? this.props.classes.highPriority : ""} variant="outlined" />
+            {/* <Chip label={convertImportanceToLabel(task.importance)} className={task.importance === 1 ? this.props.classes.lowPriority : task.importance === 2 ? this.props.classes.medPriority : task.importance === 3 ? this.props.classes.highPriority : ""} variant="outlined" /> */}
           </div>
           <div className={this.props.classes.buttons}>
             <Tooltip title="Delete task" placement="bottom-end">
