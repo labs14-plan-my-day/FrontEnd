@@ -203,16 +203,7 @@ class Task extends Component {
 
   render() {
 
-    const { task, status } = this.props;
-    const checked =
-      status === 3
-        ? this.props.classes.listElementStyles
-        : this.props.classes.listElementCheckedStyles;
-
-    const convertImportanceToLabel = taskImportance => {
-      switch (taskImportance) {
-        case 1:
-          return "Low";
+   
 
 
     const { task, status, handleRemove, handleBookmark } = this.props;
