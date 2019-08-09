@@ -2,6 +2,11 @@ import React, { Component } from "react";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 import axios from "axios";
 class AddTask extends Component {
   constructor(props) {
@@ -77,22 +82,40 @@ class AddTask extends Component {
                 fullWidth={true}
               
               />
-              <TextField
+              Priority
+              <FormControl >
+        <InputLabel htmlFor="age-simple"></InputLabel>
+        <Select
+        placeholder="Priority"
+          // value={values.age}
+          // onChange={handleChange}
+          // inputProps={{
+          //   name: 'age',
+          //   id: 'age-simple',
+          // }}
+        >
+          <MenuItem value={1}>Low</MenuItem>
+          <MenuItem value={2}>Medium</MenuItem>
+          <MenuItem value={3}>High</MenuItem>
+        </Select>
+      </FormControl>
+              {/* <TextField
         id="standard-select-currency-native"
         select
         label=""
+        menuItems={['Item 1', 'Item 2', 'Item 3']}
         // className={ }
         // value={ }
         // onChange={ }
-        SelectProps={{
-          native: true,
-          MenuProps: {
+        // SelectProps={{ "item1" }}
+        //   native: true,
+        //   MenuProps: {
             
-          },
-        }}
+        //   },
+        // }}
         helperText="Please select priority"
         margin="normal"
-      ></TextField>
+      ></TextField> */}
             </div>
           </Paper>
           <br />

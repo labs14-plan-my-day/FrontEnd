@@ -62,7 +62,7 @@ export const Auth0Provider = ({
         //   })
 
         Axios
-          .post('http://localhost:8080/auth/register', newUser)
+          .post('https://plan-my-dayapp.herokuapp.com/auth/register', newUser)
           .then(res => {
             console.log(res)
           }).catch(err => {
