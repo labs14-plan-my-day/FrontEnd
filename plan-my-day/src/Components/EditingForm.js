@@ -6,6 +6,11 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 import axios from 'axios';
 
 const whatTask = {
@@ -96,25 +101,22 @@ class EditingForm extends Component {
                 className="AddText"
                 fullWidth={true}
             />
-            <TextField
-        id="Priority-Select"
-        select
-        label=""
+           Select Priority
+              <FormControl >
+        <InputLabel></InputLabel>
+        <Select
+        placeholder="Priority"
+        fullWidth={true}
         name="importance"
-        // className={classes.textField}
-        // value={values.importance}
-        onChange={this.formHandler}
-        SelectProps={{
-          native: true,
-          MenuProps: {
-            // className: classes.menu,
-          },
-        }}
-        helperText="Please select priority"
-        margin="normal"
-      >
-        
-      </TextField>
+        onChange={this.formHandler} 
+        >
+          
+          <MenuItem value={1}>Low</MenuItem>
+          <MenuItem value={2}>Medium</MenuItem>
+          <MenuItem value={3}>High</MenuItem>
+        </Select>
+      </FormControl>
+            
           </DialogContent>
           <DialogActions>
             <Button onClick={this.props.handleToggle} color="primary">

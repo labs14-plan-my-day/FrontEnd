@@ -8,7 +8,6 @@ import AddTask from "../Components/AddTask";
 import TaskList from "../Components/TaskList";
 
 
-
 const styles = theme => ({
   mainFooterContainer: {
     [theme.breakpoints.down("xs")]: {
@@ -22,6 +21,8 @@ const TASK_STATUS_CODES = {
   STATUS_IN_PROGRESS: 2,
   STATUS_COMPLETE: 3
 };
+
+const deleteTask = {};
 
 class Main extends Component {
   constructor() {
@@ -56,7 +57,7 @@ class Main extends Component {
       });
   }
   refetchAllTasks = () => {
-    console.log("refetching all tasks")
+    console.log("refetching all tasks");
     const endpoint = "https://plan-my-dayapp.herokuapp.com/tasks";
 
     axios
@@ -72,7 +73,7 @@ class Main extends Component {
       .catch(error => {
         console.error("USERS ERROR", error);
       });
-  }
+  };
 
   handleClick(task) {
     this.setState({
@@ -84,6 +85,17 @@ class Main extends Component {
           status: TASK_STATUS_CODES.STATUS_INCOMPLETE
         }
       ]
+    });
+  }
+
+
+  handleRemove(id) {
+    const finalTasks = this.state.tasks.filter(task => {
+      if (task.id != id) return task;
+    });
+    this.setState({
+      tasks: finalTasks,
+      open: true
     });
   }
 
@@ -101,6 +113,7 @@ class Main extends Component {
   };
 
   
+
 
 
   setStatus(task) {
@@ -171,6 +184,18 @@ class Main extends Component {
       });
   }
 
+  handleRemove = id => {
+    console.log("delete");
+    axios
+      .delete(`https://plan-my-dayapp.herokuapp.com/tasks/${id}`)
+      .then(res => {
+        this.setState({
+          tasks: this.state.tasks.filter(task => task.id != id)
+        });
+      })
+      .catch(err => console.log(err.message, "delete"));
+  };
+
   handleRequestClose = () => {
     this.setState({
       open: false
@@ -180,7 +205,6 @@ class Main extends Component {
   render() {
     return (
       <>
-
         {this.state.tasks && (
           <div>
             <Route
@@ -206,9 +230,13 @@ class Main extends Component {
 
                 path="/tasks"
                 render={props => (
+
+                  <AddTask {...props} refetchAllTasks={this.refetchAllTasks} />
+
                   <AddTask {...props}
                   refetchAllTasks={this.refetchAllTasks}
                    />
+
 
                 )}
               />
