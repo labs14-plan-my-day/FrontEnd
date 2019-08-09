@@ -203,16 +203,7 @@ class Task extends Component {
 
   render() {
 
-    const { task, status } = this.props;
-    const checked =
-      status === 3
-        ? this.props.classes.listElementStyles
-        : this.props.classes.listElementCheckedStyles;
-
-    const convertImportanceToLabel = taskImportance => {
-      switch (taskImportance) {
-        case 1:
-          return "Low";
+   
 
 
     const { task, status, handleRemove, handleBookmark } = this.props;
@@ -246,13 +237,10 @@ const convertImportanceToLabel = (taskImportance) => {
     return (
       <div className={this.props.classes.taskPanel}>
         {/* if({this.state.editingID === task.id}) {
-
-
       default:
         console.error("Invalid code");
     }
   }
-
   // console.log(this.state)
   
   return (
@@ -260,19 +248,15 @@ const convertImportanceToLabel = (taskImportance) => {
       
       <div className={this.props.classes.taskPanel}>  
          {/* if({this.state.editingID === task.id}) {
-
-
             return (<div><h2>TEST</h2></div>)
         } */}
 
         {/* <div className={this.props.classes.startTime}>
-
           <Typography
             className={this.props.classes.startTimeText}
             variant="body1"
           >
             {task.start_time}
-
           </Typography> 
         </div> */}
 
@@ -313,7 +297,7 @@ const convertImportanceToLabel = (taskImportance) => {
             />
 
 
-            <Chip label={convertImportanceToLabel(task.importance)} className={task.importance === 1 ? this.props.classes.lowPriority : task.importance === 2 ? this.props.classes.medPriority : task.importance === 3 ? this.props.classes.highPriority : ""} variant="outlined" />
+            {/* <Chip label={convertImportanceToLabel(task.importance)} className={task.importance === 1 ? this.props.classes.lowPriority : task.importance === 2 ? this.props.classes.medPriority : task.importance === 3 ? this.props.classes.highPriority : ""} variant="outlined" /> */}
 
 
           </div>
