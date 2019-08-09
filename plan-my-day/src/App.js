@@ -2,10 +2,12 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Container } from "reactstrap";
 
+
 import PrivateRoute from "./Components/PrivateRoute";
 import Loading from "./Components/Loading";
 import NavBar from "./Components/NavBar";
 import Footer from "./Components/Footer";
+
 import Home from "./views/Home";
 import Main from "./views/Main";
 import Profile from "./views/Profile";

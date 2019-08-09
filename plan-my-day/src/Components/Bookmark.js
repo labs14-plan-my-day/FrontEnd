@@ -43,6 +43,7 @@ const styles = theme => ({
     width: "100%",
     padding: ".5rem",
     maxHeight: "2.5rem",
+
     alignItems: "center",
     alignContent: "center",
     "& $bookmarkAddIcon": {
@@ -50,6 +51,7 @@ const styles = theme => ({
     },
     "&:hover": {
       fontWeight: 500,
+
       backgroundColor: "white",
       cursor: "pointer",
       "& $bookmarkAddIcon": {
@@ -88,12 +90,16 @@ class Bookmark extends Component {
   }
 
   componentDidMount() {
+
     const endpoint = "https://plan-my-dayapp.herokuapp.com/tasks";
+
     axios
       .get(endpoint)
       .then(res => {
         this.setState({
+
           tasks: res.data.tasks
+
         });
         this.setState({
           activeStep: this.getActiveStep()
@@ -179,8 +185,14 @@ class Bookmark extends Component {
   render() {
     // console.log("Props Tasks List", this.props.tasks);
 
-    const { 
-      tasks
+
+    const {
+      handleRemove,
+      handleCheck,
+      tasks,
+      classes,
+      activeStep
+
     } = this.props;
 
     const bookmarkedTasksList = tasks.filter(task => {
@@ -216,7 +228,9 @@ class Bookmark extends Component {
                       this.onSubmitAddTask(bookmarkedTask);
                     }}
                   >
+
                     {/* <Typography
+
                       variant="body2"
                       id="start_time"
                       name="start_time"
@@ -224,7 +238,9 @@ class Bookmark extends Component {
                       className={this.props.classes.bookmarkedTime}
                     >
                       {bookmarkedTask.start_time}
+
                     </Typography> */}
+
                     <Tooltip title="add task to today's plan">
                       <div className={this.props.classes.taskNameAndAddIcon}>
                         <Typography
