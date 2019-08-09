@@ -12,19 +12,21 @@ const whatTask = {
   name: "",
   description: ""
 };
+
 class EditingForm extends Component {
 
     constructor(props) {
             super(props);
             this.state = {
                 tasks: [ {} ],
-                task: { name: "" },
+                task: { name: "", description:"", importance: 1 },
                 editingId: null,
                 activeTask: null,
                 isEditing: false
             };
         }
 
+        
     formHandler = (event) => {
 		this.setState({
 			task: {
@@ -44,7 +46,7 @@ class EditingForm extends Component {
 
     updateInfo = (event) => {
     event.preventDefault();
-    const editTask = { user_id: 1, id:this.props.id, name: this.state.task.name, description: this.state.task.description, date: Date.now(), start_time: "12:00", end_time: "1:00" }
+    const editTask = { user_id: 1, id:this.props.id, name: this.state.task.name, description: this.state.task.description, importance: this.state.task.importance, date: Date.now(), start_time: "12:00", end_time: "1:00" }
     const  name  = this.state.task.name;
     axios
 			.put(`https://plan-my-dayapp.herokuapp.com/tasks/${this.props.id}`, editTask)
@@ -54,7 +56,7 @@ class EditingForm extends Component {
         this.props.refetchAllTasks();
 				this.setState({
 					tasks: res.data.tasks,
-					task: { name: "", description:"", task: whatTask, isEditing: false }
+					task: { name: "", description:"", importance: 1, task: whatTask, isEditing: false }
 				});
 			})
 			.catch((err) => console.log(err));
@@ -76,22 +78,43 @@ class EditingForm extends Component {
             <DialogContentText>
               
             </DialogContentText>
-            Task
+           
             <TextField
-              onChange={this.formHandler}
+                placeholder="Task"
+                onChange={this.formHandler}
                 name="name"
                 hintText="Add a Task"
                 className="AddText"
                 fullWidth={true}
             />
-            Description
+            
             <TextField
-              onChange={this.formHandler}
+                placeholder="Description"
+                onChange={this.formHandler}
                 name="description"
                 hintText="Add a Task"
                 className="AddText"
                 fullWidth={true}
             />
+            <TextField
+        id="Priority-Select"
+        select
+        label=""
+        name="importance"
+        // className={classes.textField}
+        // value={values.importance}
+        onChange={this.formHandler}
+        SelectProps={{
+          native: true,
+          MenuProps: {
+            // className: classes.menu,
+          },
+        }}
+        helperText="Please select priority"
+        margin="normal"
+      >
+        
+      </TextField>
           </DialogContent>
           <DialogActions>
             <Button onClick={this.props.handleToggle} color="primary">

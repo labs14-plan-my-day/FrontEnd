@@ -18,6 +18,7 @@ class AddTask extends Component {
   formHandler = (event) => {
     event.preventDefault();
 
+
 		this.setState({
 			task: {
 				...this.state.task,
@@ -50,6 +51,7 @@ class AddTask extends Component {
 		}
 	};
 
+
   render() {
 
     return (
@@ -57,8 +59,9 @@ class AddTask extends Component {
         <form action="">
           <Paper style={{ width: "60%", leftMargin: "0px" }} zDepth={1}>
             <div style={{ marginLeft: "20px", width: "92%" }}>
-              Task
+              
               <TextField
+              placeholder="Task"
                 onChange={this.formHandler}
                 name="name"
                 hintText="Add a Task"
@@ -66,8 +69,9 @@ class AddTask extends Component {
                 fullWidth={true}
               
               />
-              Description
+              
               <TextField
+              placeholder="Description"
                 onChange={this.formHandler}
                 hintText="Add a Description"
                 name="description"
@@ -75,6 +79,22 @@ class AddTask extends Component {
                 fullWidth={true}
               
               />
+              <TextField
+        id="standard-select-currency-native"
+        select
+        label=""
+        // className={ }
+        // value={ }
+        // onChange={ }
+        SelectProps={{
+          native: true,
+          MenuProps: {
+            
+          },
+        }}
+        helperText="Please select priority"
+        margin="normal"
+      ></TextField>
             </div>
           </Paper>
           <br />

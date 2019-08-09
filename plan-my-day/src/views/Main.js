@@ -7,6 +7,7 @@ import Footer from "../Components/Footer";
 import AddTask from "../Components/AddTask";
 import TaskList from "../Components/TaskList";
 
+
 const styles = theme => ({
   mainFooterContainer: {
     [theme.breakpoints.down("xs")]: {
@@ -39,6 +40,7 @@ class Main extends Component {
   }
 
   componentDidMount() {
+
     const endpoint = "https://plan-my-dayapp.herokuapp.com/tasks";
     axios
       .get(endpoint)
@@ -57,6 +59,7 @@ class Main extends Component {
   refetchAllTasks = () => {
     console.log("refetching all tasks");
     const endpoint = "https://plan-my-dayapp.herokuapp.com/tasks";
+
     axios
       .get(endpoint)
       .then(res => {
@@ -85,6 +88,7 @@ class Main extends Component {
     });
   }
 
+
   handleRemove(id) {
     const finalTasks = this.state.tasks.filter(task => {
       if (task.id != id) return task;
@@ -94,6 +98,23 @@ class Main extends Component {
       open: true
     });
   }
+
+
+  handleRemove = id => {
+    console.log("delete");
+    axios
+      .delete(`https://plan-my-dayapp.herokuapp.com/tasks/${id}`)
+      .then(res => {
+        this.setState({
+          tasks: this.state.tasks.filter(task => task.id != id)
+        });
+      })
+      .catch(err => console.log(err.message, "delete"));
+  };
+
+  
+
+
 
   setStatus(task) {
     const { status } = task;
@@ -197,16 +218,26 @@ class Main extends Component {
                   handleRemove={this.handleRemove}
                   handleCheck={this.handleCheck}
                   handleBookmark={this.handleBookmark}
+
                   refetchAllTasks={this.refetchAllTasks}
+
                 />
               )}
             />
             <div>
               <Route
                 exact
+
                 path="/tasks"
                 render={props => (
+
                   <AddTask {...props} refetchAllTasks={this.refetchAllTasks} />
+
+                  <AddTask {...props}
+                  refetchAllTasks={this.refetchAllTasks}
+                   />
+
+
                 )}
               />
             </div>

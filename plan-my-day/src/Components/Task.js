@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
+
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import Chip from "@material-ui/core/Chip";
 import Icon from "@material-ui/core/Icon";
 import "typeface-roboto";
+
 import EditingForm from "./EditingForm";
+
 
 const styles = theme => ({
   listElementStyles: {
@@ -165,6 +168,10 @@ const styles = theme => ({
 });
 
 class Task extends Component {
+
+
+
+
   state = {
     editingID: null,
     open: false
@@ -175,6 +182,7 @@ class Task extends Component {
       open: !this.state.open
     });
   };
+
 
   constructor(props) {
     super(props);
@@ -194,6 +202,7 @@ class Task extends Component {
   }
 
   render() {
+
     const { task, status } = this.props;
     const checked =
       status === 3
@@ -204,6 +213,22 @@ class Task extends Component {
       switch (taskImportance) {
         case 1:
           return "Low";
+
+
+    const { task, status, handleRemove, handleBookmark } = this.props;
+    const checked = status === 3;
+    const listStyles = !checked
+
+      ? this.props.classes.listElementStyles
+      : this.props.classes.listElementCheckedStyles;
+
+  
+const convertImportanceToLabel = (taskImportance) => {
+    switch (taskImportance) {
+      case 1:
+        return "Low";
+
+
         // break;
         case 2:
           return "Medium";
@@ -211,6 +236,7 @@ class Task extends Component {
         case 3:
           return "High";
         // break;
+
         default:
           console.error("Invalid code");
       }
@@ -221,17 +247,35 @@ class Task extends Component {
       <div className={this.props.classes.taskPanel}>
         {/* if({this.state.editingID === task.id}) {
 
+
+      default:
+        console.error("Invalid code");
+    }
+  }
+
+  // console.log(this.state)
+  
+  return (
+    
+      
+      <div className={this.props.classes.taskPanel}>  
+         {/* if({this.state.editingID === task.id}) {
+
+
             return (<div><h2>TEST</h2></div>)
         } */}
 
         {/* <div className={this.props.classes.startTime}>
+
           <Typography
             className={this.props.classes.startTimeText}
             variant="body1"
           >
             {task.start_time}
+
           </Typography> 
         </div> */}
+
         <div className={this.props.classes.taskButtonsAndContent}>
           <div className={this.props.classes.taskContent}>
             <Typography
@@ -253,6 +297,7 @@ class Task extends Component {
             >
               {task.description}
             </Typography>
+
             <Chip
               label={convertImportanceToLabel(task.importance)}
               className={
@@ -266,6 +311,11 @@ class Task extends Component {
               }
               variant="outlined"
             />
+
+
+            <Chip label={convertImportanceToLabel(task.importance)} className={task.importance === 1 ? this.props.classes.lowPriority : task.importance === 2 ? this.props.classes.medPriority : task.importance === 3 ? this.props.classes.highPriority : ""} variant="outlined" />
+
+
           </div>
           <div className={this.props.classes.buttons}>
             <Tooltip title="Delete task" placement="bottom-end">
@@ -293,6 +343,7 @@ class Task extends Component {
               </IconButton>
             </Tooltip>
 
+
             <Tooltip title="Edit task" placement="bottom-end">
               <IconButton onClick={this.handleToggle} fontSize="medium">
                 <Icon>create</Icon>
@@ -306,7 +357,12 @@ class Task extends Component {
               refetchAllTasks={this.props.refetchAllTasks}
             />
 
+
             {/* {this.props.taskBeingEdited ? <EditingForm taskBeingEdited ={this.props.taskBeingEdited.name}/> : <h1>WE ARE NOT EDITING ANYTHING</h1>} */}
+
+                  {/* {this.props.taskBeingEdited ? <EditingForm taskBeingEdited ={this.props.taskBeingEdited.name}/> : <h1>WE ARE NOT EDITING ANYTHING</h1>} */}
+
+
           </div>
         </div>
       </div>
