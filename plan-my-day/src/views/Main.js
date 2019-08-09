@@ -233,9 +233,9 @@ class Main extends Component {
 
                   <AddTask {...props} refetchAllTasks={this.refetchAllTasks} />
 
-                  <AddTask {...props}
-                  refetchAllTasks={this.refetchAllTasks}
-                   />
+                  // <AddTask {...props}
+                  // refetchAllTasks={this.refetchAllTasks}
+                  //  />
 
 
                 )}

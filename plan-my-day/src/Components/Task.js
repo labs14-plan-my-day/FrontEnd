@@ -203,16 +203,7 @@ class Task extends Component {
 
   render() {
 
-    const { task, status } = this.props;
-    const checked =
-      status === 3
-        ? this.props.classes.listElementStyles
-        : this.props.classes.listElementCheckedStyles;
-
-    const convertImportanceToLabel = taskImportance => {
-      switch (taskImportance) {
-        case 1:
-          return "Low";
+   
 
 
     const { task, status, handleRemove, handleBookmark } = this.props;
@@ -313,7 +304,7 @@ const convertImportanceToLabel = (taskImportance) => {
             />
 
 
-            <Chip label={convertImportanceToLabel(task.importance)} className={task.importance === 1 ? this.props.classes.lowPriority : task.importance === 2 ? this.props.classes.medPriority : task.importance === 3 ? this.props.classes.highPriority : ""} variant="outlined" />
+            {/* <Chip label={convertImportanceToLabel(task.importance)} className={task.importance === 1 ? this.props.classes.lowPriority : task.importance === 2 ? this.props.classes.medPriority : task.importance === 3 ? this.props.classes.highPriority : ""} variant="outlined" /> */}
 
 
           </div>
