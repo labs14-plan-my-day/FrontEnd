@@ -91,7 +91,7 @@ class AddTask extends Component {
                 name="description"
                 className="AddText"
                 fullWidth={true}
-                // value={this.state.task.description}
+
               
               />
               Select Priority
