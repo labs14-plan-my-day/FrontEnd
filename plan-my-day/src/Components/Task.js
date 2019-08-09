@@ -189,6 +189,8 @@ class Task extends Component {
   }
 
   onRemove(event) {
+    event.preventDefault();
+    console.log("on remove");
     this.props.handleRemove(this.props.id);
   }
 
