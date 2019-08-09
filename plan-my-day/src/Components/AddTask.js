@@ -2,6 +2,11 @@ import React, { Component } from "react";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 import axios from "axios";
 class AddTask extends Component {
   constructor(props) {
@@ -11,6 +16,7 @@ class AddTask extends Component {
       task: {
          name:"",
          description:"",
+         importance: 0
      }
     };
   }
@@ -23,7 +29,8 @@ class AddTask extends Component {
 			task: {
 				...this.state.task,
         [event.target.name]: event.target.value,
-        [event.target.description]: event.target.value        
+        [event.target.description]: event.target.value,
+        [event.target.importance]: event.target.value       
     
 			}
 		});
@@ -32,7 +39,12 @@ class AddTask extends Component {
 
   addNewTask = (event) => {
     event.preventDefault();
-    const newTask = { user_id: 1, name: this.state.task.name, description: this.state.task.description, date: Date.now(), start_time: "12:00", end_time: "1:00" }
+    const newTask = { user_id: 1,
+       name: this.state.task.name,
+        description: this.state.task.description,
+        importance: this.state.task.importance,
+         date: Date.now(),
+          start_time: "12:00", end_time: "1:00" }
     const  name  = this.state.task.name;
 		if (name.length <= 0) {}
 
@@ -43,7 +55,9 @@ class AddTask extends Component {
           this.props.refetchAllTasks();
 					this.setState({
             name: "",
-            description: "" 
+            description: "",
+            importance: 0
+
 					});
         })
  
@@ -67,7 +81,7 @@ class AddTask extends Component {
                 hintText="Add a Task"
                 className="AddText"
                 fullWidth={true}
-              
+                // value={this.state.name}
               />
               
               <TextField
@@ -77,24 +91,26 @@ class AddTask extends Component {
                 name="description"
                 className="AddText"
                 fullWidth={true}
+                // value={this.state.task.description}
               
               />
-              <TextField
-        id="standard-select-currency-native"
-        select
-        label=""
-        // className={ }
-        // value={ }
-        // onChange={ }
-        SelectProps={{
-          native: true,
-          MenuProps: {
-            
-          },
-        }}
-        helperText="Please select priority"
-        margin="normal"
-      ></TextField>
+              Select Priority
+              <FormControl >
+        <InputLabel></InputLabel>
+        <Select
+        placeholder="Priority"
+        fullWidth={true}
+        name="importance"
+        onChange={this.formHandler} 
+        // value={this.state.importance}
+        >
+          
+          <MenuItem value={1}>Low</MenuItem>
+          <MenuItem value={2}>Medium</MenuItem>
+          <MenuItem value={3}>High</MenuItem>
+        </Select>
+      </FormControl>
+              
             </div>
           </Paper>
           <br />
