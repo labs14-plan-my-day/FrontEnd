@@ -99,12 +99,8 @@ class AddTask extends Component {
         <Select
         placeholder="Priority"
         fullWidth={true}
-          // value={}
-          onChange={this.formHandler}
-          // onChange={handleChange}
-          // inputProps={{
-          //   
-          // }}
+        name="importance"
+        onChange={this.formHandler} 
         >
           
           <MenuItem value={1}>Low</MenuItem>

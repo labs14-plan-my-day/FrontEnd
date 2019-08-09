@@ -101,18 +101,14 @@ class EditingForm extends Component {
                 className="AddText"
                 fullWidth={true}
             />
-            Select Priority
+           Select Priority
               <FormControl >
         <InputLabel></InputLabel>
         <Select
         placeholder="Priority"
         fullWidth={true}
-          // value={}
-          onChange={this.formHandler}
-          // onChange={handleChange}
-          // inputProps={{
-          //   
-          // }}
+        name="importance"
+        onChange={this.formHandler} 
         >
           
           <MenuItem value={1}>Low</MenuItem>
