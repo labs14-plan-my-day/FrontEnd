@@ -81,7 +81,7 @@ class AddTask extends Component {
                 hintText="Add a Task"
                 className="AddText"
                 fullWidth={true}
-              
+                value={this.state.name}
               />
               
               <TextField
@@ -91,6 +91,7 @@ class AddTask extends Component {
                 name="description"
                 className="AddText"
                 fullWidth={true}
+                value={this.state.description}
               
               />
               Select Priority
@@ -101,6 +102,7 @@ class AddTask extends Component {
         fullWidth={true}
         name="importance"
         onChange={this.formHandler} 
+        value={this.state.importance}
         >
           
           <MenuItem value={1}>Low</MenuItem>
