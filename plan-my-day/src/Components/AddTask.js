@@ -16,6 +16,7 @@ class AddTask extends Component {
       task: {
          name:"",
          description:"",
+         importance: 0
      }
     };
   }
@@ -28,7 +29,8 @@ class AddTask extends Component {
 			task: {
 				...this.state.task,
         [event.target.name]: event.target.value,
-        [event.target.description]: event.target.value        
+        [event.target.description]: event.target.value,
+        [event.target.importance]: event.target.value       
     
 			}
 		});
@@ -37,7 +39,12 @@ class AddTask extends Component {
 
   addNewTask = (event) => {
     event.preventDefault();
-    const newTask = { user_id: 1, name: this.state.task.name, description: this.state.task.description, date: Date.now(), start_time: "12:00", end_time: "1:00" }
+    const newTask = { user_id: 1,
+       name: this.state.task.name,
+        description: this.state.task.description,
+        importance: this.state.task.importance,
+         date: Date.now(),
+          start_time: "12:00", end_time: "1:00" }
     const  name  = this.state.task.name;
 		if (name.length <= 0) {}
 
@@ -48,7 +55,9 @@ class AddTask extends Component {
           this.props.refetchAllTasks();
 					this.setState({
             name: "",
-            description: "" 
+            description: "",
+            importance: 0
+
 					});
         })
  
@@ -84,40 +93,26 @@ class AddTask extends Component {
                 fullWidth={true}
               
               />
-              Priority
+              Select Priority
               <FormControl >
-        <InputLabel htmlFor="age-simple"></InputLabel>
+        <InputLabel></InputLabel>
         <Select
         placeholder="Priority"
-          // value={values.age}
+        fullWidth={true}
+          // value={}
+          onChange={this.formHandler}
           // onChange={handleChange}
           // inputProps={{
-          //   name: 'age',
-          //   id: 'age-simple',
+          //   
           // }}
         >
+          
           <MenuItem value={1}>Low</MenuItem>
           <MenuItem value={2}>Medium</MenuItem>
           <MenuItem value={3}>High</MenuItem>
         </Select>
       </FormControl>
-              {/* <TextField
-        id="standard-select-currency-native"
-        select
-        label=""
-        menuItems={['Item 1', 'Item 2', 'Item 3']}
-        // className={ }
-        // value={ }
-        // onChange={ }
-        // SelectProps={{ "item1" }}
-        //   native: true,
-        //   MenuProps: {
-            
-        //   },
-        // }}
-        helperText="Please select priority"
-        margin="normal"
-      ></TextField> */}
+              
             </div>
           </Paper>
           <br />
