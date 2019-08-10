@@ -90,24 +90,16 @@ class Bookmark extends Component {
   }
 
   componentDidMount() {
-<<<<<<< HEAD
-    const endpoint = "http://localhost:8080/tasks/user/1";
-=======
 
     const endpoint = "https://plan-my-dayapp.herokuapp.com/tasks";
 
->>>>>>> ffd6ffd6250689050e461d2376e5c1ef5fac16bb
     axios
       .get(endpoint)
       .then(res => {
         this.setState({
-<<<<<<< HEAD
-          tasks: res.data
-=======
 
           tasks: res.data.tasks
 
->>>>>>> ffd6ffd6250689050e461d2376e5c1ef5fac16bb
         });
         this.setState({
           activeStep: this.getActiveStep()
@@ -195,11 +187,7 @@ class Bookmark extends Component {
 
 
     const {
-      handleRemove,
-      handleCheck,
       tasks,
-      classes,
-      activeStep
 
     } = this.props;
 

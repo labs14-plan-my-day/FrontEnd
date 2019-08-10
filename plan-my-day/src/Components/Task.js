@@ -206,7 +206,7 @@ class Task extends Component {
    
 
 
-    const { task, status, handleRemove, handleBookmark } = this.props;
+    const { task, status} = this.props;
     const checked = status === 3;
     const listStyles = !checked
 

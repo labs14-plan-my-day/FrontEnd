@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
-import axios from "axios";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import StepConnector from "@material-ui/core/StepConnector";
-import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import List from "@material-ui/core/List";
@@ -19,7 +17,6 @@ import Task from "./Task";
 import Bookmark from "./Bookmark";
 import TaskProgress from "./TaskProgress";
 
-import EditingForm from "./EditingForm";
 
 
 const styles = theme => ({
@@ -214,10 +211,9 @@ class TaskList extends Component {
               handleRemove={handleRemove}
               handleCheck={handleCheck}
 
-              handleBookmark={handleBookmark}
 
               activeStep={activeStep}
-              handleBookmark={this.handleBookmark}
+              handleBookmark={handleBookmark}
             />
           </div>
           <div className={this.props.classes.mainTaskContainer}>
