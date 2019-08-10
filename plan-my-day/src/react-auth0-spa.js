@@ -45,11 +45,14 @@ export const Auth0Provider = ({
         }
 
       
-        console.log(user.email)
         Axios
-        .post(`http://localhost:8080/auth/register`, newUser)
+        .post(`http://localhost:8080/auth/a`, newUser)
         .then(res =>{
           console.log('authenticate', res.data)
+          localStorage.setItem("currentUserID", res.data.id)
+          localStorage.setItem("currentUserEmail", res.data.email)
+          localStorage.setItem("currentUser", res.data.username)
+          localStorage.setItem("currentUserAdmin", res.data.is_admin)
         }).catch(e =>{
           console.log(e)
         }) 

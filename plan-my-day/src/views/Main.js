@@ -40,7 +40,7 @@ class Main extends Component {
 
   componentDidMount() {
 
-    const endpoint = "https://plan-my-dayapp.herokuapp.com/tasks";
+    const endpoint = `https://plan-my-dayapp.herokuapp.com/tasks/${localStorage.getItem("currentUserID")}`;
     axios
       .get(endpoint)
       .then(res => {
@@ -57,7 +57,7 @@ class Main extends Component {
   }
   refetchAllTasks = () => {
     console.log("refetching all tasks");
-    const endpoint = "https://plan-my-dayapp.herokuapp.com/tasks";
+    const endpoint = `https://plan-my-dayapp.herokuapp.com/tasks/${localStorage.getItem("currentUserID")}`;
 
     axios
       .get(endpoint)
