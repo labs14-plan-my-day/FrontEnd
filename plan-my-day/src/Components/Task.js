@@ -1,12 +1,15 @@
-import React, { Component, PropTypes } from "react";
+import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
-import DeleteIcon from "@material-ui/icons/Delete";
+
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import Chip from "@material-ui/core/Chip";
 import Icon from "@material-ui/core/Icon";
 import "typeface-roboto";
+
+import EditingForm from "./EditingForm";
+
 
 const styles = theme => ({
   listElementStyles: {
@@ -142,7 +145,7 @@ const styles = theme => ({
     backgroundColor: "#eeeeee",
     borderWidth: ".3px",
     height: "25px",
-    fontSize: "12px",
+    fontSize: "12px"
   },
   medPriority: {
     marginTop: ".5rem",
@@ -151,20 +154,35 @@ const styles = theme => ({
     backgroundColor: "#fff9c4",
     borderWidth: ".3px",
     height: "25px",
-    fontSize: "12px",
+    fontSize: "12px"
   },
-highPriority: {
-  marginTop: ".5rem",
+  highPriority: {
+    marginTop: ".5rem",
     color: "rgba(0,0,0,.7)",
     fontweight: 500,
     backgroundColor: "rgba(255, 158, 128, .5)",
     borderWidth: ".3px",
     height: "25px",
-    fontSize: "12px",
+    fontSize: "12px"
   }
 });
 
 class Task extends Component {
+
+
+
+
+  state = {
+    editingID: null,
+    open: false
+  };
+
+  handleToggle = () => {
+    this.setState({
+      open: !this.state.open
+    });
+  };
+
 
   constructor(props) {
     super(props);
@@ -173,6 +191,8 @@ class Task extends Component {
   }
 
   onRemove(event) {
+    event.preventDefault();
+    console.log("on remove");
     this.props.handleRemove(this.props.id);
   }
 
@@ -181,11 +201,15 @@ class Task extends Component {
     console.log("Handle Bookmark", this.props.task.bookmark);
   }
 
-
   render() {
+
+   
+
+
     const { task, status, handleRemove, handleBookmark } = this.props;
     const checked = status === 3;
     const listStyles = !checked
+
       ? this.props.classes.listElementStyles
       : this.props.classes.listElementCheckedStyles;
 
@@ -194,28 +218,55 @@ const convertImportanceToLabel = (taskImportance) => {
     switch (taskImportance) {
       case 1:
         return "Low";
-        break;
-      case 2:
-       return "Medium";
-        break;
-     case 3:
-        return "High";
-        break;
+
+
+        // break;
+        case 2:
+          return "Medium";
+        // break;
+        case 3:
+          return "High";
+        // break;
+
+        default:
+          console.error("Invalid code");
+      }
+    };
+    // console.log(this.state)
+
+    return (
+      <div className={this.props.classes.taskPanel}>
+        {/* if({this.state.editingID === task.id}) {
+
+
       default:
         console.error("Invalid code");
     }
   }
 
-    return (
-      <div className={this.props.classes.taskPanel}>
-        <div className={this.props.classes.startTime}>
+  // console.log(this.state)
+  
+  return (
+    
+      
+      <div className={this.props.classes.taskPanel}>  
+         {/* if({this.state.editingID === task.id}) {
+
+
+            return (<div><h2>TEST</h2></div>)
+        } */}
+
+        {/* <div className={this.props.classes.startTime}>
+
           <Typography
             className={this.props.classes.startTimeText}
             variant="body1"
           >
             {task.start_time}
-          </Typography>
-        </div>
+
+          </Typography> 
+        </div> */}
+
         <div className={this.props.classes.taskButtonsAndContent}>
           <div className={this.props.classes.taskContent}>
             <Typography
@@ -237,7 +288,25 @@ const convertImportanceToLabel = (taskImportance) => {
             >
               {task.description}
             </Typography>
-            <Chip label={convertImportanceToLabel(task.importance)} className={task.importance === 1 ? this.props.classes.lowPriority : task.importance === 2 ? this.props.classes.medPriority : task.importance === 3 ? this.props.classes.highPriority : ""} variant="outlined" />
+
+            <Chip
+              label={convertImportanceToLabel(task.importance)}
+              className={
+                task.importance === 1
+                  ? this.props.classes.lowPriority
+                  : task.importance === 2
+                  ? this.props.classes.medPriority
+                  : task.importance === 3
+                  ? this.props.classes.highPriority
+                  : ""
+              }
+              variant="outlined"
+            />
+
+
+            {/* <Chip label={convertImportanceToLabel(task.importance)} className={task.importance === 1 ? this.props.classes.lowPriority : task.importance === 2 ? this.props.classes.medPriority : task.importance === 3 ? this.props.classes.highPriority : ""} variant="outlined" /> */}
+
+
           </div>
           <div className={this.props.classes.buttons}>
             <Tooltip title="Delete task" placement="bottom-end">
@@ -264,6 +333,27 @@ const convertImportanceToLabel = (taskImportance) => {
                 </Icon>
               </IconButton>
             </Tooltip>
+
+
+            <Tooltip title="Edit task" placement="bottom-end">
+              <IconButton onClick={this.handleToggle} fontSize="medium">
+                <Icon>create</Icon>
+              </IconButton>
+            </Tooltip>
+
+            <EditingForm
+              open={this.state.open}
+              handleToggle={this.handleToggle}
+              id={task.id}
+              refetchAllTasks={this.props.refetchAllTasks}
+            />
+
+
+            {/* {this.props.taskBeingEdited ? <EditingForm taskBeingEdited ={this.props.taskBeingEdited.name}/> : <h1>WE ARE NOT EDITING ANYTHING</h1>} */}
+
+                  {/* {this.props.taskBeingEdited ? <EditingForm taskBeingEdited ={this.props.taskBeingEdited.name}/> : <h1>WE ARE NOT EDITING ANYTHING</h1>} */}
+
+
           </div>
         </div>
       </div>

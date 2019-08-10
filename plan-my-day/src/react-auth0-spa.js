@@ -2,6 +2,9 @@ import React, { useState, useEffect, useContext } from "react";
 import createAuth0Client from "@auth0/auth0-spa-js";
 import Axios from "axios";
 
+import Axios from "axios";
+
+
 const DEFAULT_REDIRECT_CALLBACK = () =>
   window.history.replaceState({}, document.title, window.location.pathname);
 
@@ -35,16 +38,17 @@ export const Auth0Provider = ({
       if (isAuthenticated) {
         const user = await auth0FromHook.getUser();
         setUser(user);
+
         //console.log(user)
         const newUser = {
           email: user.email,
           username: user.nickname,
         }
+
       
         console.log(user.email)
-        //console.log(user.app_metadata.onboarded)
         Axios
-        .post(`http://localhost:8080/auth/a/${user.email}`, newUser)
+        .post(`http://localhost:8080/auth/register`, newUser)
         .then(res =>{
           console.log('authenticate', res.data)
         }).catch(e =>{
