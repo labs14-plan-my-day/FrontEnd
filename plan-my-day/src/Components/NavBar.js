@@ -18,16 +18,29 @@ import {
 } from "reactstrap";
 
 import { useAuth0 } from "../react-auth0-spa";
+import { func } from "prop-types";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
   const toggle = () => setIsOpen(!isOpen);
 
+  const sayHello = () => {
+    console.log('hello')
+  }
+  const sayClicked = () => {
+    console.log('clicked')
+  }
+
+  const clear = () => {
+    localStorage.clear();
+  }
+
   const logoutWithRedirect = () =>
     logout({
       returnTo: window.location.origin
-    });
+    })
+    clear()
 
   return (
     <div className="nav-container">
@@ -35,12 +48,12 @@ const NavBar = () => {
         <Container>
 
           {/* <NavbarBrand className="logo" /> */}
-          
+
 
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar>
-              <NavItem>
+              <NavItem >
                 <NavLink
                   tag={RouterNavLink}
                   to="/"
@@ -50,8 +63,9 @@ const NavBar = () => {
                   Home
                 </NavLink>
                 <NavLink
-                  tag = {RouterNavLink}
-                  to = "/tasks">
+                  tag={RouterNavLink}
+                  to="/tasks"
+                  activeClassName="router-link-exact-active">
                   Tasks
                 </NavLink>
               </NavItem>
