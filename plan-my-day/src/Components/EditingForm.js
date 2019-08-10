@@ -18,12 +18,11 @@ const whatTask = {
 };
 
 class EditingForm extends Component {
-
     constructor(props) {
             super(props);
             this.state = {
                 tasks: [ {} ],
-                task: { name: "", description:"", importance: 1 },
+                task: this.props.task,
                 editingId: null,
                 activeTask: null,
                 isEditing: false
@@ -31,7 +30,11 @@ class EditingForm extends Component {
         }
 
         
+
+        
     formHandler = (event) => {
+      console.log(this.props.id)
+      console.log(this.state.task)
 		this.setState({
 			task: {
 				...this.state.task,
@@ -58,8 +61,7 @@ class EditingForm extends Component {
         this.props.handleToggle();
         this.props.refetchAllTasks();
 				this.setState({
-					tasks: res.data.tasks,
-					task: { name: "", description:"", importance: 1, task: whatTask, isEditing: false }
+					tasks: res.data.tasks
 				});
 			})
 			.catch((err) => console.log(err));
@@ -67,7 +69,7 @@ class EditingForm extends Component {
 
   render() {
     const open  = this.props.open;
-    console.log(this.state.task);
+    console.log(this.props.task);
     return(
       <Fragment>
           
@@ -85,6 +87,7 @@ class EditingForm extends Component {
             <TextField
                 placeholder="Task"
                 onChange={this.formHandler}
+                value = {this.state.task.name}
                 name="name"
                 hintText="Add a Task"
                 className="AddText"
@@ -94,6 +97,7 @@ class EditingForm extends Component {
             <TextField
                 placeholder="Description"
                 onChange={this.formHandler}
+                value = {this.state.task.description}
                 name="description"
                 hintText="Add a Task"
                 className="AddText"

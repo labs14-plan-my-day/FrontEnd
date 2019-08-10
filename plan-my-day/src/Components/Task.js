@@ -202,7 +202,6 @@ class Task extends Component {
   }
 
   render() {
-
    
 
 
@@ -236,37 +235,6 @@ const convertImportanceToLabel = (taskImportance) => {
 
     return (
       <div className={this.props.classes.taskPanel}>
-        {/* if({this.state.editingID === task.id}) {
-
-
-      default:
-        console.error("Invalid code");
-    }
-  }
-
-  // console.log(this.state)
-  
-  return (
-    
-      
-      <div className={this.props.classes.taskPanel}>  
-         {/* if({this.state.editingID === task.id}) {
-
-
-            return (<div><h2>TEST</h2></div>)
-        } */}
-
-        {/* <div className={this.props.classes.startTime}>
-
-          <Typography
-            className={this.props.classes.startTimeText}
-            variant="body1"
-          >
-            {task.start_time}
-
-          </Typography> 
-        </div> */}
-
         <div className={this.props.classes.taskButtonsAndContent}>
           <div className={this.props.classes.taskContent}>
             <Typography
@@ -342,17 +310,13 @@ const convertImportanceToLabel = (taskImportance) => {
             </Tooltip>
 
             <EditingForm
+            
               open={this.state.open}
               handleToggle={this.handleToggle}
+              task = {task}
               id={task.id}
               refetchAllTasks={this.props.refetchAllTasks}
             />
-
-
-            {/* {this.props.taskBeingEdited ? <EditingForm taskBeingEdited ={this.props.taskBeingEdited.name}/> : <h1>WE ARE NOT EDITING ANYTHING</h1>} */}
-
-                  {/* {this.props.taskBeingEdited ? <EditingForm taskBeingEdited ={this.props.taskBeingEdited.name}/> : <h1>WE ARE NOT EDITING ANYTHING</h1>} */}
-
 
           </div>
         </div>
