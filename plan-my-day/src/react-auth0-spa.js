@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import createAuth0Client from "@auth0/auth0-spa-js";
-
 import Axios from "axios";
+
 
 
 const DEFAULT_REDIRECT_CALLBACK = () =>
@@ -43,35 +43,19 @@ export const Auth0Provider = ({
           email: user.email,
           username: user.nickname,
         }
-        //console.log(newUser)
-        // After we have set the user, make a POST request to your backend and save the USER if it doesnt exist. if exist just return the user
-        // get user if !user 
 
-        // Axios.get(`http://localhost:8080/auth/${user.email}`)
-        //   .then(res => {
-        //     console.log(`this is res${res.data}`)
-        //     return res.data
-
-        //   }).catch(err => {
-        //     if (!user) {
-        //       Axios
-        //         .post('http://localhost:8080/auth/register', newUser)
-        //         .then(res => {
-        //           console.log({res, newUser})
-        //         }).catch(err => {
-        //           console.log(err)
-        //         })
-        //     }else{console.log('error')}
-        //   })
-
+      
         Axios
-          .post('https://plan-my-dayapp.herokuapp.com/auth/register', newUser)
-          .then(res => {
-            console.log(res)
-          }).catch(err => {
-            console.log(err)
-          })
-
+        .post(`http://localhost:8080/auth/a`, newUser)
+        .then(res =>{
+          console.log('authenticate', res.data)
+          localStorage.setItem("currentUserID", res.data.id)
+          localStorage.setItem("currentUserEmail", res.data.email)
+          localStorage.setItem("currentUser", res.data.username)
+          localStorage.setItem("currentUserAdmin", res.data.is_admin)
+        }).catch(e =>{
+          console.log(e)
+        }) 
 
       }
 

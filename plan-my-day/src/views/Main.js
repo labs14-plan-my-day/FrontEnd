@@ -22,7 +22,6 @@ const TASK_STATUS_CODES = {
   STATUS_COMPLETE: 3
 };
 
-const deleteTask = {};
 
 class Main extends Component {
   constructor() {
@@ -41,7 +40,7 @@ class Main extends Component {
 
   componentDidMount() {
 
-    const endpoint = "https://plan-my-dayapp.herokuapp.com/tasks";
+    const endpoint = `https://plan-my-dayapp.herokuapp.com/tasks/${localStorage.getItem("currentUserID")}`;
     axios
       .get(endpoint)
       .then(res => {
@@ -58,7 +57,7 @@ class Main extends Component {
   }
   refetchAllTasks = () => {
     console.log("refetching all tasks");
-    const endpoint = "https://plan-my-dayapp.herokuapp.com/tasks";
+    const endpoint = `https://plan-my-dayapp.herokuapp.com/tasks/${localStorage.getItem("currentUserID")}`;
 
     axios
       .get(endpoint)
@@ -91,7 +90,7 @@ class Main extends Component {
 
   handleRemove(id) {
     const finalTasks = this.state.tasks.filter(task => {
-      if (task.id != id) return task;
+      if (task.id !== id) return task;
     });
     this.setState({
       tasks: finalTasks,
@@ -106,7 +105,7 @@ class Main extends Component {
       .delete(`https://plan-my-dayapp.herokuapp.com/tasks/${id}`)
       .then(res => {
         this.setState({
-          tasks: this.state.tasks.filter(task => task.id != id)
+          tasks: this.state.tasks.filter(task => task.id !== id)
         });
       })
       .catch(err => console.log(err.message, "delete"));
@@ -190,7 +189,7 @@ class Main extends Component {
       .delete(`https://plan-my-dayapp.herokuapp.com/tasks/${id}`)
       .then(res => {
         this.setState({
-          tasks: this.state.tasks.filter(task => task.id != id)
+          tasks: this.state.tasks.filter(task => task.id !== id)
         });
       })
       .catch(err => console.log(err.message, "delete"));

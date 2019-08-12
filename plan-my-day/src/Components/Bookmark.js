@@ -187,11 +187,7 @@ class Bookmark extends Component {
 
 
     const {
-      handleRemove,
-      handleCheck,
       tasks,
-      classes,
-      activeStep
 
     } = this.props;
 
