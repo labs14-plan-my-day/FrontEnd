@@ -40,7 +40,7 @@ const NavBar = () => {
     logout({
       returnTo: window.location.origin
     })
-    clear()
+  clear()
 
   return (
     <div className="nav-container">
@@ -68,9 +68,13 @@ const NavBar = () => {
                   activeClassName="router-link-exact-active">
                   Tasks
                 </NavLink>
-                <NavLink  
-                to="/external-api">
-                External API
+                <NavLink
+                  tag={RouterNavLink}
+                  to="/external-api"
+                  exact
+                  activeClassName="router-link-exact-active"
+                >
+                  External API
                 </NavLink>
               </NavItem>
             </Nav>

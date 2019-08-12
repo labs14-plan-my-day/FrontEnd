@@ -169,9 +169,6 @@ class TaskList extends Component {
 
   render() {
 
-    console.log(this.state);
-
-
     const {
       handleRemove,
       handleCheck,
@@ -198,8 +195,6 @@ class TaskList extends Component {
     });
 
     console.log("Sorted tasks", sortedTasks);
-
-    console.log(this.state.task.id)
 
     return (
       <>
@@ -231,7 +226,6 @@ class TaskList extends Component {
                 activeStep={activeStep}
               />
               <div className={this.props.classes.root}>
-                {console.log(this.props.classes)}
                 <Stepper
                   orientation="vertical"
                   activeStep={activeStep}
