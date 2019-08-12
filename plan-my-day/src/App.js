@@ -12,6 +12,8 @@ import Home from "./views/Home";
 import Main from "./views/Main";
 import Profile from "./views/Profile";
 import { useAuth0 } from "./react-auth0-spa";
+// NEW - import the ExternalApi component
+import ExternalApi from './Components/ExternalApi'
 
 // styles
 import "./App.css";
@@ -36,6 +38,10 @@ const App = () => {
             <Route path="/" exact component={Home} />
             <PrivateRoute path="/profile" component={Profile} />
             <Route path="/tasks" component={Main} />
+
+             {/* NEW - add a route to the ExternalApi component */}
+      <PrivateRoute path="/external-api" component={ExternalApi} />
+      
           </Switch>
         </Container>
         <Footer />

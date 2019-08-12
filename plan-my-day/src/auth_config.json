@@ -1,4 +1,5 @@
 {
     "domain": "plan-my-day.auth0.com",
-    "clientId": "BHP4rpg0q1WEeawFBJPbSBruv1J2wb2w"
+    "clientId": "BHP4rpg0q1WEeawFBJPbSBruv1J2wb2w",
+    "audience": "https://plan-my-day.auth0.com/api/v2/"
   }
