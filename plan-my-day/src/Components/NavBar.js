@@ -55,8 +55,13 @@ const NavBar = () => {
                   to = "/tasks">
                   Tasks
                 </NavLink>
+                <NavLink  
+                to="/external-api">
+                External API
+                </NavLink>
               </NavItem>
             </Nav>
+
             <Nav className="d-none d-md-block" navbar>
               {!isAuthenticated && (
                 <NavItem>
@@ -148,6 +153,7 @@ const NavBar = () => {
                     id="qsLogoutBtn"
                     onClick={() => logoutWithRedirect()}
                   >
+
                     Log out
                   </RouterNavLink>
                 </NavItem>

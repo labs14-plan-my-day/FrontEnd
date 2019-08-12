@@ -231,7 +231,7 @@ class Main extends Component {
                 path="/tasks"
                 render={props => (
 
-                  <AddTask {...props} refetchAllTasks={this.refetchAllTasks} />
+                  // <AddTask {...props} refetchAllTasks={this.refetchAllTasks} />
 
                   // <AddTask {...props}
                   // refetchAllTasks={this.refetchAllTasks}

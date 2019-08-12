@@ -237,13 +237,10 @@ const convertImportanceToLabel = (taskImportance) => {
     return (
       <div className={this.props.classes.taskPanel}>
         {/* if({this.state.editingID === task.id}) {
-
-
       default:
         console.error("Invalid code");
     }
   }
-
   // console.log(this.state)
   
   return (
@@ -251,19 +248,15 @@ const convertImportanceToLabel = (taskImportance) => {
       
       <div className={this.props.classes.taskPanel}>  
          {/* if({this.state.editingID === task.id}) {
-
-
             return (<div><h2>TEST</h2></div>)
         } */}
 
         {/* <div className={this.props.classes.startTime}>
-
           <Typography
             className={this.props.classes.startTimeText}
             variant="body1"
           >
             {task.start_time}
-
           </Typography> 
         </div> */}
 
