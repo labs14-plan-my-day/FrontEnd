@@ -37,7 +37,7 @@ const App = () => {
           <Switch>
             <Route path="/" exact component={Home} />
             <PrivateRoute path="/profile" component={Profile} />
-            <Route path="/tasks" component={Main} />
+            <PrivateRoute path="/tasks" component={Main} />
 
              {/* NEW - add a route to the ExternalApi component */}
       <PrivateRoute path="/external-api" component={ExternalApi} />
