@@ -7,9 +7,10 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Chip from "@material-ui/core/Chip";
 import Icon from "@material-ui/core/Icon";
 import "typeface-roboto";
+import PrivateRoute from "./PrivateRoute";
+import TaskList from "./TaskList";
 
 import EditingForm from "./EditingForm";
-
 
 const styles = theme => ({
   listElementStyles: {
@@ -168,10 +169,6 @@ const styles = theme => ({
 });
 
 class Task extends Component {
-
-
-
-
   state = {
     editingID: null,
     open: false
@@ -182,7 +179,6 @@ class Task extends Component {
       open: !this.state.open
     });
   };
-
 
   constructor(props) {
     super(props);
@@ -202,22 +198,16 @@ class Task extends Component {
   }
 
   render() {
-   
-
-
-    const { task, status} = this.props;
+    const { task, status } = this.props;
     const checked = status === 3;
     const listStyles = !checked
-
       ? this.props.classes.listElementStyles
       : this.props.classes.listElementCheckedStyles;
 
-  
-const convertImportanceToLabel = (taskImportance) => {
-    switch (taskImportance) {
-      case 1:
-        return "Low";
-
+    const convertImportanceToLabel = taskImportance => {
+      switch (taskImportance) {
+        case 1:
+          return "Low";
 
         // break;
         case 2:
@@ -237,6 +227,21 @@ const convertImportanceToLabel = (taskImportance) => {
       <div className={this.props.classes.taskPanel}>
         <div className={this.props.classes.taskButtonsAndContent}>
           <div className={this.props.classes.taskContent}>
+            <PrivateRoute
+              exact
+              path="/tasks"
+              render={props => (
+                <TaskList
+                  {...props}
+                  tasks={this.state.tasks}
+                  activeStep={this.state.activeStep}
+                  handleRemove={this.handleRemove}
+                  handleCheck={this.handleCheck}
+                  handleBookmark={this.handleBookmark}
+                  refetchAllTasks={this.refetchAllTasks}
+                />
+              )}
+            />
             <Typography
               variant="body1"
               className={
@@ -271,10 +276,7 @@ const convertImportanceToLabel = (taskImportance) => {
               variant="outlined"
             />
 
-
             {/* <Chip label={convertImportanceToLabel(task.importance)} className={task.importance === 1 ? this.props.classes.lowPriority : task.importance === 2 ? this.props.classes.medPriority : task.importance === 3 ? this.props.classes.highPriority : ""} variant="outlined" /> */}
-
-
           </div>
           <div className={this.props.classes.buttons}>
             <Tooltip title="Delete task" placement="bottom-end">
@@ -302,7 +304,6 @@ const convertImportanceToLabel = (taskImportance) => {
               </IconButton>
             </Tooltip>
 
-
             <Tooltip title="Edit task" placement="bottom-end">
               <IconButton onClick={this.handleToggle} fontSize="medium">
                 <Icon>create</Icon>
@@ -310,14 +311,12 @@ const convertImportanceToLabel = (taskImportance) => {
             </Tooltip>
 
             <EditingForm
-            
               open={this.state.open}
               handleToggle={this.handleToggle}
-              task = {task}
+              task={task}
               id={task.id}
               refetchAllTasks={this.props.refetchAllTasks}
             />
-
           </div>
         </div>
       </div>
