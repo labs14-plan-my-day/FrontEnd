@@ -223,7 +223,6 @@ class Bookmark extends Component {
                   >
 
                     {/* <Typography
-
                       variant="body2"
                       id="start_time"
                       name="start_time"
@@ -231,7 +230,6 @@ class Bookmark extends Component {
                       className={this.props.classes.bookmarkedTime}
                     >
                       {bookmarkedTask.start_time}
-
                     </Typography> */}
 
                     <Tooltip title="add task to today's plan">
