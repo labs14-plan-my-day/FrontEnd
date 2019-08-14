@@ -101,9 +101,6 @@ class Bookmark extends Component {
           tasks: res.data.tasks
 
         });
-        this.setState({
-          activeStep: this.getActiveStep()
-        });
       })
       .catch(error => {
         console.error("USERS ERROR", error);

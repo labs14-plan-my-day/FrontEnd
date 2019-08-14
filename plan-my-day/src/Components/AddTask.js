@@ -62,7 +62,9 @@ class AddTask extends Component {
           });
         })
 
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          this.props.refetchAllTasks()
+          console.log(err)});
     }
   };
 

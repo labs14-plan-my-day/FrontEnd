@@ -46,7 +46,7 @@ export const Auth0Provider = ({
 
       
         Axios
-        .post(`http://localhost:8080/auth/a`, newUser)
+        .post(`https://plan-my-dayapp.herokuapp.com/auth/a`, newUser)
         .then(res =>{
           console.log('authenticate', res.data)
           localStorage.setItem("currentUserID", res.data.id)
