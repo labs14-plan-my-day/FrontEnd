@@ -6,7 +6,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import Footer from "../Components/Footer";
 import AddTask from "../Components/AddTask";
 import TaskList from "../Components/TaskList";
-
+import PrivateRoute from "../Components/PrivateRoute";
 
 const styles = theme => ({
   mainFooterContainer: {
@@ -22,25 +22,22 @@ const TASK_STATUS_CODES = {
   STATUS_COMPLETE: 3
 };
 
-
 class Main extends Component {
-  
   state = {
-    currentUserID :localStorage.getItem('currentUserID'),
-    tasks:[],
+    currentUserID: localStorage.getItem("currentUserID"),
+    tasks: [],
     open: false,
     activeStep: 0
-  }
-
-
-  
+  };
 
   componentDidMount() {
-    console.log(this.state.currentUserID)
-    this.refetchAllTasks()
+    console.log(this.state.currentUserID);
+    this.refetchAllTasks();
   }
   refetchAllTasks = () => {
-    const endpoint = `https://plan-my-dayapp.herokuapp.com/tasks/user/${localStorage.getItem("currentUserID")}`;
+    const endpoint = `https://plan-my-dayapp.herokuapp.com/tasks/user/${localStorage.getItem(
+      "currentUserID"
+    )}`;
     console.log("refetching all tasks", endpoint);
 
     axios
@@ -58,7 +55,7 @@ class Main extends Component {
       });
   };
 
-  handleClick = (task) => {
+  handleClick = task => {
     this.setState({
       tasks: [
         ...this.state.tasks,
@@ -69,10 +66,9 @@ class Main extends Component {
         }
       ]
     });
-  }
+  };
 
-
-  handleRemove = (id) =>  {
+  handleRemove = id => {
     const finalTasks = this.state.tasks.filter(task => {
       if (task.id !== id) return task;
     });
@@ -80,8 +76,7 @@ class Main extends Component {
       tasks: finalTasks,
       open: true
     });
-  }
-
+  };
 
   handleRemove = id => {
     console.log("delete");
@@ -95,11 +90,7 @@ class Main extends Component {
       .catch(err => console.log(err.message, "delete"));
   };
 
-  
-
-
-
-  setStatus = (task) => {
+  setStatus = task => {
     const { status } = task;
     switch (status) {
       case TASK_STATUS_CODES.STATUS_INCOMPLETE:
@@ -115,12 +106,11 @@ class Main extends Component {
         console.error("Invalid status code");
     }
     return task;
-  }
+  };
 
   getActiveStep = () => {
     console.log("Teeeyasks", this.state.tasks);
-    if(this.state.tasks.length){
-
+    if (this.state.tasks.length) {
       const firstUnchecked = this.state.tasks.find(
         task => task.status === TASK_STATUS_CODES.STATUS_INCOMPLETE
       );
@@ -128,14 +118,14 @@ class Main extends Component {
         ? this.state.tasks.indexOf(firstUnchecked)
         : this.state.tasks.length;
     } else {
-      this.getActiveStep()
+      this.getActiveStep();
     }
-  }
+  };
 
-  setBookmark = (task) => {
+  setBookmark = task => {
     // toggling bookmark status
     return (task.bookmark = !task.bookmark);
-  }
+  };
 
   updateTasks = (updateFunc, taskToUpdate) => {
     return this.state.tasks.map(task => {
@@ -144,9 +134,9 @@ class Main extends Component {
       }
       return task;
     });
-  }
+  };
 
-  handleCheck = (task) => {
+  handleCheck = task => {
     const { id } = task;
     const updatedTasks = this.updateTasks(this.setStatus, task);
     axios
@@ -157,9 +147,9 @@ class Main extends Component {
           activeStep: this.getActiveStep()
         });
       });
-  }
+  };
 
-  handleBookmark = (task) => {
+  handleBookmark = task => {
     const { id } = task;
     const updatedTasks = this.updateTasks(this.setBookmark, task);
     axios
@@ -170,7 +160,7 @@ class Main extends Component {
           activeStep: this.getActiveStep()
         });
       });
-  }
+  };
 
   handleRemove = id => {
     console.log("delete");
@@ -195,7 +185,7 @@ class Main extends Component {
       <>
         {this.state.tasks && (
           <div>
-            <Route
+            <PrivateRoute
               exact
               path="/tasks"
               render={props => (
@@ -206,9 +196,7 @@ class Main extends Component {
                   handleRemove={this.handleRemove}
                   handleCheck={this.handleCheck}
                   handleBookmark={this.handleBookmark}
-
                   refetchAllTasks={this.refetchAllTasks}
-
                 />
               )}
             />
@@ -217,9 +205,7 @@ class Main extends Component {
                 exact
                 path="/tasks"
                 render={props => (
-
                   <AddTask {...props} refetchAllTasks={this.refetchAllTasks} />
-
                 )}
               />
             </div>
