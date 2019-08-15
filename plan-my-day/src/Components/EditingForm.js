@@ -105,6 +105,7 @@ class EditingForm extends Component {
                 fullWidth={true}
                 name="importance"
                 onChange={this.formHandler}
+                value={this.state.task.importance}
               >
 
                 <MenuItem value={1}>Low</MenuItem>
