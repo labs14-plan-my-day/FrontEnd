@@ -14,13 +14,12 @@ const onRedirectCallback = appState => {
       : window.location.pathname
   );
 };
-console.log(window.location.origin)
 
 ReactDOM.render(
   <Auth0Provider
     domain={config.domain}
     client_id={config.clientId}
-    redirect_uri= {`${window.location.origin}/tasks`}
+    redirect_uri={window.location.origin}
     audience={config.audience}     // NEW - specify the audience value
     onRedirectCallback={onRedirectCallback}
   >
