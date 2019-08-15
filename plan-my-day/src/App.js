@@ -39,9 +39,9 @@ const App = () => {
             <PrivateRoute path="/profile" component={Profile} />
             <PrivateRoute path="/tasks" component={Main} />
 
-            {/* NEW - add a route to the ExternalApi component */}
-            <PrivateRoute path="/external-api" component={ExternalApi} />
-
+             {/* NEW - add a route to the ExternalApi component */}
+      <PrivateRoute path="/external-api" component={ExternalApi} />
+      
           </Switch>
         </Container>
         <Footer />
