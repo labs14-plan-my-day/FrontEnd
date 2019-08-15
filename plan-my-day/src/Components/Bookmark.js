@@ -14,7 +14,6 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Icon from "@material-ui/core/Icon";
 import "typeface-roboto";
 
-
 const styles = theme => ({
   bookmarkMainContainer: {
     display: "flex",
@@ -90,16 +89,13 @@ class Bookmark extends Component {
   }
 
   componentDidMount() {
-
     const endpoint = "https://plan-my-dayapp.herokuapp.com/tasks";
 
     axios
       .get(endpoint)
       .then(res => {
         this.setState({
-
           tasks: res.data.tasks
-
         });
       })
       .catch(error => {
@@ -182,11 +178,7 @@ class Bookmark extends Component {
   render() {
     // console.log("Props Tasks List", this.props.tasks);
 
-
-    const {
-      tasks,
-
-    } = this.props;
+    const { tasks } = this.props;
 
     const bookmarkedTasksList = tasks.filter(task => {
       return task.bookmark;
@@ -199,7 +191,7 @@ class Bookmark extends Component {
             className={this.props.classes.bookmarkListToggle}
             onClick={this.handleExpandClick}
           >
-            <Icon>bookmarks</Icon>
+            {/* <Icon>bookmarks</Icon> */}
             {/* <Typography
             variant="subtitle 1"
             className={this.props.classes.bookmarkToggleText}
@@ -221,7 +213,6 @@ class Bookmark extends Component {
                       this.onSubmitAddTask(bookmarkedTask);
                     }}
                   >
-
                     {/* <Typography
 
                       variant="body2"
