@@ -1,6 +1,25 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Comment from "./Comment";
+import { withStyles } from "@material-ui/core/styles";
+
+
+componentDidMount() {
+    const endpoint = "https://plan-my-dayapp.herokuapp.com/comments";
+
+    axios
+      .get(endpoint)
+      .then(res => {
+        this.setState({
+          tasks: res.data.comment
+        });
+      })
+      .catch(error => {
+        console.error("COMMENTS ERROR", error);
+      });
+  }
+
+
 
 const CommentSection = props => {
   return (

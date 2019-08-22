@@ -7,6 +7,7 @@ import Footer from "../Components/Footer";
 import AddTask from "../Components/AddTask";
 import TaskList from "../Components/TaskList";
 import PrivateRoute from "../Components/PrivateRoute";
+import Comment from "../Components/Comments";
 
 const styles = theme => ({
   mainFooterContainer: {
@@ -15,6 +16,19 @@ const styles = theme => ({
     }
   }
 });
+
+const Comment = props => {
+  <form onSubmit={props.addNewComment}>
+    <input
+      className="comment-input"
+      type="text"
+      value={props.text}
+      placeholder="Add a comment..."
+      onChange={props.commentValueChange}
+      name="text"
+    />
+  </form>;
+};
 
 const TASK_STATUS_CODES = {
   STATUS_INCOMPLETE: 1,
@@ -217,6 +231,15 @@ class Main extends Component {
             />
           </div>
         )}
+        <div>
+          {props.comments.map(comment => (
+            <Comments
+              usercomment={comment.username}
+              text={comment.text}
+              key={comment.text}
+            />
+          ))}
+        </div>
         <div className={this.props.classes.mainFooterContainer}>
           <Footer />
         </div>
