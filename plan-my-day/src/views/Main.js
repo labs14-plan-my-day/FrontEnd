@@ -51,28 +51,33 @@ class Main extends Component {
   };
 
   componentDidMount() {
-    console.log(this.state.currentUserID);
+    console.log(this.state);
     this.refetchAllTasks();
+    this.setState({ currentUserID: localStorage.getItem("currentUserID") });
   }
-  refetchAllTasks = () => {
-    const endpoint = `https://plan-my-dayapp.herokuapp.com/tasks/user/${localStorage.getItem(
-      "currentUserID"
-    )}`;
-    console.log("refetching all tasks", endpoint);
 
-    axios
-      .get(endpoint)
-      .then(res => {
-        this.setState({
-          tasks: res.data
+  refetchAllTasks = () => {
+    setTimeout(() => {
+      const endpoint = `https://plan-my-dayapp.herokuapp.com/tasks/user/${localStorage.getItem(
+        "currentUserID"
+      )}`;
+      console.log("refetching all tasks", endpoint);
+      console.log(this.state.currentUserID);
+
+      axios
+        .get(endpoint)
+        .then(res => {
+          this.setState({
+            tasks: res.data
+          });
+          // this.setState({
+          //   activeStep: this.getActiveStep()
+          // });
+        })
+        .catch(error => {
+          console.error("USERS ERROR", error);
         });
-        // this.setState({
-        //   activeStep: this.getActiveStep()
-        // });
-      })
-      .catch(error => {
-        console.error("USERS ERROR", error);
-      });
+    }, 200);
   };
 
   handleClick = task => {
@@ -205,7 +210,7 @@ class Main extends Component {
       <>
         {this.state.tasks && (
           <div>
-            <PrivateRoute
+            <Route
               exact
               path="/tasks"
               render={props => (

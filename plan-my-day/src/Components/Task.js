@@ -227,21 +227,6 @@ class Task extends Component {
       <div className={this.props.classes.taskPanel}>
         <div className={this.props.classes.taskButtonsAndContent}>
           <div className={this.props.classes.taskContent}>
-            <PrivateRoute
-              exact
-              path="/tasks"
-              render={props => (
-                <TaskList
-                  {...props}
-                  tasks={this.state.tasks}
-                  activeStep={this.state.activeStep}
-                  handleRemove={this.handleRemove}
-                  handleCheck={this.handleCheck}
-                  handleBookmark={this.handleBookmark}
-                  refetchAllTasks={this.refetchAllTasks}
-                />
-              )}
-            />
             <Typography
               variant="body1"
               className={

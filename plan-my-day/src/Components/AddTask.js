@@ -55,16 +55,18 @@ class AddTask extends Component {
         .then((res) => {
           this.props.refetchAllTasks();
           this.setState({
-            name: "",
+            task: {
+               name: "",
             description: "",
             importance: 0
-
+            }
           });
         })
 
         .catch((err) => {
           this.props.refetchAllTasks()
-          console.log(err)});
+          console.log(err)
+        });
     }
   };
 
@@ -84,7 +86,7 @@ class AddTask extends Component {
                 hintText="Add a Task"
                 className="AddText"
                 fullWidth={true}
-              // value={this.state.name}
+                value={this.state.task.name}
               />
 
               <TextField
@@ -94,6 +96,7 @@ class AddTask extends Component {
                 name="description"
                 className="AddText"
                 fullWidth={true}
+                value={this.state.task.description}
 
 
               />
@@ -105,7 +108,7 @@ class AddTask extends Component {
                   fullWidth={true}
                   name="importance"
                   onChange={this.formHandler}
-                // value={this.state.importance}
+                  value={this.state.task.importance}
                 >
 
                   <MenuItem value={1}>Low</MenuItem>
