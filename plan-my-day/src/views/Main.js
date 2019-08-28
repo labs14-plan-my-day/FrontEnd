@@ -17,17 +17,23 @@ const styles = theme => ({
   }
 });
 
-const Comment = props => {
-  <form onSubmit={props.addNewComment}>
-    <input
-      className="comment-input"
-      type="text"
-      value={props.text}
-      placeholder="Add a comment..."
-      onChange={props.commentValueChange}
-      name="text"
-    />
-  </form>;
+const Comments = props => {
+  console.log(props);
+  return (
+    <div>
+      <form onSubmit={() => props.addNewComment}>
+        <input
+          className="comment-input"
+          type="text"
+          value={props.text}
+          placeholder="Add a comment..."
+          onChange={props.commentValueChange}
+          name="text"
+        />
+      </form>
+      ;
+    </div>
+  );
 };
 
 const TASK_STATUS_CODES = {
@@ -231,7 +237,7 @@ class Main extends Component {
             />
           </div>
         )}
-        <div>
+        {/* <div>
           {props.comments.map(comment => (
             <Comments
               usercomment={comment.username}
@@ -239,7 +245,7 @@ class Main extends Component {
               key={comment.text}
             />
           ))}
-        </div>
+        </div> */}
         <div className={this.props.classes.mainFooterContainer}>
           <Footer />
         </div>
