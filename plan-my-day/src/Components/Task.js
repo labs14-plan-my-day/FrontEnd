@@ -296,7 +296,7 @@ class Task extends Component {
             </Tooltip>
             <Tooltip title="Comment" placement="bottom-end">
               <IconButton onClick={this.handleToggle} fontSize="medium">
-                <Icon>create</Icon>
+                <Icon>chat_bubble</Icon>
               </IconButton>
             </Tooltip>
             <EditingForm
