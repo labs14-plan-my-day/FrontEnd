@@ -6,11 +6,11 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import axios from 'axios';
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import axios from "axios";
 
 const whatTask = {
   name: "",
@@ -21,7 +21,7 @@ class EditingForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentUserID: localStorage.getItem('currentUserID'),
+      currentUserID: localStorage.getItem("currentUserID"),
       tasks: [{}],
       task: this.props.task,
       editingId: null,
@@ -30,7 +30,7 @@ class EditingForm extends Component {
     };
   }
 
-  formHandler = (event) => {
+  formHandler = event => {
     this.setState({
       task: {
         ...this.state.task,
@@ -47,26 +47,38 @@ class EditingForm extends Component {
     });
   };
 
-  updateInfo = (event) => {
+  updateInfo = event => {
     event.preventDefault();
-    const editTask = { user_id: this.state.currentUserID, id: this.props.id, name: this.state.task.name, description: this.state.task.description, importance: this.state.task.importance, date: Date.now(), start_time: "12:00", end_time: "1:00" }
+    const editTask = {
+      user_id: this.state.currentUserID,
+      id: this.props.id,
+      name: this.state.task.name,
+      comment: this.state.task.comment,
+      description: this.state.task.description,
+      importance: this.state.task.importance,
+      date: Date.now(),
+      start_time: "12:00",
+      end_time: "1:00"
+    };
     axios
-      .put(`https://plan-my-dayapp.herokuapp.com/tasks/${this.props.id}`, editTask)
-      .then((res) => {
+      .put(
+        `https://plan-my-dayapp.herokuapp.com/tasks/${this.props.id}`,
+        editTask
+      )
+      .then(res => {
         this.props.handleToggle();
         this.props.refetchAllTasks();
         this.setState({
           tasks: res.data.tasks
         });
       })
-      .catch((err) => console.log(err));
+      .catch(err => console.log(err));
   };
 
   render() {
     const open = this.props.open;
     return (
       <Fragment>
-
         <Dialog
           open={open}
           onClose={this.props.handleToggle}
@@ -74,10 +86,7 @@ class EditingForm extends Component {
         >
           <DialogTitle id="form-dialog-title">Edit Task</DialogTitle>
           <DialogContent>
-            <DialogContentText>
-
-            </DialogContentText>
-
+            <DialogContentText />
             <TextField
               placeholder="Task"
               onChange={this.formHandler}
@@ -87,7 +96,15 @@ class EditingForm extends Component {
               className="AddText"
               fullWidth={true}
             />
-
+            <TextField
+              placeholder="Comment"
+              onChange={this.formHandler}
+              value={this.state.task.comment}
+              name="comment"
+              hintText="Add a Comment"
+              className="AddComment"
+              fullWidth={true}
+            />
             <TextField
               placeholder="Description"
               onChange={this.formHandler}
@@ -98,8 +115,8 @@ class EditingForm extends Component {
               fullWidth={true}
             />
             Select Priority
-              <FormControl >
-              <InputLabel></InputLabel>
+            <FormControl>
+              <InputLabel />
               <Select
                 placeholder="Priority"
                 fullWidth={true}
@@ -107,13 +124,11 @@ class EditingForm extends Component {
                 onChange={this.formHandler}
                 value={this.state.task.importance}
               >
-
                 <MenuItem value={1}>Low</MenuItem>
                 <MenuItem value={2}>Medium</MenuItem>
                 <MenuItem value={3}>High</MenuItem>
               </Select>
             </FormControl>
-
           </DialogContent>
           <DialogActions>
             <Button onClick={this.props.handleToggle} color="primary">
@@ -124,13 +139,14 @@ class EditingForm extends Component {
               label="Add Task"
               primary={true}
               onClick={this.updateInfo}
-              color="primary">
+              color="primary"
+            >
               Update
             </Button>
           </DialogActions>
         </Dialog>
       </Fragment>
-    )
+    );
   }
 }
 

@@ -17,23 +17,70 @@ const styles = theme => ({
     }
   }
 });
+class Comments extends Component {
+  state = {
+    tasks: []
+  };
+  componentDidMount() {
+    const endpoint = "https://plan-my-dayapp.herokuapp.com/comments";
 
-const Comments = props => {
-  console.log(props);
+    axios
+      .get(endpoint)
+      .then(res => {
+        this.setState({
+          tasks: res.data.comment
+        });
+        console.log(this.state.tasks, "this are the comments");
+      })
+      .catch(error => {
+        console.error("COMMENTS ERROR", error);
+      });
+  }
+  render() {
+    return (
+      <div>
+        <form onSubmit={() => this.props.addNewComment}>
+          <input
+            className="comment-input"
+            type="text"
+            value={this.props.text}
+            placeholder="Add a comment..."
+            onChange={this.props.commentValueChange}
+            name="text"
+          />
+        </form>
+        ;
+      </div>
+    );
+  }
+}
+
+const CommentSection = props => {
   return (
-    <div>
-      <form onSubmit={() => props.addNewComment}>
-        <input
-          className="comment-input"
-          type="text"
-          value={props.text}
-          placeholder="Add a comment..."
-          onChange={props.commentValueChange}
-          name="text"
-        />
-      </form>
-      ;
-    </div>
+    <React.Fragment>
+      <div>
+        {props.comments.map(comment => (
+          <Comment
+            usercomment={comment.username}
+            text={comment.text}
+            key={comment.text}
+          />
+        ))}
+      </div>
+      <div className="timestamp">{props.timestamp}</div>
+      <div className="add-comment">
+        <form onSubmit={props.addNewComment}>
+          <input
+            className="comment-input"
+            type="text"
+            value={props.text}
+            placeholder="Add a comment..."
+            onChange={props.commentValueChange}
+            name="text"
+          />
+        </form>
+      </div>
+    </React.Fragment>
   );
 };
 
@@ -207,6 +254,7 @@ class Main extends Component {
   };
 
   render() {
+    console.log(this.props, "the props");
     return (
       <>
         {this.state.tasks && (
@@ -244,7 +292,7 @@ class Main extends Component {
           </div>
         )}
         {/* <div>
-          {props.comments.map(comment => (
+          {this.props.comments.map(comment => (
             <Comments
               usercomment={comment.username}
               text={comment.text}
