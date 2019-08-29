@@ -17,8 +17,6 @@ import Task from "./Task";
 import Bookmark from "./Bookmark";
 import TaskProgress from "./TaskProgress";
 
-
-
 const styles = theme => ({
   mainPageContainer: {
     display: "flex",
@@ -160,15 +158,19 @@ class TaskList extends Component {
   // }
 
   state = {
-    task: ''
+    task: ""
+  };
+  componentDidMount() {
+    setTimeout(() => {
+      this.props.refetchAllTasks();
+    }, 1000);
   }
 
-  getID = (task) =>{
-    this.setState({task})
-  }
+  getID = task => {
+    this.setState({ task });
+  };
 
   render() {
-
     const {
       handleRemove,
       handleCheck,
@@ -205,8 +207,6 @@ class TaskList extends Component {
               tasks={tasks}
               handleRemove={handleRemove}
               handleCheck={handleCheck}
-
-
               activeStep={activeStep}
               handleBookmark={handleBookmark}
             />
@@ -275,7 +275,6 @@ class TaskList extends Component {
                                       : this.props.classes.taskItem
                                   }
                                 >
-
                                   <Task
                                     task={task}
                                     id={task.id}
@@ -283,11 +282,9 @@ class TaskList extends Component {
                                     handleRemove={handleRemove}
                                     handleCheck={handleCheck}
                                     handleBookmark={handleBookmark}
-
                                     getID={this.getID}
                                     refetchAllTasks={this.props.refetchAllTasks}
                                     taskBeingEdited={this.state.task}
-
                                   />
                                 </div>
                               </ListItem>

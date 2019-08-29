@@ -294,7 +294,11 @@ class Task extends Component {
                 <Icon>create</Icon>
               </IconButton>
             </Tooltip>
-
+            <Tooltip title="Comment" placement="bottom-end">
+              <IconButton onClick={this.handleToggle} fontSize="medium">
+                <Icon>create</Icon>
+              </IconButton>
+            </Tooltip>
             <EditingForm
               open={this.state.open}
               handleToggle={this.handleToggle}
