@@ -53,7 +53,6 @@ class EditingForm extends Component {
       user_id: this.state.currentUserID,
       id: this.props.id,
       name: this.state.task.name,
-      comment: this.state.task.comment,
       description: this.state.task.description,
       importance: this.state.task.importance,
       date: Date.now(),
@@ -94,15 +93,6 @@ class EditingForm extends Component {
               name="name"
               hintText="Add a Task"
               className="AddText"
-              fullWidth={true}
-            />
-            <TextField
-              placeholder="Comment"
-              onChange={this.formHandler}
-              value={this.state.task.comment}
-              name="comment"
-              hintText="Add a Comment"
-              className="AddComment"
               fullWidth={true}
             />
             <TextField

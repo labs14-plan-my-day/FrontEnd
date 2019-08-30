@@ -8,7 +8,6 @@ import AddTask from "../Components/AddTask";
 import TaskList from "../Components/TaskList";
 
 import PrivateRoute from "../Components/PrivateRoute";
-import Comment from "../Components/Comments";
 
 const styles = theme => ({
   mainFooterContainer: {
@@ -17,72 +16,44 @@ const styles = theme => ({
     }
   }
 });
-class Comments extends Component {
-  state = {
-    tasks: []
-  };
-  componentDidMount() {
-    const endpoint = "https://plan-my-dayapp.herokuapp.com/comments";
+// class Comments extends Component {
+//   state = {
+//     tasks: []
+//   };
+//   componentDidMount() {
+//     const endpoint = "https://plan-my-dayapp.herokuapp.com/comments";
 
-    axios
-      .get(endpoint)
-      .then(res => {
-        this.setState({
-          tasks: res.data.comment
-        });
-        console.log(this.state.tasks, "this are the comments");
-      })
-      .catch(error => {
-        console.error("COMMENTS ERROR", error);
-      });
-  }
-  render() {
-    return (
-      <div>
-        <form onSubmit={() => this.props.addNewComment}>
-          <input
-            className="comment-input"
-            type="text"
-            value={this.props.text}
-            placeholder="Add a comment..."
-            onChange={this.props.commentValueChange}
-            name="text"
-          />
-        </form>
-        ;
-      </div>
-    );
-  }
-}
+//     axios
+//       .get(endpoint)
+//       .then(res => {
+//         this.setState({
+//           tasks: res.data.comment
+//         });
+//         console.log(this.state.tasks, "this are the comments");
+//       })
+//       .catch(error => {
+//         console.error("COMMENTS ERROR", error);
+//       });
+//   }
+//   render() {
+//     return (
+//       <div>
+//         <form onSubmit={() => this.props.addNewComment}>
+//           <input
+//             className="comment-input"
+//             type="text"
+//             value={this.props.text}
+//             placeholder="Add a comment..."
+//             onChange={this.props.commentValueChange}
+//             name="text"
+//           />
+//         </form>
+//         ;
+//       </div>
+//     );
+//   }
+// }
 
-const CommentSection = props => {
-  return (
-    <React.Fragment>
-      <div>
-        {props.comments.map(comment => (
-          <Comment
-            usercomment={comment.username}
-            text={comment.text}
-            key={comment.text}
-          />
-        ))}
-      </div>
-      <div className="timestamp">{props.timestamp}</div>
-      <div className="add-comment">
-        <form onSubmit={props.addNewComment}>
-          <input
-            className="comment-input"
-            type="text"
-            value={props.text}
-            placeholder="Add a comment..."
-            onChange={props.commentValueChange}
-            name="text"
-          />
-        </form>
-      </div>
-    </React.Fragment>
-  );
-};
 
 const TASK_STATUS_CODES = {
   STATUS_INCOMPLETE: 1,

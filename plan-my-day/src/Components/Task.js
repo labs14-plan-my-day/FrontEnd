@@ -10,7 +10,9 @@ import "typeface-roboto";
 import PrivateRoute from "./PrivateRoute";
 import TaskList from "./TaskList";
 
+
 import EditingForm from "./EditingForm";
+import CommentSection from './CommentSection'
 
 const styles = theme => ({
   listElementStyles: {
@@ -171,7 +173,8 @@ const styles = theme => ({
 class Task extends Component {
   state = {
     editingID: null,
-    open: false
+    open: false,
+    open2: false
   };
 
   handleToggle = () => {
@@ -179,6 +182,12 @@ class Task extends Component {
       open: !this.state.open
     });
   };
+
+  handleToggle2 = () => {
+    this.setState({
+      open2: !this.state.open2
+    })
+  }
 
   constructor(props) {
     super(props);
@@ -253,10 +262,10 @@ class Task extends Component {
                 task.importance === 1
                   ? this.props.classes.lowPriority
                   : task.importance === 2
-                  ? this.props.classes.medPriority
-                  : task.importance === 3
-                  ? this.props.classes.highPriority
-                  : ""
+                    ? this.props.classes.medPriority
+                    : task.importance === 3
+                      ? this.props.classes.highPriority
+                      : ""
               }
               variant="outlined"
             />
@@ -295,10 +304,16 @@ class Task extends Component {
               </IconButton>
             </Tooltip>
             <Tooltip title="Comment" placement="bottom-end">
-              <IconButton onClick={this.handleToggle} fontSize="medium">
+              <IconButton onClick={this.handleToggle2} fontSize="medium">
                 <Icon>chat_bubble</Icon>
               </IconButton>
             </Tooltip>
+            <CommentSection
+              open2={this.state.open2}
+              handleToggle2={this.handleToggle2}
+              task={task}
+              id={task.id}
+            />
             <EditingForm
               open={this.state.open}
               handleToggle={this.handleToggle}
