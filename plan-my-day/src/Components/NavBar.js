@@ -68,14 +68,6 @@ const NavBar = () => {
                   activeClassName="router-link-exact-active">
                   Tasks
                 </NavLink>
-//                 <NavLink
-//                   tag={RouterNavLink}
-//                   to="/history"
-//                   exact
-//                   activeClassName="router-link-exact-active"
-//                 >
-//                   History
-//                 </NavLink>
               </NavItem>
             </Nav>
 
