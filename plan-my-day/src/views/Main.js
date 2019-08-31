@@ -262,16 +262,8 @@ class Main extends Component {
             />
           </div>
         )}
-        {/* <div>
-          {this.props.comments.map(comment => (
-            <Comments
-              usercomment={comment.username}
-              text={comment.text}
-              key={comment.text}
-            />
-          ))}
-        </div> */}
         <div className={this.props.classes.mainFooterContainer}>
+
           <Footer />
         </div>
       </>

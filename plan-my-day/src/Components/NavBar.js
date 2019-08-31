@@ -111,6 +111,14 @@ const NavBar = () => {
                       <FontAwesomeIcon icon="power-off" className="mr-3" /> Log
                       out
                     </DropdownItem>
+                    <DropdownItem
+                      tag={RouterNavLink}
+                      to="/profile"
+                      className="dropdown-profile"
+                      activeClassName="router-link-exact-active"
+                    >
+                      <FontAwesomeIcon icon="user" className="mr-3" /> Slack
+                    </DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>
               )}

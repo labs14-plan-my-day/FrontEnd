@@ -57,23 +57,22 @@ export default function Footer() {
   const classes = useStyles();
 
   return (
-    // <Tabs className={classes.footerMainContainer}>
-    //   <Tab>
-    //     Need to report a problem?{" "}
-    //     <a href="mailto:slackplanmyday@gmail.com">Contact us</a>
-    //   </Tab>
-    // </Tabs>
-    <Link
-      href="mailto:slackplanmyday@gmail.com"
-      variant="body2"
-      className={classes.link}
-    >
-      <AppBar position="fixed" className={classes.footerMainContainer}>
-        <Icon className={classes.helpIcon}>error</Icon>
-        <Typography className={classes.helpText} variant="body2">
-          {"Contact Us"}
-        </Typography>
-      </AppBar>
-    </Link>
+    <div>
+
+      <Link
+        href="mailto:slackplanmyday@gmail.com"
+        variant="body2"
+        className={classes.link}
+      >
+        <AppBar position="fixed" className={classes.footerMainContainer}>
+          <Icon className={classes.helpIcon}>error</Icon>
+          <Typography className={classes.helpText} variant="body2">
+            {"Contact Us"}
+          </Typography>
+        </AppBar>
+      </Link>
+
+    </div>
+
   );
 }
