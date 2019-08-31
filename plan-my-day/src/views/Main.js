@@ -6,6 +6,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import Footer from "../Components/Footer";
 import AddTask from "../Components/AddTask";
 import TaskList from "../Components/TaskList";
+import Alert from "../Components/Alert";
 
 import PrivateRoute from "../Components/PrivateRoute";
 
@@ -230,6 +231,7 @@ class Main extends Component {
       <>
         {this.state.tasks && (
           <div>
+            <Alert/>
             <Route
               exact
               path="/tasks"
